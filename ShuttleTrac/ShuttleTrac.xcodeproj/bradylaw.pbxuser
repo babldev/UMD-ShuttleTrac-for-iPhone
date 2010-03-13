@@ -1,0 +1,152 @@
+// !$*UTF8*$!
+{
+	1D6058900D05DD3D006BFB54 /* ShuttleTrac */ = {
+		activeExec = 0;
+		executables = (
+			850B93E3114C071D00155A0B /* ShuttleTrac */,
+		);
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 850B93E3114C071D00155A0B /* ShuttleTrac */;
+		activeSDKPreference = iphonesimulator3.1.2;
+		activeTarget = 1D6058900D05DD3D006BFB54 /* ShuttleTrac */;
+		codeSenseManager = 850B93FC114C075700155A0B /* Code sense */;
+		executables = (
+			850B93E3114C071D00155A0B /* ShuttleTrac */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					367,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					327,
+					60,
+					20,
+					48,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 290196645;
+			PBXWorkspaceStateSaveDate = 290196645;
+		};
+		perUserProjectItems = {
+			85C3F832114C0C35008F7C06 = 85C3F832114C0C35008F7C06 /* PlistBookmark */;
+			85C3F833114C0C35008F7C06 = 85C3F833114C0C35008F7C06 /* PlistBookmark */;
+			85C3F84E114C0CC4008F7C06 /* PlistBookmark */ = 85C3F84E114C0CC4008F7C06 /* PlistBookmark */;
+		};
+		sourceControlManager = 850B93FB114C075700155A0B /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	850B93E3114C071D00155A0B /* ShuttleTrac */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = ShuttleTrac;
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	850B93FB114C075700155A0B /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	850B93FC114C075700155A0B /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	85C3F832114C0C35008F7C06 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* ShuttleTrac-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/bradylaw/Documents/iphone/UMD-ShuttleTrac-for-iPhone/ShuttleTrac/ShuttleTrac-Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775808;
+	};
+	85C3F833114C0C35008F7C06 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* ShuttleTrac-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			CFBundleVersion,
+		);
+		name = "/Users/bradylaw/Documents/iphone/UMD-ShuttleTrac-for-iPhone/ShuttleTrac/ShuttleTrac-Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775808;
+	};
+	85C3F84E114C0CC4008F7C06 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* ShuttleTrac-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			CFBundleVersion,
+		);
+		name = "/Users/bradylaw/Documents/iphone/UMD-ShuttleTrac-for-iPhone/ShuttleTrac/ShuttleTrac-Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+}
