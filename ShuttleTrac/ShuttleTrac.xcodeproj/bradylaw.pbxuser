@@ -6,6 +6,20 @@
 			850B93E3114C071D00155A0B /* ShuttleTrac */,
 		);
 	};
+	28216C950DB411BC00E5133A /* NearMeViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {897, 507}}";
+			sepNavSelRange = "{316, 47}";
+			sepNavVisRange = "{0, 370}";
+		};
+	};
+	28216C960DB411BC00E5133A /* NearMeViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {897, 819}}";
+			sepNavSelRange = "{1174, 0}";
+			sepNavVisRange = "{181, 1085}";
+		};
+	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Debug;
 		activeExecutable = 850B93E3114C071D00155A0B /* ShuttleTrac */;
@@ -60,13 +74,14 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 290196645;
-			PBXWorkspaceStateSaveDate = 290196645;
+			PBXPerProjectTemplateStateSaveDate = 290565515;
+			PBXWorkspaceStateSaveDate = 290565515;
 		};
 		perUserProjectItems = {
+			852F7D381151ADA600EFF04B /* PlistBookmark */ = 852F7D381151ADA600EFF04B /* PlistBookmark */;
 			85C3F832114C0C35008F7C06 = 85C3F832114C0C35008F7C06 /* PlistBookmark */;
 			85C3F833114C0C35008F7C06 = 85C3F833114C0C35008F7C06 /* PlistBookmark */;
-			85C3F84E114C0CC4008F7C06 /* PlistBookmark */ = 85C3F84E114C0CC4008F7C06 /* PlistBookmark */;
+			85C3F84E114C0CC4008F7C06 = 85C3F84E114C0CC4008F7C06 /* PlistBookmark */;
 		};
 		sourceControlManager = 850B93FB114C075700155A0B /* Source Control */;
 		userBuildSettings = {
@@ -114,6 +129,18 @@
 		isa = PBXCodeSenseManager;
 		indexTemplatePath = "";
 	};
+	852F7D381151ADA600EFF04B /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* ShuttleTrac-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			CFBundleVersion,
+		);
+		name = "/Users/bradylaw/Documents/iphone/UMD-ShuttleTrac-for-iPhone/ShuttleTrac/ShuttleTrac-Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
 	85C3F832114C0C35008F7C06 /* PlistBookmark */ = {
 		isa = PlistBookmark;
 		fRef = 8D1107310486CEB800E47090 /* ShuttleTrac-Info.plist */;
@@ -147,6 +174,6 @@
 		);
 		name = "/Users/bradylaw/Documents/iphone/UMD-ShuttleTrac-for-iPhone/ShuttleTrac/ShuttleTrac-Info.plist";
 		rLen = 0;
-		rLoc = 9223372036854775807;
+		rLoc = 9223372036854775808;
 	};
 }
