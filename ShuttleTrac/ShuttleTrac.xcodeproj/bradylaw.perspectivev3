@@ -270,6 +270,7 @@
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>080E96DDFE201D6D7F000001</string>
+								<string>29B97315FDCFA39411CA2CEA</string>
 								<string>29B97317FDCFA39411CA2CEA</string>
 								<string>29B97323FDCFA39411CA2CEA</string>
 								<string>1C37FBAC04509CD000000102</string>
@@ -277,13 +278,12 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>9</integer>
-									<integer>7</integer>
+									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {244, 497}}</string>
+							<string>{{0, 0}, {244, 664}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -293,14 +293,14 @@
 					<key>GeometryConfiguration</key>
 					<dict>
 						<key>Frame</key>
-						<string>{{0, 0}, {261, 515}}</string>
+						<string>{{0, 0}, {261, 682}}</string>
 						<key>GroupTreeTableConfiguration</key>
 						<array>
 							<string>MainColumn</string>
 							<real>244</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>263 165 872 556 0 0 1280 778 </string>
+						<string>56 55 1224 723 0 0 1280 778 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -316,7 +316,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>850B93EF114C075700155A0B</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ShuttleTrac-Info.plist</string>
+								<string>NearMeViewController.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -324,15 +324,7 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>850B93F0114C075700155A0B</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>ShuttleTrac-Info.plist</string>
-										<key>_historyCapacity</key>
-										<integer>0</integer>
-										<key>bookmark</key>
-										<string>852F7D381151ADA600EFF04B</string>
-										<key>history</key>
-										<array>
-											<string>85C3F84E114C0CC4008F7C06</string>
-										</array>
+										<string>NearMeViewController.h</string>
 									</dict>
 									<key>SplitCount</key>
 									<string>1</string>
@@ -345,18 +337,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {606, 175}}</string>
+								<string>{{0, 0}, {958, 480}}</string>
 								<key>RubberWindowFrame</key>
-								<string>263 165 872 556 0 0 1280 778 </string>
+								<string>56 55 1224 723 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>175pt</string>
+							<string>480pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>335pt</string>
+							<string>197pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -370,9 +362,9 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {606, 308}}</string>
+										<string>{{10, 27}, {958, 170}}</string>
 										<key>RubberWindowFrame</key>
-										<string>263 165 872 556 0 0 1280 778 </string>
+										<string>56 55 1224 723 0 0 1280 778 </string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -426,7 +418,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {606, 282}}</string>
+										<string>{{10, 27}, {958, 158}}</string>
 									</dict>
 									<key>Module</key>
 									<string>PBXBuildResultsModule</string>
@@ -435,7 +427,7 @@
 						</dict>
 					</array>
 					<key>Proportion</key>
-					<string>606pt</string>
+					<string>958pt</string>
 				</dict>
 			</array>
 			<key>Name</key>
@@ -454,11 +446,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>852F7D391151ADA600EFF04B</string>
+				<string>852F7D691151D5AD00EFF04B</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>852F7D3A1151ADA600EFF04B</string>
+				<string>852F7D6A1151D5AD00EFF04B</string>
 				<string>850B93EF114C075700155A0B</string>
-				<string>852F7D3B1151ADA600EFF04B</string>
+				<string>852F7D6B1151D5AD00EFF04B</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -607,14 +599,14 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>85C3F852114C0CC4008F7C06</string>
+				<string>852F7D6C1151D5AD00EFF04B</string>
 				<string>1CCC7628064C1048000F2A68</string>
 				<string>1CCC7629064C1048000F2A68</string>
-				<string>85C3F853114C0CC4008F7C06</string>
-				<string>85C3F854114C0CC4008F7C06</string>
-				<string>85C3F855114C0CC4008F7C06</string>
-				<string>85C3F856114C0CC4008F7C06</string>
-				<string>85C3F857114C0CC4008F7C06</string>
+				<string>852F7D6D1151D5AD00EFF04B</string>
+				<string>852F7D6E1151D5AD00EFF04B</string>
+				<string>852F7D6F1151D5AD00EFF04B</string>
+				<string>852F7D701151D5AD00EFF04B</string>
+				<string>852F7D711151D5AD00EFF04B</string>
 			</array>
 			<key>ToolbarConfigUserDefaultsMinorVersion</key>
 			<string>2</string>
@@ -648,10 +640,11 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>1C530D5B069F1CE1000CFCEE</string>
 		<string>/Users/bradylaw/Documents/iphone/UMD-ShuttleTrac-for-iPhone/ShuttleTrac/ShuttleTrac.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>263 165 872 556 0 0 1280 778 </string>
+	<string>56 55 1224 723 0 0 1280 778 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -1024,7 +1017,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C530D5B069F1CE1000CFCEE</string>
-				<string>850B9404114C082600155A0B</string>
+				<string>852F7D7211531F8300EFF04B</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

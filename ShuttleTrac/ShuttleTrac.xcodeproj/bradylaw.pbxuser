@@ -35,7 +35,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					367,
+					719,
 					20,
 					48,
 					43,
@@ -74,14 +74,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 290565515;
-			PBXWorkspaceStateSaveDate = 290565515;
-		};
-		perUserProjectItems = {
-			852F7D381151ADA600EFF04B /* PlistBookmark */ = 852F7D381151ADA600EFF04B /* PlistBookmark */;
-			85C3F832114C0C35008F7C06 = 85C3F832114C0C35008F7C06 /* PlistBookmark */;
-			85C3F833114C0C35008F7C06 = 85C3F833114C0C35008F7C06 /* PlistBookmark */;
-			85C3F84E114C0CC4008F7C06 = 85C3F84E114C0CC4008F7C06 /* PlistBookmark */;
+			PBXPerProjectTemplateStateSaveDate = 290575784;
+			PBXWorkspaceStateSaveDate = 290575784;
 		};
 		sourceControlManager = 850B93FB114C075700155A0B /* Source Control */;
 		userBuildSettings = {
@@ -128,52 +122,5 @@
 	850B93FC114C075700155A0B /* Code sense */ = {
 		isa = PBXCodeSenseManager;
 		indexTemplatePath = "";
-	};
-	852F7D381151ADA600EFF04B /* PlistBookmark */ = {
-		isa = PlistBookmark;
-		fRef = 8D1107310486CEB800E47090 /* ShuttleTrac-Info.plist */;
-		fallbackIsa = PBXBookmark;
-		isK = 0;
-		kPath = (
-			CFBundleVersion,
-		);
-		name = "/Users/bradylaw/Documents/iphone/UMD-ShuttleTrac-for-iPhone/ShuttleTrac/ShuttleTrac-Info.plist";
-		rLen = 0;
-		rLoc = 9223372036854775807;
-	};
-	85C3F832114C0C35008F7C06 /* PlistBookmark */ = {
-		isa = PlistBookmark;
-		fRef = 8D1107310486CEB800E47090 /* ShuttleTrac-Info.plist */;
-		fallbackIsa = PBXBookmark;
-		isK = 0;
-		kPath = (
-		);
-		name = "/Users/bradylaw/Documents/iphone/UMD-ShuttleTrac-for-iPhone/ShuttleTrac/ShuttleTrac-Info.plist";
-		rLen = 0;
-		rLoc = 9223372036854775808;
-	};
-	85C3F833114C0C35008F7C06 /* PlistBookmark */ = {
-		isa = PlistBookmark;
-		fRef = 8D1107310486CEB800E47090 /* ShuttleTrac-Info.plist */;
-		fallbackIsa = PBXBookmark;
-		isK = 0;
-		kPath = (
-			CFBundleVersion,
-		);
-		name = "/Users/bradylaw/Documents/iphone/UMD-ShuttleTrac-for-iPhone/ShuttleTrac/ShuttleTrac-Info.plist";
-		rLen = 0;
-		rLoc = 9223372036854775808;
-	};
-	85C3F84E114C0CC4008F7C06 /* PlistBookmark */ = {
-		isa = PlistBookmark;
-		fRef = 8D1107310486CEB800E47090 /* ShuttleTrac-Info.plist */;
-		fallbackIsa = PBXBookmark;
-		isK = 0;
-		kPath = (
-			CFBundleVersion,
-		);
-		name = "/Users/bradylaw/Documents/iphone/UMD-ShuttleTrac-for-iPhone/ShuttleTrac/ShuttleTrac-Info.plist";
-		rLen = 0;
-		rLoc = 9223372036854775808;
 	};
 }
