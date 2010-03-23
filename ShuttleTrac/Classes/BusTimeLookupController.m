@@ -1,29 +1,23 @@
 //
-//  FirstViewController.m
+//  BusTimeLookupController.m
 //  ShuttleTrac
 //
-//  Created by Brady Law on 3/11/10.
-//  Copyright __MyCompanyName__ 2010. All rights reserved.
+//  Created by Brady Law on 3/23/10.
+//  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "NearMeViewController.h"
+#import "BusTimeLookupController.h"
 
 
-@implementation NearMeViewController
+@implementation BusTimeLookupController
 
 /*
-// The designated initializer. Override to perform setup that is required before the view is loaded.
+ // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         // Custom initialization
     }
     return self;
-}
-*/
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
 }
 */
 
@@ -42,10 +36,6 @@
 }
 */
 
--(IBAction)loadBusTimes:(UIButton *)loadButton {
-	// Load Bus Times
-}
-
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
@@ -62,5 +52,6 @@
 - (void)dealloc {
     [super dealloc];
 }
+
 
 @end
