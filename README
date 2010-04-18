@@ -3,3 +3,33 @@ Project for Spring 10' CMSC498i @ UMD
 
 Created by:
 Brady and Tarek
+
+UMD Website XML Dumps:
+
+Domain can be specified as realtime.commuterpage.com (external) or Nostromo (internal).
+
+This link details all the platforms in the system: -
+http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=Platform.xml
+
+This link details the route patterns & associated stops: -
+http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=RoutePattern.xml
+
+This gives you the ETAs given a PlatformTag in HTML form: -
+http://shuttle.umd.edu/RTT/Public/RoutePositionET.aspx?PlatformTag=457
+
+This gives you the ETAs given a PlatformTag in XML form: -
+http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=RoutePositionET.xml&PlatformTag=700
+
+These give you the timetable in HTML form
+http://shuttle.umd.edu/RTT/Public/Schedule.aspx
+
+Or a specific schedule by adding the RouteNo
+http://shuttle.umd.edu/RTT/Public/Schedule.aspx?RouteNo=118
+
+These will give you the timetable in XML form
+http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=ScheduleMaster.xml
+
+With the details given with this where the ID & ServiceName are taken from above.
+http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=Scheduledetail.xml&ID=1&ServiceName=Weekday
+
+Note that the ID may change whenever a new schedule is loaded so the IDs should be looked up not hard coded.
