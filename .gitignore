@@ -1,2 +1,5 @@
 # Ignore the build directory
 ShuttleTrac/build/*
+*.pbxuser
+*.perspective
+*.perspectivev3
