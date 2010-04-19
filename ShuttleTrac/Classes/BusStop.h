@@ -27,6 +27,7 @@
 	NSArray	*upcomingBuses;
 }
 
+-(BusStop *)busStopWithName:(NSString *)sName stopNumber:(NSInteger)sNumber;
 -(id)initWithName:(NSString *)sName stopNumber:(NSInteger)sNumber;
 -(void)refreshBusArrivals;
 

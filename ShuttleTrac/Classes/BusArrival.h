@@ -24,7 +24,7 @@
 	NSDate *arrivalTime;
 }
 
-+(id)busArrivalWithRoute:(BusRoute *)bRoute stop:(BusStop *)bStop arrivalTime:(NSDate *)bArrivalTime;
++(BusStop *)busArrivalWithRoute:(BusRoute *)bRoute stop:(BusStop *)bStop arrivalTime:(NSDate *)bArrivalTime;
 
 -(id)initWithRoute:(BusRoute *)bRoute stop:(BusStop *)bStop arrivalTime:(NSDate *)bArrivalTime;
 

@@ -13,8 +13,8 @@
 
 @synthesize busArrival;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
+- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier {
+    if ((self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier])) {
         // Initialization code
     }
     return self;
@@ -30,7 +30,8 @@
 
 - (void)layoutSubviews {
 	// Customize cell
-	[[self textLabel] setText:[[busArrival arrivalTime] description]];
+	self.textLabel.text = [[busArrival route] routeName];
+	self.detailTextLabel.text = [[busArrival arrivalTime] description];
 	
 	[super layoutSubviews];
 }

@@ -21,6 +21,11 @@
 
 @synthesize routeName, routeID, stops;
 
++(BusRoute *)busRouteWithID:(NSInteger)rID name:(NSString *)rName stops:(NSArray *)rStops {
+	BusRoute *newRoute = [[BusRoute alloc] initRouteWithID:rID name:rName stops:rStops];
+	return [newRoute autorelease];
+}
+
 -(id)initRouteWithID:(NSInteger)rID name:(NSString *)rName stops:(NSArray *)rStops {
 	if (self = [super init]) {
 		[self setRouteID:rID];

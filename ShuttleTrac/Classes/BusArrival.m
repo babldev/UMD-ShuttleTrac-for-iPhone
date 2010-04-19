@@ -22,7 +22,7 @@
 
 @synthesize route, stop, arrivalTime;
 
-+(id)busArrivalWithRoute:(BusRoute *)bRoute stop:(BusStop *)bStop arrivalTime:(NSDate *)bArrivalTime {
++(BusStop *)busArrivalWithRoute:(BusRoute *)bRoute stop:(BusStop *)bStop arrivalTime:(NSDate *)bArrivalTime {
 	BusArrival *newArrival = [[BusArrival alloc]
 							  initWithRoute:bRoute stop:bStop arrivalTime:bArrivalTime];
 	return [newArrival autorelease];

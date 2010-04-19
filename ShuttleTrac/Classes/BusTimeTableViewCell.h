@@ -13,6 +13,8 @@
 	BusArrival *busArrival;
 }
 
+- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
+
 @property (retain, readwrite) BusArrival *busArrival;
 
 @end

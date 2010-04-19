@@ -22,6 +22,11 @@
 
 @synthesize name, stopNumber, lastRefresh, location, upcomingBuses;
 
+-(BusStop *)busStopWithName:(NSString *)sName stopNumber:(NSInteger)sNumber {
+	BusStop *newStop = [[BusStop alloc] initWithName:sName stopNumber:sNumber];
+	return [newStop autorelease];
+}
+
 #pragma mark Initializer
 
 -(id)initWithName:(NSString *)sName stopNumber:(NSInteger)sNumber {
@@ -40,8 +45,8 @@
 	
 	// FIXME this is just temporary
 	self.upcomingBuses = [NSArray arrayWithObject:[BusArrival 
-									busArrivalWithRoute:nil 
-									stop:nil
+									busArrivalWithRoute:[[BusRoute busRouteWithID:1 name:@"Purple" stops:nil] retain]
+									stop:self
 									arrivalTime:[NSDate date]]];
 }
 

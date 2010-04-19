@@ -20,6 +20,7 @@
 	NSArray *stops;
 }
 
++(BusRoute *)busRouteWithID:(NSInteger)rID name:(NSString *)rName stops:(NSArray *)rStops;
 -(id)initRouteWithID:(NSInteger)rID name:(NSString *)rName stops:(NSArray *)rStops;
 
 @property (retain, readonly) NSString *routeName;
