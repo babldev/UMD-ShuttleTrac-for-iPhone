@@ -11,6 +11,8 @@
 #import "BusStop.h"
 #import "BusRoute.h"
 
+@class BusStop;
+
 @interface BusArrival : NSObject {
 	// Route for the arriving bus
 	BusRoute *route;
@@ -21,6 +23,8 @@
 	// Arrival time for the bus
 	NSDate *arrivalTime;
 }
+
++(id)busArrivalWithRoute:(BusRoute *)bRoute stop:(BusStop *)bStop arrivalTime:(NSDate *)bArrivalTime;
 
 -(id)initWithRoute:(BusRoute *)bRoute stop:(BusStop *)bStop arrivalTime:(NSDate *)bArrivalTime;
 

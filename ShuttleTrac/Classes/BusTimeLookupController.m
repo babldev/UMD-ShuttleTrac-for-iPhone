@@ -21,12 +21,17 @@
 }
 */
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	arrivalTimesTableController = [[BusTimesTableViewController alloc] initWithStyle:UITableViewStylePlain];
+	[arrivalTimesTableController setView:busStopTableView]; 
+	[busStopTableView setDataSource:arrivalTimesTableController];
+	[busStopTableView setDelegate:arrivalTimesTableController];
 }
-*/
+
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -48,8 +53,30 @@
 	// e.g. self.myOutlet = nil;
 }
 
+#pragma mark IBActions
+
+-(IBAction)lookupBusStop:(UIButton *)submitButton {
+	busStop = [[BusStop alloc]
+					initWithName:@"Unnamed Stop"
+					stopNumber:[[busStopNumber text] intValue]];
+	
+	// Refresh bus arrivals
+	[busStop refreshBusArrivals];
+	
+	// TODO Use delegate or notification to figure out when we are done
+	[arrivalTimesTableController setBusArrivals:[busStop upcomingBuses]];
+	[busStopTableView reloadData];
+}
+
+#pragma mark dealloc
 
 - (void)dealloc {
+	[busStop release];
+	busStop = nil;
+	
+	[arrivalTimesTableController release];
+	arrivalTimesTableController = nil;
+	
     [super dealloc];
 }
 

@@ -8,7 +8,7 @@
 
 #import "BusStop.h"
 
-@interface BusStop (Internal)
+@interface BusStop ()
 
 @property (retain, readwrite) NSString *name;
 @property (assign, readwrite) NSInteger stopNumber;
@@ -37,6 +37,12 @@
 
 -(void)refreshBusArrivals {
 	// TODO Implement ShuttleTrac arrival calls
+	
+	// FIXME this is just temporary
+	self.upcomingBuses = [NSArray arrayWithObject:[BusArrival 
+									busArrivalWithRoute:nil 
+									stop:nil
+									arrivalTime:[NSDate date]]];
 }
 
 @end

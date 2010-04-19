@@ -8,7 +8,7 @@
 
 #import "BusRoute.h"
 
-@interface BusRoute (Internal)
+@interface BusRoute ()
 
 @property (retain, readwrite) NSString *routeName;
 @property (assign, readwrite) NSInteger routeID;
