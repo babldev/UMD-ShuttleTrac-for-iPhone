@@ -18,6 +18,9 @@
 		41127432117C10940082FBF7 /* BusArrival.m in Sources */ = {isa = PBXBuildFile; fileRef = 4112742D117C10940082FBF7 /* BusArrival.m */; };
 		41127433117C10940082FBF7 /* BusRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 4112742F117C10940082FBF7 /* BusRoute.m */; };
 		41127434117C10940082FBF7 /* BusStop.m in Sources */ = {isa = PBXBuildFile; fileRef = 41127431117C10940082FBF7 /* BusStop.m */; };
+		41127484117C12BF0082FBF7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41127483117C12BF0082FBF7 /* MapKit.framework */; };
+		4112748E117C13500082FBF7 /* BusMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4112748C117C13500082FBF7 /* BusMapViewController.m */; };
+		4112748F117C13500082FBF7 /* BusMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4112748D117C13500082FBF7 /* BusMapViewController.xib */; };
 		853D4C7911595E5A00F3E812 /* BusTimeLookupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 853D4C7711595E5A00F3E812 /* BusTimeLookupController.m */; };
 		853D4C7A11595E5A00F3E812 /* BusTimeLookupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 853D4C7811595E5A00F3E812 /* BusTimeLookupController.xib */; };
 		855893CE117BC85F005DF0F5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 855893CD117BC85F005DF0F5 /* CoreLocation.framework */; };
@@ -43,6 +46,10 @@
 		4112742F117C10940082FBF7 /* BusRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusRoute.m; sourceTree = "<group>"; };
 		41127430117C10940082FBF7 /* BusStop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusStop.h; sourceTree = "<group>"; };
 		41127431117C10940082FBF7 /* BusStop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusStop.m; sourceTree = "<group>"; };
+		41127483117C12BF0082FBF7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		4112748B117C13500082FBF7 /* BusMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusMapViewController.h; sourceTree = "<group>"; };
+		4112748C117C13500082FBF7 /* BusMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusMapViewController.m; sourceTree = "<group>"; };
+		4112748D117C13500082FBF7 /* BusMapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = BusMapViewController.xib; path = Classes/BusMapViewController.xib; sourceTree = "<group>"; };
 		853D4C7611595E5A00F3E812 /* BusTimeLookupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusTimeLookupController.h; sourceTree = "<group>"; };
 		853D4C7711595E5A00F3E812 /* BusTimeLookupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusTimeLookupController.m; sourceTree = "<group>"; };
 		853D4C7811595E5A00F3E812 /* BusTimeLookupController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = BusTimeLookupController.xib; path = Classes/BusTimeLookupController.xib; sourceTree = "<group>"; };
@@ -60,6 +67,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */,
 				855893CE117BC85F005DF0F5 /* CoreLocation.framework in Frameworks */,
+				41127484117C12BF0082FBF7 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +118,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4112748D117C13500082FBF7 /* BusMapViewController.xib */,
 				853D4C7811595E5A00F3E812 /* BusTimeLookupController.xib */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* ShuttleTrac-Info.plist */,
@@ -124,6 +133,7 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765070DF74369002DB57D /* CoreGraphics.framework */,
 				855893CD117BC85F005DF0F5 /* CoreLocation.framework */,
+				41127483117C12BF0082FBF7 /* MapKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -131,6 +141,7 @@
 		41127424117C0FE40082FBF7 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				41127487117C12C50082FBF7 /* BusMap */,
 				41127425117C0FEA0082FBF7 /* BusTimeLookup */,
 			);
 			name = Tabs;
@@ -160,6 +171,15 @@
 				41127431117C10940082FBF7 /* BusStop.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		41127487117C12C50082FBF7 /* BusMap */ = {
+			isa = PBXGroup;
+			children = (
+				4112748B117C13500082FBF7 /* BusMapViewController.h */,
+				4112748C117C13500082FBF7 /* BusMapViewController.m */,
+			);
+			name = BusMap;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,6 +226,7 @@
 			files = (
 				28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */,
 				853D4C7A11595E5A00F3E812 /* BusTimeLookupController.xib in Resources */,
+				4112748F117C13500082FBF7 /* BusMapViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +245,7 @@
 				41127432117C10940082FBF7 /* BusArrival.m in Sources */,
 				41127433117C10940082FBF7 /* BusRoute.m in Sources */,
 				41127434117C10940082FBF7 /* BusStop.m in Sources */,
+				4112748E117C13500082FBF7 /* BusMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
