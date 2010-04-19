@@ -8,9 +8,28 @@
 
 #import "BusArrival.h"
 
+@interface BusArrival (Internal)
+
+@property (assign, readwrite) BusRoute *route;
+@property (assign, readwrite) BusStop *stop;
+@property (retain, readwrite) NSDate *arrivalTime;
+
+@end
+
+
 
 @implementation BusArrival
 
 @synthesize route, stop, arrivalTime;
+
+-(id)initWithRoute:(BusRoute *)bRoute stop:(BusStop *)bStop arrivalTime:(NSDate *)bArrivalTime {
+	if (self = [super init]) {
+		[self setRoute:bRoute];
+		[self setStop:bStop];
+		[self setArrivalTime:bArrivalTime];
+	}
+	
+	return self;
+}
 
 @end

@@ -26,6 +26,9 @@
 	NSArray	*upcomingBuses;
 }
 
+-(id)initWithName:(NSString *)sName stopNumber:(NSInteger)sNumber;
+-(void)refreshBusArrivals;
+
 @property (retain, readonly) NSString *name;
 @property (assign, readonly) NSInteger stopNumber;
 @property (retain, readwrite) NSDate *lastRefresh;

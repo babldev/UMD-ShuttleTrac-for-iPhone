@@ -22,8 +22,10 @@
 	NSDate *arrivalTime;
 }
 
-@property (retain, readonly) BusRoute *route;
-@property (retain, readonly) BusStop *stop;
+-(id)initWithRoute:(BusRoute *)bRoute stop:(BusStop *)bStop arrivalTime:(NSDate *)bArrivalTime;
+
+@property (assign, readonly) BusRoute *route;
+@property (assign, readonly) BusStop *stop;
 @property (retain, readonly) NSDate *arrivalTime;
 
 @end
