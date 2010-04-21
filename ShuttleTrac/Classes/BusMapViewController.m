@@ -62,17 +62,12 @@
 
 - (void)addBusStops {
 	self.busStops = [GetShuttleTracDataStore() allBusStops];
-	BusStop *stop = [busStops objectAtIndex:0];
 	
-	CLLocationCoordinate2D	coordinate1 = [stop location];
-	NSDictionary *address = [NSDictionary dictionaryWithObjectsAndKeys:[stop name], @"Country", nil];
-    MKPlacemark	*rome = [MKPlacemark placemarkWithCoordinate:coordinate1 addressDictionary:address];    
-	[mapView addAnnotation:rome];
-	
-	CLLocationCoordinate2D coordinate2 = { 48.858196,2.294748 };
-	address = [NSDictionary dictionaryWithObjectsAndKeys:@"France", @"Country", nil];
-	MKPlacemark *paris = [MKPlacemark placemarkWithCoordinate:coordinate2 addressDictionary:address];
-	[mapView addAnnotation:paris];
+	for (BusStop *stop in busStops) {
+		NSDictionary *address = [NSDictionary dictionaryWithObjectsAndKeys:[stop name], @"Country", nil];
+		MKPlacemark *newPlacemark = [MKPlacemark placemarkWithCoordinate:[stop location] addressDictionary:address];
+		[mapView addAnnotation:newPlacemark];
+	}
 }
 
 #pragma mark -
