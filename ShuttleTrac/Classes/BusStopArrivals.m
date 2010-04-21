@@ -22,7 +22,7 @@
 
 @implementation BusStopArrivals
 
-@synthesize route, stop, upcomingBuses, lastRefresh;
+@synthesize route, stop, upcomingBuses, lastRefresh, delegate;
 
 -(id)initWithBusStop:(BusStop *)bStop {
 	if (self = [super init]) {
@@ -54,6 +54,7 @@
 							[BusArrival busArrivalWithRoute:badRoute
 													   stop:[self stop] 
 												arrivalTime:[NSDate date]]]];
+	[delegate arrivalsRefreshComplete:self];
 }
 
 @end

@@ -10,7 +10,7 @@
 #import "BusStopArrivals.h"
 #import "BusTimesTableViewController.h"
 
-@interface BusTimeLookupController : UIViewController {
+@interface BusTimeLookupController : UIViewController <BusStopArrivalsDelegate> {
 	IBOutlet UITextField *busStopNumber;
 	IBOutlet UITableView *busStopTableView;
 	

@@ -18,6 +18,7 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     dataStore = [[ShuttleTracDataStore alloc] init];
+	[dataStore refreshAllBookmarkedStops];
 	
     // Add the tab bar controller's current view as a subview of the window
     [window addSubview:tabBarController.view];

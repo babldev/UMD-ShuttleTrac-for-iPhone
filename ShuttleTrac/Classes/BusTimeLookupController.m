@@ -56,18 +56,24 @@
 #pragma mark IBActions
 
 -(IBAction)lookupBusStop:(UIButton *)submitButton {
-//	CLLocationCoordinate2D loc;
-//	loc.latitude = 0;
-//	loc.longitude = 0;
-	busStop = [[GetShuttleTracDataStore() allBusStops] objectAtIndex:0];
+	[busStop release];
+	busStop = nil;
 	
+	[busStopArrivals release];
+	busStopArrivals = nil;
+	
+	busStop = [[GetShuttleTracDataStore() allBusStops] objectAtIndex:0];
 	busStopArrivals = [[BusStopArrivals alloc] initWithBusStop:busStop];
+	[busStopArrivals setDelegate:self];
 	
 	// Refresh bus arrivals
 	[busStopArrivals refreshUpcomingBuses];
-	
-	// TODO Use delegate or notification to figure out when we are done
-	[arrivalTimesTableController setBusArrivals:busStopArrivals];
+}
+
+#pragma mark -
+#pragma mark BusStopArrivalsDelegate
+-(void)arrivalsRefreshComplete:(BusStopArrivals *)arrivals {
+	[arrivalTimesTableController setBusArrivals:arrivals];
 	[busStopTableView reloadData];
 }
 
@@ -76,6 +82,9 @@
 - (void)dealloc {
 	[busStop release];
 	busStop = nil;
+	
+	[busStopArrivals release];
+	busStopArrivals = nil;
 	
 	[arrivalTimesTableController release];
 	arrivalTimesTableController = nil;

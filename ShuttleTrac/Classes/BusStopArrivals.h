@@ -12,6 +12,15 @@
 #import "BusRoute.h"
 #import "BusArrival.h"
 
+@class BusStopArrivals;
+
+@protocol BusStopArrivalsDelegate
+
+-(void)arrivalsRefreshComplete:(BusStopArrivals *)arrivals;
+
+@end
+
+
 @class BusStop;
 
 @interface BusStopArrivals : NSObject {
@@ -26,6 +35,8 @@
 	
 	// Time of last refresh
 	NSDate *lastRefresh;
+	
+	id <BusStopArrivalsDelegate> delegate;
 }
 
 -(id)initWithBusStop:(BusStop *)bStop;
@@ -37,5 +48,6 @@
 @property (assign, readonly) BusStop *stop;
 @property (retain, readonly) NSArray *upcomingBuses;
 @property (retain, readonly) NSDate *lastRefresh;
+@property (assign, readwrite) id <BusStopArrivalsDelegate> delegate;
 
 @end

@@ -29,6 +29,8 @@
 		418D7E3A117EB9490027754F /* DataStoreGrabber.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7E39117EB9490027754F /* DataStoreGrabber.m */; };
 		418D7F18117F5B200027754F /* shuttleTracDataStore.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 418D7F17117F5B200027754F /* shuttleTracDataStore.sqlite */; };
 		418D7F70117F65EC0027754F /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 418D7F6F117F65EC0027754F /* libsqlite3.0.dylib */; };
+		8528A31E117F7730000CDEF3 /* BookmarkedStopsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8528A31C117F7730000CDEF3 /* BookmarkedStopsController.m */; };
+		8528A31F117F7730000CDEF3 /* BookmarkedStopsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8528A31D117F7730000CDEF3 /* BookmarkedStopsController.xib */; };
 		853D4C7911595E5A00F3E812 /* BusTimeLookupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 853D4C7711595E5A00F3E812 /* BusTimeLookupController.m */; };
 		853D4C7A11595E5A00F3E812 /* BusTimeLookupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 853D4C7811595E5A00F3E812 /* BusTimeLookupController.xib */; };
 		855893CE117BC85F005DF0F5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 855893CD117BC85F005DF0F5 /* CoreLocation.framework */; };
@@ -71,6 +73,9 @@
 		418D7E39117EB9490027754F /* DataStoreGrabber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStoreGrabber.m; sourceTree = "<group>"; };
 		418D7F17117F5B200027754F /* shuttleTracDataStore.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shuttleTracDataStore.sqlite; sourceTree = "<group>"; };
 		418D7F6F117F65EC0027754F /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		8528A31B117F7730000CDEF3 /* BookmarkedStopsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkedStopsController.h; sourceTree = "<group>"; };
+		8528A31C117F7730000CDEF3 /* BookmarkedStopsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkedStopsController.m; sourceTree = "<group>"; };
+		8528A31D117F7730000CDEF3 /* BookmarkedStopsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookmarkedStopsController.xib; sourceTree = "<group>"; };
 		853D4C7611595E5A00F3E812 /* BusTimeLookupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusTimeLookupController.h; sourceTree = "<group>"; };
 		853D4C7711595E5A00F3E812 /* BusTimeLookupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusTimeLookupController.m; sourceTree = "<group>"; };
 		853D4C7811595E5A00F3E812 /* BusTimeLookupController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusTimeLookupController.xib; sourceTree = "<group>"; };
@@ -168,6 +173,7 @@
 		41127424117C0FE40082FBF7 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				8528A31A117F771F000CDEF3 /* BookmarkedStops */,
 				41127487117C12C50082FBF7 /* BusMap */,
 				41127425117C0FEA0082FBF7 /* BusTimeLookup */,
 			);
@@ -242,6 +248,16 @@
 			name = Persistent;
 			sourceTree = "<group>";
 		};
+		8528A31A117F771F000CDEF3 /* BookmarkedStops */ = {
+			isa = PBXGroup;
+			children = (
+				8528A31B117F7730000CDEF3 /* BookmarkedStopsController.h */,
+				8528A31C117F7730000CDEF3 /* BookmarkedStopsController.m */,
+				8528A31D117F7730000CDEF3 /* BookmarkedStopsController.xib */,
+			);
+			name = BookmarkedStops;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -288,6 +304,7 @@
 				853D4C7A11595E5A00F3E812 /* BusTimeLookupController.xib in Resources */,
 				4112748F117C13500082FBF7 /* BusMapViewController.xib in Resources */,
 				418D7F18117F5B200027754F /* shuttleTracDataStore.sqlite in Resources */,
+				8528A31F117F7730000CDEF3 /* BookmarkedStopsController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +329,7 @@
 				418D7D73117EA1FB0027754F /* BusStopArrivals.m in Sources */,
 				418D7D90117EA7D70027754F /* BusArrival.m in Sources */,
 				418D7E3A117EB9490027754F /* DataStoreGrabber.m in Sources */,
+				8528A31E117F7730000CDEF3 /* BookmarkedStopsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
