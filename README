@@ -4,6 +4,23 @@ Project for Spring 10' CMSC498i @ UMD
 Created by:
 Brady and Tarek
 
+---
+
+Data to be stored:
+* Set of all bus stops
+Used for quick loading on map. Can be refreshed using menu and refreshes automatically.
+
+* Set of all bus routes
+Used for looking up bus schedules quickly. Can be refreshed using menu and refreshes automatically.
+
+* Bookmarked bus stops
+
+* BusArrivals for bookmarked stops
+
+* BusArrivals for active stop 
+
+---
+
 UMD Website XML Dumps:
 
 Domain can be specified as realtime.commuterpage.com (external) or Nostromo (internal).

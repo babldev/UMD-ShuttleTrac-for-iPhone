@@ -17,24 +17,16 @@
 	// ShuttleTrac stop number 
 	NSInteger stopNumber;
 	
-	// Last refresh of bus times
-	NSDate *lastRefresh;
-	
 	// Geolocation of the bus stop
 	CLLocationCoordinate2D location;
-	
-	// Array of ArrivingBus(es)
-	NSArray	*upcomingBuses;
 }
 
--(BusStop *)busStopWithName:(NSString *)sName stopNumber:(NSInteger)sNumber;
--(id)initWithName:(NSString *)sName stopNumber:(NSInteger)sNumber;
--(void)refreshBusArrivals;
++(BusStop *)busStopWithName:(NSString *)sName stopNumber:(NSInteger)sNumber location:(CLLocationCoordinate2D)sLoc;
+
+-(id)initWithName:(NSString *)sName stopNumber:(NSInteger)sNumber location:(CLLocationCoordinate2D)sLoc;
 
 @property (retain, readonly) NSString *name;
 @property (assign, readonly) NSInteger stopNumber;
-@property (retain, readwrite) NSDate *lastRefresh;
 @property (assign, readonly) CLLocationCoordinate2D location;
-@property (retain, readwrite) NSArray *upcomingBuses;
 
 @end

@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BusArrival.h"
+#import "BusStopArrivals.h"
 
 @interface BusTimesTableViewController : UITableViewController {
-	NSArray *busArrivals;
+	BusStopArrivals *busArrivals;
 }
 
-@property (retain, readwrite) NSArray *busArrivals;
+@property (retain, readwrite) BusStopArrivals *busArrivals;
 
 @end

@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import "BusStop.h"
 
-
-@interface BusMapViewController : UIViewController {
-
+@interface BusMapViewController : UIViewController <MKMapViewDelegate> {
+	IBOutlet MKMapView  *mapView;
+	MKReverseGeocoder   *reverseGeocoder;
+	NSSet				*busStops;
 }
+
+- (IBAction)changeType:(UISegmentedControl *)sender;
+- (IBAction)findMe:(UIBarButtonItem *)sender;
 
 @end

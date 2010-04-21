@@ -81,7 +81,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [busArrivals count];
+    return [[busArrivals upcomingBuses] count];
 }
 
 
@@ -96,7 +96,7 @@
     }
     
     // Configure the cell...
-    [cell setBusArrival:[busArrivals objectAtIndex:[indexPath row]]];
+    [cell setBusArrival:[[busArrivals upcomingBuses] objectAtIndex:[indexPath row]]];
 	
     return cell;
 }

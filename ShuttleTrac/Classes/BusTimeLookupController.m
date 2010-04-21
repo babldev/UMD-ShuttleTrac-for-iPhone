@@ -8,7 +8,6 @@
 
 #import "BusTimeLookupController.h"
 
-
 @implementation BusTimeLookupController
 
 /*
@@ -56,15 +55,20 @@
 #pragma mark IBActions
 
 -(IBAction)lookupBusStop:(UIButton *)submitButton {
-	busStop = [[BusStop alloc]
-					initWithName:@"Unnamed Stop"
-					stopNumber:[[busStopNumber text] intValue]];
+	CLLocationCoordinate2D loc;
+	loc.latitude = 0;
+	loc.longitude = 0;
+	busStop = [[BusStop alloc] initWithName:@"Courtyards"
+								 stopNumber:[[busStopNumber text] intValue]
+								   location:loc];
+	
+	busStopArrivals = [[BusStopArrivals alloc] initWithBusStop:busStop];
 	
 	// Refresh bus arrivals
-	[busStop refreshBusArrivals];
+	[busStopArrivals refreshUpcomingBuses];
 	
 	// TODO Use delegate or notification to figure out when we are done
-	[arrivalTimesTableController setBusArrivals:[busStop upcomingBuses]];
+	[arrivalTimesTableController setBusArrivals:busStopArrivals];
 	[busStopTableView reloadData];
 }
 

@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BusStop.h"
+#import "BusStopArrivals.h"
 #import "BusTimesTableViewController.h"
 
 @interface BusTimeLookupController : UIViewController {
 	IBOutlet UITextField *busStopNumber;
 	IBOutlet UITableView *busStopTableView;
+	
 	BusStop *busStop;
+	BusStopArrivals *busStopArrivals;
 	
 	BusTimesTableViewController *arrivalTimesTableController;
 }

@@ -15,12 +15,17 @@
 		28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD73870D9D96C1002E5188 /* MainWindow.xib */; };
 		41127311117C03280082FBF7 /* BusTimesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41127310117C03280082FBF7 /* BusTimesTableViewController.m */; };
 		41127319117C03E40082FBF7 /* BusTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41127318117C03E40082FBF7 /* BusTimeTableViewCell.m */; };
-		41127432117C10940082FBF7 /* BusArrival.m in Sources */ = {isa = PBXBuildFile; fileRef = 4112742D117C10940082FBF7 /* BusArrival.m */; };
 		41127433117C10940082FBF7 /* BusRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 4112742F117C10940082FBF7 /* BusRoute.m */; };
 		41127434117C10940082FBF7 /* BusStop.m in Sources */ = {isa = PBXBuildFile; fileRef = 41127431117C10940082FBF7 /* BusStop.m */; };
 		41127484117C12BF0082FBF7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41127483117C12BF0082FBF7 /* MapKit.framework */; };
 		4112748E117C13500082FBF7 /* BusMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4112748C117C13500082FBF7 /* BusMapViewController.m */; };
 		4112748F117C13500082FBF7 /* BusMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4112748D117C13500082FBF7 /* BusMapViewController.xib */; };
+		41302455117CC0AC00474B5B /* NSDateAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 41302454117CC0AC00474B5B /* NSDateAdditions.m */; };
+		418D7D51117E9E210027754F /* MKAddressDictionaryPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7D50117E9E210027754F /* MKAddressDictionaryPlacemark.m */; };
+		418D7D62117E9E880027754F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418D7D61117E9E880027754F /* AddressBook.framework */; };
+		418D7D70117EA1660027754F /* ShuttleTracDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7D6F117EA1660027754F /* ShuttleTracDataStore.m */; };
+		418D7D73117EA1FB0027754F /* BusStopArrivals.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7D72117EA1FB0027754F /* BusStopArrivals.m */; };
+		418D7D90117EA7D70027754F /* BusArrival.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7D8F117EA7D70027754F /* BusArrival.m */; };
 		853D4C7911595E5A00F3E812 /* BusTimeLookupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 853D4C7711595E5A00F3E812 /* BusTimeLookupController.m */; };
 		853D4C7A11595E5A00F3E812 /* BusTimeLookupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 853D4C7811595E5A00F3E812 /* BusTimeLookupController.xib */; };
 		855893CE117BC85F005DF0F5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 855893CD117BC85F005DF0F5 /* CoreLocation.framework */; };
@@ -40,8 +45,6 @@
 		41127310117C03280082FBF7 /* BusTimesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusTimesTableViewController.m; sourceTree = "<group>"; };
 		41127317117C03E40082FBF7 /* BusTimeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusTimeTableViewCell.h; sourceTree = "<group>"; };
 		41127318117C03E40082FBF7 /* BusTimeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusTimeTableViewCell.m; sourceTree = "<group>"; };
-		4112742C117C10940082FBF7 /* BusArrival.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusArrival.h; sourceTree = "<group>"; };
-		4112742D117C10940082FBF7 /* BusArrival.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusArrival.m; sourceTree = "<group>"; };
 		4112742E117C10940082FBF7 /* BusRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusRoute.h; sourceTree = "<group>"; };
 		4112742F117C10940082FBF7 /* BusRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusRoute.m; sourceTree = "<group>"; };
 		41127430117C10940082FBF7 /* BusStop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusStop.h; sourceTree = "<group>"; };
@@ -49,10 +52,21 @@
 		41127483117C12BF0082FBF7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4112748B117C13500082FBF7 /* BusMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusMapViewController.h; sourceTree = "<group>"; };
 		4112748C117C13500082FBF7 /* BusMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusMapViewController.m; sourceTree = "<group>"; };
-		4112748D117C13500082FBF7 /* BusMapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = BusMapViewController.xib; path = Classes/BusMapViewController.xib; sourceTree = "<group>"; };
+		4112748D117C13500082FBF7 /* BusMapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusMapViewController.xib; sourceTree = "<group>"; };
+		41302453117CC0AC00474B5B /* NSDateAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDateAdditions.h; sourceTree = "<group>"; };
+		41302454117CC0AC00474B5B /* NSDateAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateAdditions.m; sourceTree = "<group>"; };
+		418D7D4F117E9E210027754F /* MKAddressDictionaryPlacemark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKAddressDictionaryPlacemark.h; sourceTree = "<group>"; };
+		418D7D50117E9E210027754F /* MKAddressDictionaryPlacemark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKAddressDictionaryPlacemark.m; sourceTree = "<group>"; };
+		418D7D61117E9E880027754F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		418D7D6E117EA1660027754F /* ShuttleTracDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShuttleTracDataStore.h; sourceTree = "<group>"; };
+		418D7D6F117EA1660027754F /* ShuttleTracDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShuttleTracDataStore.m; sourceTree = "<group>"; };
+		418D7D71117EA1FB0027754F /* BusStopArrivals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusStopArrivals.h; sourceTree = "<group>"; };
+		418D7D72117EA1FB0027754F /* BusStopArrivals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusStopArrivals.m; sourceTree = "<group>"; };
+		418D7D8E117EA7D70027754F /* BusArrival.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusArrival.h; sourceTree = "<group>"; };
+		418D7D8F117EA7D70027754F /* BusArrival.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusArrival.m; sourceTree = "<group>"; };
 		853D4C7611595E5A00F3E812 /* BusTimeLookupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusTimeLookupController.h; sourceTree = "<group>"; };
 		853D4C7711595E5A00F3E812 /* BusTimeLookupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusTimeLookupController.m; sourceTree = "<group>"; };
-		853D4C7811595E5A00F3E812 /* BusTimeLookupController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = BusTimeLookupController.xib; path = Classes/BusTimeLookupController.xib; sourceTree = "<group>"; };
+		853D4C7811595E5A00F3E812 /* BusTimeLookupController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusTimeLookupController.xib; sourceTree = "<group>"; };
 		855893CD117BC85F005DF0F5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		855893D1117BC8B8005DF0F5 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README; path = ../README; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* ShuttleTrac-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ShuttleTrac-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -68,6 +82,7 @@
 				288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */,
 				855893CE117BC85F005DF0F5 /* CoreLocation.framework in Frameworks */,
 				41127484117C12BF0082FBF7 /* MapKit.framework in Frameworks */,
+				418D7D62117E9E880027754F /* AddressBook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +92,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				41302451117CC07F00474B5B /* Additions */,
 				41127424117C0FE40082FBF7 /* Tabs */,
 				41127426117C10840082FBF7 /* Models */,
 				1D3623240D0F684500981E51 /* ShuttleTracAppDelegate.h */,
@@ -118,8 +134,6 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4112748D117C13500082FBF7 /* BusMapViewController.xib */,
-				853D4C7811595E5A00F3E812 /* BusTimeLookupController.xib */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* ShuttleTrac-Info.plist */,
 			);
@@ -134,6 +148,7 @@
 				288765070DF74369002DB57D /* CoreGraphics.framework */,
 				855893CD117BC85F005DF0F5 /* CoreLocation.framework */,
 				41127483117C12BF0082FBF7 /* MapKit.framework */,
+				418D7D61117E9E880027754F /* AddressBook.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -150,6 +165,7 @@
 		41127425117C0FEA0082FBF7 /* BusTimeLookup */ = {
 			isa = PBXGroup;
 			children = (
+				853D4C7811595E5A00F3E812 /* BusTimeLookupController.xib */,
 				4112730F117C03280082FBF7 /* BusTimesTableViewController.h */,
 				41127310117C03280082FBF7 /* BusTimesTableViewController.m */,
 				41127317117C03E40082FBF7 /* BusTimeTableViewCell.h */,
@@ -163,12 +179,8 @@
 		41127426117C10840082FBF7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4112742C117C10940082FBF7 /* BusArrival.h */,
-				4112742D117C10940082FBF7 /* BusArrival.m */,
-				4112742E117C10940082FBF7 /* BusRoute.h */,
-				4112742F117C10940082FBF7 /* BusRoute.m */,
-				41127430117C10940082FBF7 /* BusStop.h */,
-				41127431117C10940082FBF7 /* BusStop.m */,
+				418D7D6A117EA0CE0027754F /* Persistent */,
+				418D7D69117EA0C50027754F /* Bus Data */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -176,10 +188,46 @@
 		41127487117C12C50082FBF7 /* BusMap */ = {
 			isa = PBXGroup;
 			children = (
+				418D7D4F117E9E210027754F /* MKAddressDictionaryPlacemark.h */,
+				418D7D50117E9E210027754F /* MKAddressDictionaryPlacemark.m */,
+				4112748D117C13500082FBF7 /* BusMapViewController.xib */,
 				4112748B117C13500082FBF7 /* BusMapViewController.h */,
 				4112748C117C13500082FBF7 /* BusMapViewController.m */,
 			);
 			name = BusMap;
+			sourceTree = "<group>";
+		};
+		41302451117CC07F00474B5B /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				41302453117CC0AC00474B5B /* NSDateAdditions.h */,
+				41302454117CC0AC00474B5B /* NSDateAdditions.m */,
+			);
+			name = Additions;
+			sourceTree = "<group>";
+		};
+		418D7D69117EA0C50027754F /* Bus Data */ = {
+			isa = PBXGroup;
+			children = (
+				418D7D71117EA1FB0027754F /* BusStopArrivals.h */,
+				418D7D72117EA1FB0027754F /* BusStopArrivals.m */,
+				4112742E117C10940082FBF7 /* BusRoute.h */,
+				4112742F117C10940082FBF7 /* BusRoute.m */,
+				41127430117C10940082FBF7 /* BusStop.h */,
+				41127431117C10940082FBF7 /* BusStop.m */,
+				418D7D8E117EA7D70027754F /* BusArrival.h */,
+				418D7D8F117EA7D70027754F /* BusArrival.m */,
+			);
+			name = "Bus Data";
+			sourceTree = "<group>";
+		};
+		418D7D6A117EA0CE0027754F /* Persistent */ = {
+			isa = PBXGroup;
+			children = (
+				418D7D6E117EA1660027754F /* ShuttleTracDataStore.h */,
+				418D7D6F117EA1660027754F /* ShuttleTracDataStore.m */,
+			);
+			name = Persistent;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,10 +290,14 @@
 				853D4C7911595E5A00F3E812 /* BusTimeLookupController.m in Sources */,
 				41127311117C03280082FBF7 /* BusTimesTableViewController.m in Sources */,
 				41127319117C03E40082FBF7 /* BusTimeTableViewCell.m in Sources */,
-				41127432117C10940082FBF7 /* BusArrival.m in Sources */,
 				41127433117C10940082FBF7 /* BusRoute.m in Sources */,
 				41127434117C10940082FBF7 /* BusStop.m in Sources */,
 				4112748E117C13500082FBF7 /* BusMapViewController.m in Sources */,
+				41302455117CC0AC00474B5B /* NSDateAdditions.m in Sources */,
+				418D7D51117E9E210027754F /* MKAddressDictionaryPlacemark.m in Sources */,
+				418D7D70117EA1660027754F /* ShuttleTracDataStore.m in Sources */,
+				418D7D73117EA1FB0027754F /* BusStopArrivals.m in Sources */,
+				418D7D90117EA7D70027754F /* BusArrival.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

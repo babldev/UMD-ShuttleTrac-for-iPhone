@@ -20,34 +20,23 @@
 
 @implementation BusStop
 
-@synthesize name, stopNumber, lastRefresh, location, upcomingBuses;
+@synthesize name, stopNumber, location;
 
--(BusStop *)busStopWithName:(NSString *)sName stopNumber:(NSInteger)sNumber {
-	BusStop *newStop = [[BusStop alloc] initWithName:sName stopNumber:sNumber];
++(BusStop *)busStopWithName:(NSString *)sName stopNumber:(NSInteger)sNumber location:(CLLocationCoordinate2D)sLoc {
+	BusStop *newStop = [[BusStop alloc] initWithName:sName stopNumber:sNumber location:sLoc];
 	return [newStop autorelease];
 }
 
 #pragma mark Initializer
 
--(id)initWithName:(NSString *)sName stopNumber:(NSInteger)sNumber {
+-(id)initWithName:(NSString *)sName stopNumber:(NSInteger)sNumber location:(CLLocationCoordinate2D)sLoc {
 	if (self = [super init]) {
 		[self setName:sName];
 		[self setStopNumber:sNumber];
+		[self setLocation:sLoc];
 	}
 	
 	return self;
-}
-
-#pragma mark ShuttleTrac calls
-
--(void)refreshBusArrivals {
-	// TODO Implement ShuttleTrac arrival calls
-	
-	// FIXME this is just temporary
-	self.upcomingBuses = [NSArray arrayWithObject:[BusArrival 
-									busArrivalWithRoute:[[BusRoute busRouteWithID:1 name:@"Purple" stops:nil] retain]
-									stop:self
-									arrivalTime:[NSDate date]]];
 }
 
 @end
