@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <sqlite3.h>
+
 #import "BusStopArrivals.h"
 #import "BusStop.h"
 #import "BusRoute.h"
@@ -14,11 +16,13 @@
 @interface ShuttleTracDataStore : NSObject {
 	NSMutableArray *bookmarkedStops;
 	NSArray *bookmarkedStopsArrivals;
-
+	
+	sqlite3 *database;
+	
 @private
 	// Temporary
-	NSArray *busStops;
-	NSArray *busRoutes;
+	NSMutableArray *busStops;
+	NSMutableArray *busRoutes;
 }
 
 -(NSArray *)allBusStops;
