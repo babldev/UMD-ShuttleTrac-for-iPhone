@@ -8,6 +8,7 @@
 
 #import "BusTimeLookupController.h"
 #import "DataStoreGrabber.h"
+#import "BusTimeTableViewCell.h"
 
 @implementation BusTimeLookupController
 
@@ -26,10 +27,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	arrivalTimesTableController = [[BusTimesTableViewController alloc] initWithStyle:UITableViewStylePlain];
+	arrivalTimesTableController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
 	[arrivalTimesTableController setView:busStopTableView]; 
-	[busStopTableView setDataSource:arrivalTimesTableController];
-	[busStopTableView setDelegate:arrivalTimesTableController];
+	[busStopTableView setDataSource:self];
 }
 
 
@@ -73,8 +73,38 @@
 #pragma mark -
 #pragma mark BusStopArrivalsDelegate
 -(void)arrivalsRefreshComplete:(BusStopArrivals *)arrivals {
-	[arrivalTimesTableController setBusArrivals:arrivals];
 	[busStopTableView reloadData];
+}
+
+#pragma mark -
+#pragma mark Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Return the number of sections.
+    return 1;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // Return the number of rows in the section.
+    return [[busStopArrivals upcomingBuses] count];
+}
+
+
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *CellIdentifier = @"BusTimes";
+    
+    BusTimeTableViewCell *cell = (BusTimeTableViewCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[BusTimeTableViewCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
+    }
+    
+    // Configure the cell...
+    [cell setBusArrival:[[busStopArrivals upcomingBuses] objectAtIndex:[indexPath row]]];
+	
+    return cell;
 }
 
 #pragma mark dealloc
