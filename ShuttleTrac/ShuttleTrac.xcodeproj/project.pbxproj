@@ -26,6 +26,7 @@
 		418D7D70117EA1660027754F /* ShuttleTracDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7D6F117EA1660027754F /* ShuttleTracDataStore.m */; };
 		418D7D73117EA1FB0027754F /* BusStopArrivals.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7D72117EA1FB0027754F /* BusStopArrivals.m */; };
 		418D7D90117EA7D70027754F /* BusArrival.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7D8F117EA7D70027754F /* BusArrival.m */; };
+		418D7E3A117EB9490027754F /* DataStoreGrabber.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7E39117EB9490027754F /* DataStoreGrabber.m */; };
 		853D4C7911595E5A00F3E812 /* BusTimeLookupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 853D4C7711595E5A00F3E812 /* BusTimeLookupController.m */; };
 		853D4C7A11595E5A00F3E812 /* BusTimeLookupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 853D4C7811595E5A00F3E812 /* BusTimeLookupController.xib */; };
 		855893CE117BC85F005DF0F5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 855893CD117BC85F005DF0F5 /* CoreLocation.framework */; };
@@ -64,6 +65,8 @@
 		418D7D72117EA1FB0027754F /* BusStopArrivals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusStopArrivals.m; sourceTree = "<group>"; };
 		418D7D8E117EA7D70027754F /* BusArrival.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusArrival.h; sourceTree = "<group>"; };
 		418D7D8F117EA7D70027754F /* BusArrival.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusArrival.m; sourceTree = "<group>"; };
+		418D7E38117EB9490027754F /* DataStoreGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStoreGrabber.h; sourceTree = "<group>"; };
+		418D7E39117EB9490027754F /* DataStoreGrabber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStoreGrabber.m; sourceTree = "<group>"; };
 		853D4C7611595E5A00F3E812 /* BusTimeLookupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusTimeLookupController.h; sourceTree = "<group>"; };
 		853D4C7711595E5A00F3E812 /* BusTimeLookupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusTimeLookupController.m; sourceTree = "<group>"; };
 		853D4C7811595E5A00F3E812 /* BusTimeLookupController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusTimeLookupController.xib; sourceTree = "<group>"; };
@@ -97,6 +100,8 @@
 				41127426117C10840082FBF7 /* Models */,
 				1D3623240D0F684500981E51 /* ShuttleTracAppDelegate.h */,
 				1D3623250D0F684500981E51 /* ShuttleTracAppDelegate.m */,
+				418D7E38117EB9490027754F /* DataStoreGrabber.h */,
+				418D7E39117EB9490027754F /* DataStoreGrabber.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -298,6 +303,7 @@
 				418D7D70117EA1660027754F /* ShuttleTracDataStore.m in Sources */,
 				418D7D73117EA1FB0027754F /* BusStopArrivals.m in Sources */,
 				418D7D90117EA7D70027754F /* BusArrival.m in Sources */,
+				418D7E3A117EB9490027754F /* DataStoreGrabber.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

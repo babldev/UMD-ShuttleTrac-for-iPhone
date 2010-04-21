@@ -7,14 +7,27 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BusStopArrivals.h"
+#import "BusStop.h"
+#import "BusRoute.h"
 
 @interface ShuttleTracDataStore : NSObject {
 	NSMutableArray *bookmarkedStops;
+	NSArray *bookmarkedStopsArrivals;
+
+@private
+	// Temporary
+	NSArray *busStops;
+	NSArray *busRoutes;
 }
 
 -(NSArray *)allBusStops;
 -(NSArray *)allBusRoutes;
 
+// Send notifications
+-(void)refreshAllBookmarkedStops;
+
 @property (retain, readonly) NSMutableArray *bookmarkedStops;
+@property (retain, readonly) NSArray		*bookmarkedStopsArrivals;
 
 @end

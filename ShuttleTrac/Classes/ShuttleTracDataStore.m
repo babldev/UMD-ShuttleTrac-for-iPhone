@@ -10,21 +10,47 @@
 
 @interface ShuttleTracDataStore ( )
 
-@property (retain, readwrite) NSMutableArray *bookmarkedStops;
+@property (retain, readwrite) NSMutableArray	*bookmarkedStops;
+@property (retain, readwrite) NSArray			*bookmarkedStopsArrivals;
 
 @end
 
 
 @implementation ShuttleTracDataStore
 
-@synthesize bookmarkedStops;
+@synthesize bookmarkedStops, bookmarkedStopsArrivals;
+
+-(id)init {
+	if (self = [super init]) {
+		// FIXME
+		CLLocationCoordinate2D loc;
+		loc.latitude = 0;
+		loc.longitude = 0;
+		
+		busStops = [[NSArray arrayWithObject:
+					[BusStop busStopWithName:@"Courtyards" stopNumber:1 location:loc]] retain];
+		busRoutes = [[NSArray arrayWithObject:
+					 [BusRoute busRouteWithID:1 name:@"Purple" stops:nil]] retain];
+	}
+	
+	return self;
+}
 
 -(NSArray *)allBusStops {
-	return nil;
+	return busStops;
 }
 
 -(NSArray *)allBusRoutes {
-	return nil;
+	return busRoutes;
+}
+
+-(void)refreshAllBookmarkedStops {
+}
+
+-(void)dealloc {
+	[busStops release];
+	[busRoutes release];
+	[super dealloc];
 }
 
 @end

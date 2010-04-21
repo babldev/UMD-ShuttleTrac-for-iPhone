@@ -13,10 +13,12 @@
 @interface BusMapViewController : UIViewController <MKMapViewDelegate> {
 	IBOutlet MKMapView  *mapView;
 	MKReverseGeocoder   *reverseGeocoder;
-	NSSet				*busStops;
+	NSArray				*busStops;
 }
 
 - (IBAction)changeType:(UISegmentedControl *)sender;
 - (IBAction)findMe:(UIBarButtonItem *)sender;
+
+@property (retain, readwrite) NSArray *busStops;
 
 @end

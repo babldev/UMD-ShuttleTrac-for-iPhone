@@ -7,13 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ShuttleTracDataStore.h"
 
 @interface ShuttleTracAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
     UIWindow *window;
     UITabBarController *tabBarController;
+	
+	ShuttleTracDataStore *dataStore;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
+@property (nonatomic, retain) ShuttleTracDataStore *dataStore;
 
 @end

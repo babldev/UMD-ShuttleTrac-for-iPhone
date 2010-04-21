@@ -14,13 +14,18 @@
 @synthesize window;
 @synthesize tabBarController;
 
+@synthesize dataStore;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-    
+    dataStore = [[ShuttleTracDataStore alloc] init];
+	
     // Add the tab bar controller's current view as a subview of the window
     [window addSubview:tabBarController.view];
 }
 
+- (void)applicationWillTerminate:(UIApplication *)application {
+	[dataStore release];
+}
 
 /*
 // Optional UITabBarControllerDelegate method

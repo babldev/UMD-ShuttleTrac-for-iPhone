@@ -7,6 +7,7 @@
 //
 
 #import "BusTimeLookupController.h"
+#import "DataStoreGrabber.h"
 
 @implementation BusTimeLookupController
 
@@ -55,12 +56,10 @@
 #pragma mark IBActions
 
 -(IBAction)lookupBusStop:(UIButton *)submitButton {
-	CLLocationCoordinate2D loc;
-	loc.latitude = 0;
-	loc.longitude = 0;
-	busStop = [[BusStop alloc] initWithName:@"Courtyards"
-								 stopNumber:[[busStopNumber text] intValue]
-								   location:loc];
+//	CLLocationCoordinate2D loc;
+//	loc.latitude = 0;
+//	loc.longitude = 0;
+	busStop = [[GetShuttleTracDataStore() allBusStops] objectAtIndex:0];
 	
 	busStopArrivals = [[BusStopArrivals alloc] initWithBusStop:busStop];
 	
