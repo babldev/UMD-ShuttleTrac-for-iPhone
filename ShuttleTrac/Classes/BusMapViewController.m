@@ -46,6 +46,8 @@
 	
 	// FIXME - We probably shouldn't run this for > 10 stops
 	[self zoomToFitMapAnnotations];
+	
+	[self.navigationController setDelegate:self];
 }
 
 
@@ -163,8 +165,9 @@
 	BusStopViewController *busStopController = [[BusStopViewController alloc] initWithNibName:@"BusStopView" bundle:nil];
 	[busStopController setDataStore:dataStore];
 	[busStopController setArrivals:nil];
-	[busStopController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-	[self presentModalViewController:busStopController animated:YES];
+	//[busStopController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+//	[self presentModalViewController:busStopController animated:YES];
+	[self.navigationController pushViewController:busStopController animated:YES];
 }
 
 #pragma mark -
@@ -176,6 +179,14 @@
 
 - (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error {
 	;
+}
+
+#pragma mark -
+#pragma mark UINavigationControllerDelegate
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+	if (viewController == self)
+		[navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 

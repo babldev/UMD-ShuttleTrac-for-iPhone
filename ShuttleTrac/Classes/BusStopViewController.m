@@ -23,12 +23,14 @@
 }
 */
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	[self.navigationController setNavigationBarHidden:NO animated:YES]; 
 }
-*/
+
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -49,13 +51,6 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-}
-
-#pragma mark -
-#pragma mark Actions
-
--(IBAction)doneViewing:(UIBarButtonItem *)sender {
-	[self.parentViewController dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark -

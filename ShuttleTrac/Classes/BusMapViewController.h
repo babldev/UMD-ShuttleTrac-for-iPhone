@@ -11,7 +11,7 @@
 #import "BusStop.h"
 #import "ShuttleTracDataStore.h"
 
-@interface BusMapViewController : UIViewController <MKMapViewDelegate> {
+@interface BusMapViewController : UIViewController <MKMapViewDelegate, UINavigationControllerDelegate> {
 	ShuttleTracDataStore *dataStore;
 	
 	IBOutlet MKMapView  *mapView;
