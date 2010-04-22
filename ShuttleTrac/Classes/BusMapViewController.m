@@ -14,8 +14,6 @@
 #import "DataStoreGrabber.h"
 #import "BusStop.h"
 
-#import "BusStopViewController.h"
-
 @interface BusMapViewController ( )
 - (void)addBusStops;
 -(void)zoomToFitMapAnnotations;
@@ -67,6 +65,7 @@
 
 - (void)dealloc {
 	[busStops release];
+	[busStopViewController release];
 	
     [super dealloc];
 }
@@ -134,11 +133,11 @@
 - (MKAnnotationView *)mapView:(MKMapView *)aMapView viewForAnnotation:(id <MKAnnotation>)annotation {
     MKPinAnnotationView *pinView = nil;
     if (annotation != [aMapView userLocation]) { // custom pin for everything except the user's location
-        pinView = (MKPinAnnotationView*)[aMapView dequeueReusableAnnotationViewWithIdentifier:@"customID"];
+        pinView = (MKPinAnnotationView*)[aMapView dequeueReusableAnnotationViewWithIdentifier:@"busMapPins"];
         if (!pinView) {
             // No reusable view, create one
-            pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
-													  reuseIdentifier:@"customID"];
+            pinView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation
+													  reuseIdentifier:@"busMapPins"] autorelease];
             
             [pinView setPinColor: MKPinAnnotationColorGreen];
             [pinView setAnimatesDrop: YES];
@@ -162,12 +161,14 @@
     [alertView show];
     [alertView release];
 	 */
-	BusStopViewController *busStopController = [[BusStopViewController alloc] initWithNibName:@"BusStopView" bundle:nil];
-	[busStopController setDataStore:dataStore];
-	[busStopController setArrivals:nil];
-	//[busStopController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-//	[self presentModalViewController:busStopController animated:YES];
-	[self.navigationController pushViewController:busStopController animated:YES];
+	if (busStopViewController == nil) {
+		busStopViewController = [[BusStopViewController alloc] initWithNibName:@"BusStopView" bundle:nil];
+	}
+
+	[busStopViewController setDataStore:dataStore];
+	[busStopViewController setArrivals:nil];
+
+	[self.navigationController pushViewController:busStopViewController animated:YES];
 }
 
 #pragma mark -
@@ -185,6 +186,8 @@
 #pragma mark UINavigationControllerDelegate
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+	[busStopViewController release];
+	
 	if (viewController == self)
 		[navigationController setNavigationBarHidden:YES animated:YES];
 }

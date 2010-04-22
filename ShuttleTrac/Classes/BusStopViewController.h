@@ -16,8 +16,6 @@
 	BusStopArrivals *arrivals;
 }
 
--(IBAction)doneViewing:(UIBarButtonItem *)sender;
-
 @property (assign, readwrite) ShuttleTracDataStore *dataStore;
 @property (retain, readwrite) BusStopArrivals *arrivals;
 
