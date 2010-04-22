@@ -86,19 +86,20 @@
 	}
 }
 
--(void) addBusStopToDatabaseWithName:(NSString*) name stopNumber:(NSInteger) stopNum location:(CLLocationCoordinate2D) location{
-	const char *sql = "INSERT INTO stops(id, name, latitude, longitude, roadName, bearingToRoad) VALUES(?, ?, ?, ?, null, null);";
+-(void) addBusStopToDatabaseWithName:(BusStop *)stop {
+	// const char *sql = "INSERT INTO stops(id, name, latitude, longitude, roadName, bearingToRoad) VALUES(?, ?, ?, ?, null, null);";
+	const char *sql = "INSERT INTO stops(id, name, latitude, longitude) VALUES(?, ?, ?, ?);";
 	sqlite3_stmt *compiledStatement;
 	
 	if(sqlite3_prepare_v2(database, sql, -1, &compiledStatement, NULL) == SQLITE_OK){
-		sqlite3_bind_int(compiledStatement, 1, stopNum);
-		sqlite3_bind_text(compiledStatement, 2, [name UTF8String], [name length], SQLITE_TRANSIENT);
-		sqlite3_bind_double(compiledStatement, 3, location.latitude );
-		sqlite3_bind_double(compiledStatement, 4, location.longitude );
+		sqlite3_bind_int(compiledStatement, 1, stop.stopNumber);
+		sqlite3_bind_text(compiledStatement, 2, [stop.name UTF8String], [stop.name length], SQLITE_TRANSIENT);
+		sqlite3_bind_double(compiledStatement, 3, stop.coordinate.latitude );
+		sqlite3_bind_double(compiledStatement, 4, stop.coordinate.longitude );
 	}
 	
 	if(SQLITE_DONE != sqlite3_step(compiledStatement))
-		NSAssert1(0, @"Error while inserting data. '%s'", sqlite3_errmsg(database));
+		NSLog(@"Error while inserting data. Error: '%s'. Stop: '%s'", sqlite3_errmsg(database), [stop description]);
 
 	sqlite3_reset(compiledStatement);
 }
@@ -148,7 +149,7 @@
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {	
 	if([elementName isEqual:@"Platform"]){
-		[self addBusStopToDatabaseWithName: currBusStop.name stopNumber:currBusStop.stopNumber location: currBusStop.coordinate];
+		[self addBusStopToDatabaseWithName:currBusStop];
 		[currBusStop release]; 
 		currBusStop = nil;
 	}
