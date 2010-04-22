@@ -52,7 +52,7 @@
 				
 				BusStopArrivals *newBusStop = [[BusStopArrivals alloc] initWithName:[NSString stringWithUTF8String:name] 
 																		 stopNumber:sqlite3_column_int(compiledStatement, 0) 
-																		   location:loc];
+																		 coordinate:loc];
 				[busStops addObject:[newBusStop autorelease]];
 			}
 		}

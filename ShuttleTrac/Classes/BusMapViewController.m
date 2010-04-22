@@ -24,17 +24,6 @@
 
 @synthesize busStops;
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
-
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -73,11 +62,8 @@
 - (void)addBusStops {
 	self.busStops = [GetShuttleTracDataStore() allBusStops];
 	
-	for (BusStop *stop in busStops) {
-		NSDictionary *address = [NSDictionary dictionaryWithObjectsAndKeys:[stop name], @"Country", nil];
-		MKPlacemark *newPlacemark = [MKPlacemark placemarkWithCoordinate:[stop location] addressDictionary:address];
-		[mapView addAnnotation:newPlacemark];
-	}
+	for (BusStop *stop in busStops)
+		[mapView addAnnotation:stop];
 }
 
 #pragma mark -
@@ -154,25 +140,18 @@
 }
 
 - (void)mapView:(MKMapView *)aMapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-	/*
-    NSString *alertTitle = [[view annotation] title];
-    NSString *alertMsg = [NSString stringWithFormat:@"You just tapped on %@!!1", [[view annotation] title]];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
-    [alertView release];
-	 */
-	if (busStopViewController == nil) {
-		busStopViewController = [[BusStopViewController alloc] initWithNibName:@"BusStopView" bundle:nil];
-	}
+	busStopViewController = [[[BusStopViewController alloc] initWithNibName:@"BusStopView" bundle:nil] autorelease];
 
 	[busStopViewController setDataStore:dataStore];
 	
-	// FIXME - We should load the selected bus stop, not just any stop
-	BusStopArrivals *activeStop = [[[BusStopArrivals alloc] initWithBusStop:[busStops objectAtIndex:0]] autorelease];
+	// FIXME - Any data leaks here?
+	
+	BusStop *stop = (BusStop *) [view annotation];
+	BusStopArrivals *activeStop = [[BusStopArrivals alloc] initWithBusStop:stop];
 	
 	[dataStore setMapActiveStop:activeStop];
 	[busStopViewController setArrivals:activeStop];
-
+	
 	[self.navigationController pushViewController:busStopViewController animated:YES];
 }
 
@@ -191,9 +170,9 @@
 #pragma mark UINavigationControllerDelegate
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {	
-	if (viewController == self)
+	if (viewController == self) {
 		[navigationController setNavigationBarHidden:YES animated:YES];
-	else if (viewController == busStopViewController)
+	} else if (viewController == busStopViewController)
 		[navigationController setNavigationBarHidden:NO animated:YES];
 }
 
