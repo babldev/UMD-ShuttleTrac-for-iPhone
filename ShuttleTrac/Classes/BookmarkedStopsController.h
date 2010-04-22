@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "ShuttleTracDataStore.h"
+#import "BusStopArrivals.h"
 
-@interface BookmarkedStopsController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface BookmarkedStopsController : UIViewController <BusStopArrivalsDelegate, UITableViewDelegate, UITableViewDataSource> {
 	IBOutlet UITableView *tableView;
 	ShuttleTracDataStore *dataStore;
+	
+	NSMutableArray *bookmarkedStops;
+	NSMutableDictionary *bookmarkedStopsArrivals;
 	
 	UITableViewController *tableViewController;
 }

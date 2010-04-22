@@ -12,20 +12,20 @@
 
 -(void)loadStopsAndRouteFromSQL;
 
-@property (retain, readwrite) NSMutableArray	*bookmarkedStops;
-@property (retain, readwrite) NSArray			*bookmarkedStopsArrivals;
+@property (retain, readwrite) NSMutableArray			*bookmarkedStops;
 
 @end
 
 
 @implementation ShuttleTracDataStore
 
-@synthesize bookmarkedStops, bookmarkedStopsArrivals;
+@synthesize bookmarkedStops;
 
 -(id)init {
 	if (self = [super init]) {
 		busStops = [[NSMutableArray alloc] init];
 		busRoutes = [[NSMutableArray alloc] init];
+		
 		bookmarkedStops = [[NSMutableArray alloc] init];
 		
 		[self loadStopsAndRouteFromSQL];
@@ -50,9 +50,10 @@
 				CLLocationCoordinate2D loc = {sqlite3_column_double(compiledStatement, 2), sqlite3_column_double(compiledStatement, 3)};
 				const char *name = (const char *) sqlite3_column_text(compiledStatement, 1);
 				
-				[busStops addObject:[BusStop busStopWithName:[NSString stringWithUTF8String:name]
-												  stopNumber:sqlite3_column_int(compiledStatement, 0)
-													location:loc]];
+				BusStopArrivals *newBusStop = [[BusStopArrivals alloc] initWithName:[NSString stringWithUTF8String:name] 
+																		 stopNumber:sqlite3_column_int(compiledStatement, 0) 
+																		   location:loc];
+				[busStops addObject:[newBusStop autorelease]];
 			}
 		}
 		

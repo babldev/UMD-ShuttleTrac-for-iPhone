@@ -25,6 +25,12 @@
 
 -(id)initWithName:(NSString *)sName stopNumber:(NSInteger)sNumber location:(CLLocationCoordinate2D)sLoc;
 
+
++(BusStop *)cloneStop:(BusStop *)bStop;
+
+-(id)initWithBusStop:(BusStop *)bStop;
+
+
 @property (retain, readonly) NSString *name;
 @property (assign, readonly) NSInteger stopNumber;
 @property (assign, readonly) CLLocationCoordinate2D location;

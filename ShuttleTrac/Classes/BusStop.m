@@ -27,13 +27,25 @@
 	return [newStop autorelease];
 }
 
-#pragma mark Initializer
-
 -(id)initWithName:(NSString *)sName stopNumber:(NSInteger)sNumber location:(CLLocationCoordinate2D)sLoc {
 	if (self = [super init]) {
 		[self setName:sName];
 		[self setStopNumber:sNumber];
 		[self setLocation:sLoc];
+	}
+	
+	return self;
+}
+
++(BusStop *)cloneStop:(BusStop *)bStop {
+	return [[[BusStop alloc] initWithBusStop:bStop] autorelease];
+}
+
+-(id)initWithBusStop:(BusStop *)bStop {
+	if (self = [super init]) {
+		[self setName:[bStop name]];
+		[self setStopNumber:[bStop stopNumber]];
+		[self setLocation:[bStop location]];
 	}
 	
 	return self;

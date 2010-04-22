@@ -12,7 +12,6 @@
 @interface BusStopArrivals ()
 
 @property (assign, readwrite) BusRoute *route;
-@property (assign, readwrite) BusStop *stop;
 @property (retain, readwrite) NSArray *upcomingBuses;
 @property (retain, readwrite) NSDate *lastRefresh;
 
@@ -22,19 +21,10 @@
 
 @implementation BusStopArrivals
 
-@synthesize route, stop, upcomingBuses, lastRefresh, delegate;
-
--(id)initWithBusStop:(BusStop *)bStop {
-	if (self = [super init]) {
-		[self setStop:bStop];
-	}
-	
-	return self;
-}
+@synthesize route, upcomingBuses, lastRefresh, delegate;
 
 -(id)initWithBusStop:(BusStop *)bStop forBusRoute:(BusRoute *)bRoute {
-	if (self = [super init]) {
-		[self setStop:bStop];
+	if (self = [super initWithBusStop:bStop]) {
 		[self setRoute:bRoute];
 	}
 	
@@ -52,7 +42,7 @@
 	BusRoute *badRoute = [[GetShuttleTracDataStore() allBusRoutes] objectAtIndex:0];
 	[self setUpcomingBuses:[NSArray arrayWithObject:
 							[BusArrival busArrivalWithRoute:badRoute
-													   stop:[self stop] 
+													   stop:self 
 												arrivalTime:[NSDate date]]]];
 	[delegate arrivalsRefreshComplete:self];
 }

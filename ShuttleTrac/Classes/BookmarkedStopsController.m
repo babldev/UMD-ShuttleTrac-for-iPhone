@@ -6,6 +6,7 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
+#import "BusTimeTableViewCell.h"
 #import "BookmarkedStopsController.h"
 #import "DataStoreGrabber.h"
 
@@ -13,48 +14,36 @@
 
 @synthesize dataStore;
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
-
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	dataStore = GetShuttleTracDataStore();
+	bookmarkedStops = [dataStore bookmarkedStops];
 	
 	tableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	[tableViewController setView:tableView];
 	
+	// Get new arrivals for all bookmarked stops
+	for (BusStopArrivals *bookmarkStop in bookmarkedStops) {
+		[bookmarkStop setDelegate:self];
+		[bookmarkStop refreshUpcomingBuses];
+	}
+	
     [super viewDidLoad];
 }
-
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 #pragma mark -
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return [[dataStore bookmarkedStops] count];
+    return [bookmarkedStops count];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [[[dataStore bookmarkedStopsArrivals] objectAtIndex:section] count];
+	NSArray *arrivals = [[bookmarkedStops objectAtIndex:section] upcomingBuses];
+    return [arrivals count];
 }
 
 
@@ -63,72 +52,26 @@
     
     static NSString *CellIdentifier = @"BookmarkedStops";
     
-    UITableViewCell *cell = [tView dequeueReusableCellWithIdentifier:CellIdentifier];
+    BusTimeTableViewCell *cell = (BusTimeTableViewCell *) [tView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[BusTimeTableViewCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
     }
     
     // Configure the cell...
-    
+	NSArray *arrivals = [[bookmarkedStops objectAtIndex:[indexPath section]] upcomingBuses];
+    [cell setBusArrival:[arrivals objectAtIndex:[indexPath row]]];
+	
     return cell;
 }
 
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- 
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
- }   
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }   
- }
- */
-
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	return [[[dataStore bookmarkedStops] objectAtIndex:section] name];
+	return [[bookmarkedStops objectAtIndex:section] name];
 }
 
 #pragma mark -
-#pragma mark Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
+#pragma mark BusStopArrivalsDelegate protocol
+-(void)arrivalsRefreshComplete:(BusStopArrivals *)arrivals {
+	[tableView reloadData];
 }
 
 #pragma mark -

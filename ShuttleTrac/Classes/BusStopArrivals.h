@@ -20,13 +20,7 @@
 
 @end
 
-
-@class BusStop;
-
-@interface BusStopArrivals : NSObject {
-	// Stop for the arriving buses (REQUIRED)
-	BusStop *stop;
-	
+@interface BusStopArrivals : BusStop {
 	// Route for the arriving buses (OPTIONAL)
 	BusRoute *route;
 	
@@ -39,13 +33,11 @@
 	id <BusStopArrivalsDelegate> delegate;
 }
 
--(id)initWithBusStop:(BusStop *)bStop;
 -(id)initWithBusStop:(BusStop *)bStop forBusRoute:(BusRoute *)bRoute;
 
 -(void)refreshUpcomingBuses;
 
 @property (assign, readonly) BusRoute *route;
-@property (assign, readonly) BusStop *stop;
 @property (retain, readonly) NSArray *upcomingBuses;
 @property (retain, readonly) NSDate *lastRefresh;
 @property (assign, readwrite) id <BusStopArrivalsDelegate> delegate;

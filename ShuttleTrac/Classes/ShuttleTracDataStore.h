@@ -15,7 +15,6 @@
 
 @interface ShuttleTracDataStore : NSObject {
 	NSMutableArray *bookmarkedStops;
-	NSArray *bookmarkedStopsArrivals;
 	
 	sqlite3 *database;
 	
@@ -32,6 +31,5 @@
 -(void)refreshAllBookmarkedStops;
 
 @property (retain, readonly) NSMutableArray *bookmarkedStops;
-@property (retain, readonly) NSArray		*bookmarkedStopsArrivals;
 
 @end
