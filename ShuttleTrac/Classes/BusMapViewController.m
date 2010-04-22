@@ -185,11 +185,11 @@
 #pragma mark -
 #pragma mark UINavigationControllerDelegate
 
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-	[busStopViewController release];
-	
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {	
 	if (viewController == self)
 		[navigationController setNavigationBarHidden:YES animated:YES];
+	else if (viewController == busStopViewController)
+		[navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 
