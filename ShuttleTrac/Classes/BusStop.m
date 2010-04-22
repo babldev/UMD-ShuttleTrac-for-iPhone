@@ -8,13 +8,13 @@
 
 #import "BusStop.h"
 
-@interface BusStop ()
-
-@property (retain, readwrite) NSString *name;
-@property (assign, readwrite) NSInteger stopNumber;
-@property (assign, readwrite, nonatomic) CLLocationCoordinate2D coordinate;
-
-@end
+//@interface BusStop ()
+//
+//@property (retain, readwrite) NSString *name;
+//@property (assign, readwrite) NSInteger stopNumber;
+//@property (assign, readwrite, nonatomic) CLLocationCoordinate2D coordinate;
+//
+//@end
 
 
 
@@ -24,10 +24,6 @@
 
 +(BusStop *)busStopWithName:(NSString *)sName stopNumber:(NSInteger)sNumber coordinate:(CLLocationCoordinate2D)sLoc {
 	BusStop *newStop = [[BusStop alloc] initWithName:sName stopNumber:sNumber coordinate:sLoc];
-	return [newStop autorelease];
-}
-+(BusStop *)busStopWithName:(NSString *)sName stopNumber:(NSInteger)sNumber {
-	BusStop *newStop = [[BusStop alloc] initWithName:sName stopNumber:sNumber];
 	return [newStop autorelease];
 }
 

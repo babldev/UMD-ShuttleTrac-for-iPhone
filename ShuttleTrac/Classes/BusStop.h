@@ -31,14 +31,8 @@
 
 -(id)initWithBusStop:(BusStop *)bStop;
 
-+(BusStop *)busStopWithName:(NSString *)sName stopNumber:(NSInteger)sNumber location:(CLLocationCoordinate2D)sLoc;
-+(BusStop *)busStopWithName:(NSString *)sName stopNumber:(NSInteger)sNumber;
-
--(id)initWithName:(NSString *)sName stopNumber:(NSInteger)sNumber location:(CLLocationCoordinate2D)sLoc;
--(id)initWithName:(NSString *)sName stopNumber:(NSInteger)sNumber;
-
-@property (retain, readonly) NSString *name;
-@property (assign, readonly) NSInteger stopNumber;
-@property (assign, readonly, nonatomic) CLLocationCoordinate2D coordinate;
+@property (retain, readwrite) NSString *name;
+@property (assign, readwrite) NSInteger stopNumber;
+@property (assign, readwrite, nonatomic) CLLocationCoordinate2D coordinate;
 
 @end

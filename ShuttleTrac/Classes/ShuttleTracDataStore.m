@@ -11,6 +11,7 @@
 @interface ShuttleTracDataStore ( )
 
 -(void)loadStopsAndRouteFromSQL;
+-(void)requestStopsFromWeb;
 
 @property (retain, readwrite) NSMutableArray			*bookmarkedStops;
 
@@ -124,14 +125,17 @@
 		if(!currBusStop){
 			NSString *name = [attributeDict objectForKey:@"Name"];
 			NSInteger busNo = [[attributeDict objectForKey:@"PlatformNo"] integerValue];
-			currBusStop =  [[BusStop busStopWithName:name stopNumber:busNo] retain];
+			currBusStop = [[BusStop alloc] init];
+			[currBusStop setName:name];
+			[currBusStop setStopNumber:busNo];
 		}
 	}
 	else if([elementName isEqual:@"Position"]){
 		if(currBusStop){
-			CLLocationDegrees lat = [[attributeDict objectForKey:@"Lat"] doubleValue];
-			CLLocationDegrees lon = [[attributeDict objectForKey:@"Long"] doubleValue];
-			[currBusStop setCoordinate:[[CLLocation alloc] initWithLatitude:lat longitude:lon]];
+			CLLocationCoordinate2D loc;
+			loc.latitude = [[attributeDict objectForKey:@"Lat"] doubleValue];
+			loc.longitude = [[attributeDict objectForKey:@"Long"] doubleValue];
+			[currBusStop setCoordinate:loc];
 		}
 	}
 }

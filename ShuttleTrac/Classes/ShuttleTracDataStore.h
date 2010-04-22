@@ -28,7 +28,7 @@
 	// Temporary
 	NSMutableArray *busStops;
 	NSMutableArray *busRoutes;
-	NSString *parserString;
+	NSMutableString *parserString;
 	NSString *databasePath;
 	BusStop *currBusStop; //used for parsing
 
