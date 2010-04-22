@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "BusStop.h"
+#import "ShuttleTracDataStore.h"
 
 @interface BusMapViewController : UIViewController <MKMapViewDelegate> {
+	ShuttleTracDataStore *dataStore;
+	
 	IBOutlet MKMapView  *mapView;
 	MKReverseGeocoder   *reverseGeocoder;
 	NSArray				*busStops;

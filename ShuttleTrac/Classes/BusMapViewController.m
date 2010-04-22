@@ -6,11 +6,15 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
+#import "DataStoreGrabber.h"
+
 #import "BusMapViewController.h"
 #import "MKAddressDictionaryPlacemark.h"
 
 #import "DataStoreGrabber.h"
 #import "BusStop.h"
+
+#import "BusStopViewController.h"
 
 @interface BusMapViewController ( )
 - (void)addBusStops;
@@ -37,6 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	dataStore = GetShuttleTracDataStore();
 	[self addBusStops];
 	
 	// FIXME - We probably shouldn't run this for > 10 stops
@@ -102,8 +107,8 @@
     MKCoordinateRegion region;
     region.center.latitude = topLeftCoord.latitude - (topLeftCoord.latitude - bottomRightCoord.latitude) * 0.5;
     region.center.longitude = topLeftCoord.longitude + (bottomRightCoord.longitude - topLeftCoord.longitude) * 0.5;
-    region.span.latitudeDelta = fabs(topLeftCoord.latitude - bottomRightCoord.latitude) * 1.1; // Add a little extra space on the sides
-    region.span.longitudeDelta = fabs(bottomRightCoord.longitude - topLeftCoord.longitude) * 1.1; // Add a little extra space on the sides
+    region.span.latitudeDelta = fabs(topLeftCoord.latitude - bottomRightCoord.latitude) * 1.2;
+    region.span.longitudeDelta = fabs(bottomRightCoord.longitude - topLeftCoord.longitude) * 1.2;
 	
     region = [mapView regionThatFits:region];
     [mapView setRegion:region animated:YES];
@@ -148,11 +153,18 @@
 }
 
 - (void)mapView:(MKMapView *)aMapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+	/*
     NSString *alertTitle = [[view annotation] title];
     NSString *alertMsg = [NSString stringWithFormat:@"You just tapped on %@!!1", [[view annotation] title]];
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
     [alertView release];
+	 */
+	BusStopViewController *busStopController = [[BusStopViewController alloc] initWithNibName:@"BusStopView" bundle:nil];
+	[busStopController setDataStore:dataStore];
+	[busStopController setArrivals:nil];
+	[busStopController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+	[self presentModalViewController:busStopController animated:YES];
 }
 
 #pragma mark -
