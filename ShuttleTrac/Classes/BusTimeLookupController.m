@@ -56,9 +56,6 @@
 #pragma mark IBActions
 
 -(IBAction)lookupBusStop:(UIButton *)submitButton {
-	[busStop release];
-	busStop = nil;
-	
 	[busStopArrivals release];
 	busStopArrivals = nil;
 	
