@@ -26,6 +26,10 @@
 	BusStop *newStop = [[BusStop alloc] initWithName:sName stopNumber:sNumber coordinate:sLoc];
 	return [newStop autorelease];
 }
++(BusStop *)busStopWithName:(NSString *)sName stopNumber:(NSInteger)sNumber {
+	BusStop *newStop = [[BusStop alloc] initWithName:sName stopNumber:sNumber];
+	return [newStop autorelease];
+}
 
 -(id)initWithName:(NSString *)sName stopNumber:(NSInteger)sNumber coordinate:(CLLocationCoordinate2D)sLoc {
 	if (self = [super init]) {
@@ -50,6 +54,15 @@
 	
 	return self;
 }
+-(id)initWithName:(NSString *)sName stopNumber:(NSInteger)sNumber {
+	if (self = [super init]) {
+		[self setName:sName];
+		[self setStopNumber:sNumber];
+	}
+	
+	return self;
+}
+
 
 #pragma mark -
 #pragma mark MKAnnotation

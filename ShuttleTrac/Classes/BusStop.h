@@ -31,6 +31,11 @@
 
 -(id)initWithBusStop:(BusStop *)bStop;
 
++(BusStop *)busStopWithName:(NSString *)sName stopNumber:(NSInteger)sNumber location:(CLLocationCoordinate2D)sLoc;
++(BusStop *)busStopWithName:(NSString *)sName stopNumber:(NSInteger)sNumber;
+
+-(id)initWithName:(NSString *)sName stopNumber:(NSInteger)sNumber location:(CLLocationCoordinate2D)sLoc;
+-(id)initWithName:(NSString *)sName stopNumber:(NSInteger)sNumber;
 
 @property (retain, readonly) NSString *name;
 @property (assign, readonly) NSInteger stopNumber;

@@ -19,13 +19,19 @@
 	
 	// BusMap Data
 	BusStopArrivals *mapActiveStop;
-	
 	sqlite3 *database;
+	
+	NSInteger temp; // used for testing purposes REMOVE! 
+
 	
 @private
 	// Temporary
 	NSMutableArray *busStops;
 	NSMutableArray *busRoutes;
+	NSString *parserString;
+	NSString *databasePath;
+	BusStop *currBusStop; //used for parsing
+
 }
 
 -(NSArray *)allBusStops;
