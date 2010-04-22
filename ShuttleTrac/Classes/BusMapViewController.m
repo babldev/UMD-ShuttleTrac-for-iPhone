@@ -166,7 +166,12 @@
 	}
 
 	[busStopViewController setDataStore:dataStore];
-	[busStopViewController setArrivals:nil];
+	
+	// FIXME - We should load the selected bus stop, not just any stop
+	BusStopArrivals *activeStop = [[[BusStopArrivals alloc] initWithBusStop:[busStops objectAtIndex:0]] autorelease];
+	
+	[dataStore setMapActiveStop:activeStop];
+	[busStopViewController setArrivals:activeStop];
 
 	[self.navigationController pushViewController:busStopViewController animated:YES];
 }

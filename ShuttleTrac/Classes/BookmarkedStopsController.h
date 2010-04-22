@@ -20,6 +20,8 @@
 	UITableViewController *tableViewController;
 }
 
+-(IBAction)refreshBookmarks:(UIBarButtonItem *)sender;
+
 @property (assign, readwrite) ShuttleTracDataStore *dataStore;
 
 @end

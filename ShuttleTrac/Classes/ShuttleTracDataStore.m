@@ -19,7 +19,7 @@
 
 @implementation ShuttleTracDataStore
 
-@synthesize bookmarkedStops;
+@synthesize bookmarkedStops, mapActiveStop;
 
 -(id)init {
 	if (self = [super init]) {

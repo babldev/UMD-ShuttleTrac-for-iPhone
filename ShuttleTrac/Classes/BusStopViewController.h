@@ -11,12 +11,14 @@
 #import "ShuttleTracDataStore.h"
 #import "BusStopArrivals.h"
 
-@interface BusStopViewController : UIViewController {
+@interface BusStopViewController : UIViewController <UITableViewDataSource, BusStopArrivalsDelegate> {
+	IBOutlet UITableView *tableView;
+	
 	ShuttleTracDataStore *dataStore;
 	BusStopArrivals *arrivals;
 }
 
 @property (assign, readwrite) ShuttleTracDataStore *dataStore;
-@property (retain, readwrite) BusStopArrivals *arrivals;
+@property (assign, readwrite) BusStopArrivals *arrivals;
 
 @end

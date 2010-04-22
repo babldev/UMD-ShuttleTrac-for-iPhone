@@ -31,7 +31,21 @@
 - (void)layoutSubviews {
 	// Customize cell
 	self.textLabel.text = [[busArrival route] routeName];
-	self.detailTextLabel.text = [[busArrival arrivalTime] description];
+	
+	// Format countodwn
+	NSInteger minutes = (int) ([[busArrival arrivalTime] timeIntervalSinceNow] / 60); 
+	NSString *countdown;
+	
+	if (minutes <= 0) {
+		// Bus left, remove cell
+		countdown = @"Now";
+	} else if (minutes == 1) {
+		countdown = @"1 minute";
+	} else {
+		countdown = [NSString stringWithFormat:@"%d minutes", minutes];
+	}
+	
+	self.detailTextLabel.text = countdown;
 	
 	[super layoutSubviews];
 }

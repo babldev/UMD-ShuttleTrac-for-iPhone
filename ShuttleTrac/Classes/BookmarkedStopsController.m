@@ -22,11 +22,7 @@
 	tableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	[tableViewController setView:tableView];
 	
-	// Get new arrivals for all bookmarked stops
-	for (BusStopArrivals *bookmarkStop in bookmarkedStops) {
-		[bookmarkStop setDelegate:self];
-		[bookmarkStop refreshUpcomingBuses];
-	}
+	[self refreshBookmarks:nil];
 	
     [super viewDidLoad];
 }
@@ -72,6 +68,17 @@
 #pragma mark BusStopArrivalsDelegate protocol
 -(void)arrivalsRefreshComplete:(BusStopArrivals *)arrivals {
 	[tableView reloadData];
+}
+
+#pragma mark -
+#pragma mark Actions
+
+-(IBAction)refreshBookmarks:(UIBarButtonItem *)sender {
+	// Get new arrivals for all bookmarked stops
+	for (BusStopArrivals *bookmarkStop in bookmarkedStops) {
+		[bookmarkStop setDelegate:self];
+		[bookmarkStop refreshUpcomingBuses];
+	}
 }
 
 #pragma mark -

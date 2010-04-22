@@ -14,7 +14,11 @@
 #import "BusRoute.h"
 
 @interface ShuttleTracDataStore : NSObject {
-	NSMutableArray *bookmarkedStops;
+	// BookmarkedStops Data
+	NSMutableArray *bookmarkedStops;	
+	
+	// BusMap Data
+	BusStopArrivals *mapActiveStop;
 	
 	sqlite3 *database;
 	
@@ -31,5 +35,6 @@
 -(void)refreshAllBookmarkedStops;
 
 @property (retain, readonly) NSMutableArray *bookmarkedStops;
+@property (retain, readwrite) BusStopArrivals *mapActiveStop;
 
 @end
