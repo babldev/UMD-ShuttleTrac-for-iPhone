@@ -81,6 +81,34 @@
 	}
 }
 
+-(IBAction)editBookmarks:(UIBarButtonItem *)sender {
+	if (bookmarksEditorController == nil) {
+		bookmarksEditorController = [[BookmarksEditorController alloc] initWithNibName:@"BookmarksEditorController"
+																				bundle:nil];
+	}
+	
+	bookmarksEditorController.delegate = self;
+	bookmarksEditorController.bookmarkedStops = [[bookmarkedStops copy] autorelease];
+	bookmarksEditorController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	
+	[self presentModalViewController:bookmarksEditorController animated:YES];
+}
+
+#pragma mark -
+#pragma mark BookmarksEditorControllerDelegate
+
+-(void)bookmarkEditingCompleted:(NSArray *)bookmarks {
+	[self dismissModalViewControllerAnimated:YES];
+	[bookmarkedStops setArray:bookmarks];
+	
+	[self refreshBookmarks:nil];
+	[tableView reloadData];
+}
+
+-(void)bookmarkEditingCancelled {
+	[self dismissModalViewControllerAnimated:YES];
+}
+
 #pragma mark -
 
 - (void)didReceiveMemoryWarning {
@@ -98,6 +126,9 @@
 
 
 - (void)dealloc {
+	[bookmarksEditorController release];
+	bookmarksEditorController = nil;
+	
     [super dealloc];
 }
 

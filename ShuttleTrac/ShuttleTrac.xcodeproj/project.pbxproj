@@ -36,6 +36,8 @@
 		853D4C7911595E5A00F3E812 /* BusTimeLookupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 853D4C7711595E5A00F3E812 /* BusTimeLookupController.m */; };
 		853D4C7A11595E5A00F3E812 /* BusTimeLookupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 853D4C7811595E5A00F3E812 /* BusTimeLookupController.xib */; };
 		855893CE117BC85F005DF0F5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 855893CD117BC85F005DF0F5 /* CoreLocation.framework */; };
+		85624D8E1181E74C007AE93C /* BookmarksEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85624D8C1181E74C007AE93C /* BookmarksEditorController.m */; };
+		85624D8F1181E74C007AE93C /* BookmarksEditorController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85624D8D1181E74C007AE93C /* BookmarksEditorController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +87,9 @@
 		853D4C7811595E5A00F3E812 /* BusTimeLookupController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusTimeLookupController.xib; sourceTree = "<group>"; };
 		855893CD117BC85F005DF0F5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		855893D1117BC8B8005DF0F5 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README; path = ../README; sourceTree = SOURCE_ROOT; };
+		85624D8B1181E74C007AE93C /* BookmarksEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarksEditorController.h; sourceTree = "<group>"; };
+		85624D8C1181E74C007AE93C /* BookmarksEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarksEditorController.m; sourceTree = "<group>"; };
+		85624D8D1181E74C007AE93C /* BookmarksEditorController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookmarksEditorController.xib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ShuttleTrac-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ShuttleTrac-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -260,6 +265,9 @@
 				8528A31B117F7730000CDEF3 /* BookmarkedStopsController.h */,
 				8528A31C117F7730000CDEF3 /* BookmarkedStopsController.m */,
 				8528A31D117F7730000CDEF3 /* BookmarkedStopsController.xib */,
+				85624D8B1181E74C007AE93C /* BookmarksEditorController.h */,
+				85624D8C1181E74C007AE93C /* BookmarksEditorController.m */,
+				85624D8D1181E74C007AE93C /* BookmarksEditorController.xib */,
 			);
 			name = BookmarkedStops;
 			sourceTree = "<group>";
@@ -313,6 +321,7 @@
 				8528A31F117F7730000CDEF3 /* BookmarkedStopsController.xib in Resources */,
 				41C3E2D1118000B200EEFD50 /* BusStopView.xib in Resources */,
 				4163C5F911813EB0004592F3 /* RouteSelectorController.xib in Resources */,
+				85624D8F1181E74C007AE93C /* BookmarksEditorController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +347,7 @@
 				8528A31E117F7730000CDEF3 /* BookmarkedStopsController.m in Sources */,
 				41C3E2D0118000B200EEFD50 /* BusStopViewController.m in Sources */,
 				4163C55A11812F3B004592F3 /* RouteSelectorController.m in Sources */,
+				85624D8E1181E74C007AE93C /* BookmarksEditorController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
