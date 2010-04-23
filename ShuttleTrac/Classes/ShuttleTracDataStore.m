@@ -98,9 +98,9 @@
 		sqlite3_bind_double(compiledStatement, 4, stop.coordinate.longitude );
 	}
 	
-	if(SQLITE_DONE != sqlite3_step(compiledStatement))
-		NSLog(@"Error while inserting data. Error: '%s'. Stop: '%s'", sqlite3_errmsg(database), [stop description]);
-
+	if(SQLITE_DONE != sqlite3_step(compiledStatement)) {
+		NSLog(@"Error while inserting data. Error: '%s'. Stop: '%@'", sqlite3_errmsg(database), [stop name]);
+	}
 	sqlite3_reset(compiledStatement);
 }
 
