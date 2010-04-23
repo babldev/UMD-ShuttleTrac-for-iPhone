@@ -19,7 +19,6 @@
 		41127484117C12BF0082FBF7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41127483117C12BF0082FBF7 /* MapKit.framework */; };
 		4112748E117C13500082FBF7 /* BusMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4112748C117C13500082FBF7 /* BusMapViewController.m */; };
 		4112748F117C13500082FBF7 /* BusMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4112748D117C13500082FBF7 /* BusMapViewController.xib */; };
-		41302455117CC0AC00474B5B /* NSDateAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 41302454117CC0AC00474B5B /* NSDateAdditions.m */; };
 		4163C55A11812F3B004592F3 /* RouteSelectorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4163C55911812F3B004592F3 /* RouteSelectorController.m */; };
 		4163C5F911813EB0004592F3 /* RouteSelectorController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4163C5F811813EB0004592F3 /* RouteSelectorController.xib */; };
 		418D7D51117E9E210027754F /* MKAddressDictionaryPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7D50117E9E210027754F /* MKAddressDictionaryPlacemark.m */; };
@@ -59,8 +58,6 @@
 		4112748B117C13500082FBF7 /* BusMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusMapViewController.h; sourceTree = "<group>"; };
 		4112748C117C13500082FBF7 /* BusMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusMapViewController.m; sourceTree = "<group>"; };
 		4112748D117C13500082FBF7 /* BusMapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusMapViewController.xib; sourceTree = "<group>"; };
-		41302453117CC0AC00474B5B /* NSDateAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDateAdditions.h; sourceTree = "<group>"; };
-		41302454117CC0AC00474B5B /* NSDateAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateAdditions.m; sourceTree = "<group>"; };
 		4163C55811812F3B004592F3 /* RouteSelectorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteSelectorController.h; sourceTree = "<group>"; };
 		4163C55911812F3B004592F3 /* RouteSelectorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteSelectorController.m; sourceTree = "<group>"; };
 		4163C5F811813EB0004592F3 /* RouteSelectorController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteSelectorController.xib; sourceTree = "<group>"; };
@@ -112,7 +109,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				41302451117CC07F00474B5B /* Additions */,
 				41127424117C0FE40082FBF7 /* Tabs */,
 				41127426117C10840082FBF7 /* Models */,
 				1D3623240D0F684500981E51 /* ShuttleTracAppDelegate.h */,
@@ -222,15 +218,6 @@
 				4163C5F811813EB0004592F3 /* RouteSelectorController.xib */,
 			);
 			name = BusMap;
-			sourceTree = "<group>";
-		};
-		41302451117CC07F00474B5B /* Additions */ = {
-			isa = PBXGroup;
-			children = (
-				41302453117CC0AC00474B5B /* NSDateAdditions.h */,
-				41302454117CC0AC00474B5B /* NSDateAdditions.m */,
-			);
-			name = Additions;
 			sourceTree = "<group>";
 		};
 		418D7D69117EA0C50027754F /* Bus Data */ = {
@@ -343,7 +330,6 @@
 				41127433117C10940082FBF7 /* BusRoute.m in Sources */,
 				41127434117C10940082FBF7 /* BusStop.m in Sources */,
 				4112748E117C13500082FBF7 /* BusMapViewController.m in Sources */,
-				41302455117CC0AC00474B5B /* NSDateAdditions.m in Sources */,
 				418D7D51117E9E210027754F /* MKAddressDictionaryPlacemark.m in Sources */,
 				418D7D70117EA1660027754F /* ShuttleTracDataStore.m in Sources */,
 				418D7D73117EA1FB0027754F /* BusStopArrivals.m in Sources */,

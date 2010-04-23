@@ -136,7 +136,7 @@
 													  reuseIdentifier:@"busMapPins"] autorelease];
             
             [pinView setPinColor: MKPinAnnotationColorGreen];
-            [pinView setAnimatesDrop: YES];
+            [pinView setAnimatesDrop: NO];
             [pinView setCanShowCallout: YES];
             
             UIButton* rightButton = [UIButton buttonWithType: UIButtonTypeDetailDisclosure];
