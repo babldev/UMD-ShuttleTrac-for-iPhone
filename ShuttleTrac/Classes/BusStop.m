@@ -8,16 +8,6 @@
 
 #import "BusStop.h"
 
-//@interface BusStop ()
-//
-//@property (retain, readwrite) NSString *name;
-//@property (assign, readwrite) NSInteger stopNumber;
-//@property (assign, readwrite, nonatomic) CLLocationCoordinate2D coordinate;
-//
-//@end
-
-
-
 @implementation BusStop
 
 @synthesize name, stopNumber, coordinate;
