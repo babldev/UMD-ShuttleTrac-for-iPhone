@@ -118,7 +118,9 @@
 	if (routeSelectorController == nil) {
 		routeSelectorController = [[RouteSelectorController alloc] initWithNibName:@"RouteSelectorController" bundle:nil];
 	}
-	[routeSelectorController setDelegate:self];
+	
+	routeSelectorController.delegate = self;
+	routeSelectorController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	
 	[self presentModalViewController:routeSelectorController animated:YES];
 }
