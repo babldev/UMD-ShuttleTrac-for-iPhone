@@ -20,6 +20,8 @@
 		4112748E117C13500082FBF7 /* BusMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4112748C117C13500082FBF7 /* BusMapViewController.m */; };
 		4112748F117C13500082FBF7 /* BusMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4112748D117C13500082FBF7 /* BusMapViewController.xib */; };
 		41302455117CC0AC00474B5B /* NSDateAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 41302454117CC0AC00474B5B /* NSDateAdditions.m */; };
+		4163C55A11812F3B004592F3 /* RouteSelectorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4163C55911812F3B004592F3 /* RouteSelectorController.m */; };
+		4163C5F911813EB0004592F3 /* RouteSelectorController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4163C5F811813EB0004592F3 /* RouteSelectorController.xib */; };
 		418D7D51117E9E210027754F /* MKAddressDictionaryPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7D50117E9E210027754F /* MKAddressDictionaryPlacemark.m */; };
 		418D7D62117E9E880027754F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418D7D61117E9E880027754F /* AddressBook.framework */; };
 		418D7D70117EA1660027754F /* ShuttleTracDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7D6F117EA1660027754F /* ShuttleTracDataStore.m */; };
@@ -59,6 +61,9 @@
 		4112748D117C13500082FBF7 /* BusMapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusMapViewController.xib; sourceTree = "<group>"; };
 		41302453117CC0AC00474B5B /* NSDateAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDateAdditions.h; sourceTree = "<group>"; };
 		41302454117CC0AC00474B5B /* NSDateAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateAdditions.m; sourceTree = "<group>"; };
+		4163C55811812F3B004592F3 /* RouteSelectorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteSelectorController.h; sourceTree = "<group>"; };
+		4163C55911812F3B004592F3 /* RouteSelectorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteSelectorController.m; sourceTree = "<group>"; };
+		4163C5F811813EB0004592F3 /* RouteSelectorController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteSelectorController.xib; sourceTree = "<group>"; };
 		418D7D4F117E9E210027754F /* MKAddressDictionaryPlacemark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKAddressDictionaryPlacemark.h; sourceTree = "<group>"; };
 		418D7D50117E9E210027754F /* MKAddressDictionaryPlacemark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKAddressDictionaryPlacemark.m; sourceTree = "<group>"; };
 		418D7D61117E9E880027754F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -212,6 +217,9 @@
 				4112748D117C13500082FBF7 /* BusMapViewController.xib */,
 				4112748B117C13500082FBF7 /* BusMapViewController.h */,
 				4112748C117C13500082FBF7 /* BusMapViewController.m */,
+				4163C55811812F3B004592F3 /* RouteSelectorController.h */,
+				4163C55911812F3B004592F3 /* RouteSelectorController.m */,
+				4163C5F811813EB0004592F3 /* RouteSelectorController.xib */,
 			);
 			name = BusMap;
 			sourceTree = "<group>";
@@ -317,6 +325,7 @@
 				418D7F18117F5B200027754F /* shuttleTracDataStore.sqlite in Resources */,
 				8528A31F117F7730000CDEF3 /* BookmarkedStopsController.xib in Resources */,
 				41C3E2D1118000B200EEFD50 /* BusStopView.xib in Resources */,
+				4163C5F911813EB0004592F3 /* RouteSelectorController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +351,7 @@
 				418D7E3A117EB9490027754F /* DataStoreGrabber.m in Sources */,
 				8528A31E117F7730000CDEF3 /* BookmarkedStopsController.m in Sources */,
 				41C3E2D0118000B200EEFD50 /* BusStopViewController.m in Sources */,
+				4163C55A11812F3B004592F3 /* RouteSelectorController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

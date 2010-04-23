@@ -55,6 +55,7 @@
 - (void)dealloc {
 	[busStops release];
 	[busStopViewController release];
+	[routeSelectorController release];
 	
     [super dealloc];
 }
@@ -113,6 +114,15 @@
 	// TODO Move to current user location
 }
 
+- (IBAction)selectRoute:(UIButton *)sender {
+	if (routeSelectorController == nil) {
+		routeSelectorController = [[RouteSelectorController alloc] initWithNibName:@"RouteSelectorController" bundle:nil];
+	}
+	[routeSelectorController setDelegate:self];
+	
+	[self presentModalViewController:routeSelectorController animated:YES];
+}
+
 #pragma mark -
 #pragma mark Map View Delegate
 
@@ -164,6 +174,15 @@
 
 - (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error {
 	;
+}
+
+#pragma mark -
+#pragma mark RouteSelectorControllerDelegate
+
+-(void)routeSelected:(BusRoute *)route {
+	[self dismissModalViewControllerAnimated:YES];
+	
+	// TODO - Select route
 }
 
 #pragma mark -

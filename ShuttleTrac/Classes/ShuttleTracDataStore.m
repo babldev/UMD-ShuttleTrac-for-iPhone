@@ -34,9 +34,6 @@
 			[self requestStopsFromWeb];
 			[self loadStopsAndRouteFromSQL];
 		}
-		
-		// FIXME - Sample bus stop
-		[bookmarkedStops addObject:[busStops objectAtIndex:0]];
 	}
 	
 	return self;
@@ -104,7 +101,7 @@
 	sqlite3_reset(compiledStatement);
 }
 
--(NSArray *)allBusStops {
+-(NSArray *)allBusStops {	
 	return busStops;
 }
 
