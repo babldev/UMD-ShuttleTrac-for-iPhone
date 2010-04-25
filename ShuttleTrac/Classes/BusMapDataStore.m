@@ -19,7 +19,6 @@
 -(id)initWithDataStore:(ShuttleTracDataStore *)dStore {
 	if (self = [super init]) {
 		dataStore = dStore;
-		activeRoute = [[dataStore allBusRoutes] objectAtIndex:0];
 	}
 	
 	return self;
@@ -31,7 +30,11 @@
 
 // Load all stops for activeRoute
 -(void)loadStopsForActiveRoute {
-	self.mappedStops = [dataStore allBusStops];
+	if (activeRoute == nil) {
+		self.mappedStops = [dataStore allBusStops];
+	} else {
+		self.mappedStops = [activeRoute stops];
+	}
 }
 
 -(NSArray *)allRoutes {

@@ -15,7 +15,7 @@
 #import "BusStop.h"
 
 @interface BusMapViewController ( )
--(void)addBusStops;
+-(void)reloadMap;
 -(void)zoomToFitMapAnnotations;
 @end
 
@@ -27,10 +27,7 @@
     [super viewDidLoad];
 	
 	dataStore = [GetShuttleTracDataStore() busMapDataStore];
-	[self addBusStops];
-	
-	// FIXME - We probably shouldn't run this for > 10 stops
-	[self zoomToFitMapAnnotations];
+	[self reloadMap];
 	
 	[self.navigationController setDelegate:self];
 }
@@ -57,11 +54,14 @@
     [super dealloc];
 }
 
-- (void)addBusStops {
+- (void)reloadMap {
 	[dataStore loadStopsForActiveRoute];
 	
+	[mapView removeAnnotations:mapView.annotations];
 	for (BusStop *stop in [dataStore mappedStops])
 		[mapView addAnnotation:stop];
+	
+	[self zoomToFitMapAnnotations];
 }
 
 #pragma mark -
@@ -178,9 +178,11 @@
 #pragma mark RouteSelectorControllerDelegate
 
 -(void)routeSelected:(BusRoute *)route {
-	[self dismissModalViewControllerAnimated:YES];
-	
-	// TODO - Select route
+	if (route != [dataStore activeRoute]) {
+		[dataStore setActiveRoute:route];
+		[self dismissModalViewControllerAnimated:YES];
+		[self reloadMap];
+	}
 }
 
 #pragma mark -
