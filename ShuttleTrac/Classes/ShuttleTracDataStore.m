@@ -87,8 +87,8 @@
 }
 
 -(void)emptyTables {
-	const char *createStopsSql = "TRUNCATE TABLE stops;";
-	const char *createRotuesSql = "TRUNCATE TABLE routes;";
+	const char *createStopsSql = "DELETE FROM stops;";
+	const char *createRotuesSql = "DELETE FROM routes;";
 	
 	// TRUNCATE STOPS TABLE
 	

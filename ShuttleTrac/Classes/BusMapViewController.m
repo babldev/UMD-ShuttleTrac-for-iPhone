@@ -108,7 +108,9 @@
 }
 
 - (IBAction)findMe:(UIBarButtonItem *)sender {
-	// TODO Move to current user location
+	if (mapView.userLocation.location) {
+		[mapView setCenterCoordinate:mapView.userLocation.location.coordinate animated:YES];
+	}
 }
 
 - (IBAction)selectRoute:(UIButton *)sender {
