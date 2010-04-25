@@ -19,6 +19,11 @@
 	if (self = [super init]) {
 		dataStore = dStore;
 		self.bookmarkedStops = [[[NSMutableArray alloc] init] autorelease];
+		
+		// FIXME - Debug statement
+		[self.bookmarkedStops addObject:[[dataStore allBusStops] objectAtIndex:100]];
+		[self.bookmarkedStops addObject:[[dataStore allBusStops] objectAtIndex:101]];
+		[self.bookmarkedStops addObject:[[dataStore allBusStops] objectAtIndex:102]];
 	}
 	
 	return self;

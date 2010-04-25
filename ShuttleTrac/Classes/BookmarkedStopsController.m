@@ -86,7 +86,7 @@
 	}
 	
 	bookmarksEditorController.delegate = self;
-	bookmarksEditorController.bookmarkedStops = [[bookmarkedStops copy] autorelease];
+	bookmarksEditorController.bookmarkedStops = [[bookmarkedStops mutableCopy] autorelease];
 	bookmarksEditorController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	
 	[self presentModalViewController:bookmarksEditorController animated:YES];
