@@ -13,30 +13,40 @@
 -(void)loadStopsAndRouteFromSQL;
 -(void)requestStopsFromWeb;
 
-@property (retain, readwrite) NSMutableArray			*bookmarkedStops;
+@property (retain, readwrite) BookmarkedStopsDataStore *bookmarkedStopsDataStore;
+@property (retain, readwrite) BusMapDataStore *busMapDataStore;
 
 @end
 
 
 @implementation ShuttleTracDataStore
 
-@synthesize bookmarkedStops, mapActiveStop;
+@synthesize bookmarkedStopsDataStore, busMapDataStore;
 
 -(id)init {
 	if (self = [super init]) {
 		busStops = [[NSMutableArray alloc] init];
 		busRoutes = [[NSMutableArray alloc] init];
 		
-		bookmarkedStops = [[NSMutableArray alloc] init];
+		// FIXME Remove this debug line
+		[busRoutes addObject:[BusRoute busRouteWithID:105 name:@"Courtyards Express" stops:nil]];
+		
+		// Initiate data stores
+		self.bookmarkedStopsDataStore	= [[[BookmarkedStopsDataStore alloc] initWithDataStore:self] autorelease];
+		self.busMapDataStore			= [[[BusMapDataStore alloc] initWithDataStore:self] autorelease];
+		
 		databasePath = [[NSBundle mainBundle] pathForResource:@"shuttleTracDataStore" ofType:@"sqlite"];
 		
-		if(sqlite3_open([databasePath UTF8String], &database) == SQLITE_OK) {
-			[self requestStopsFromWeb];
-			[self loadStopsAndRouteFromSQL];
-		}
+		if(sqlite3_open([databasePath UTF8String], &database) != SQLITE_OK)
+			NSLog(@"SQLite database failed to open");
 	}
 	
 	return self;
+}
+
+-(void)refreshStopAndRouteData {
+	[self requestStopsFromWeb];
+	[self loadStopsAndRouteFromSQL];
 }
 
 -(void)requestStopsFromWeb{
@@ -49,7 +59,9 @@
 	[parser release];
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
+
 #pragma mark SQL
+
 -(void)loadStopsAndRouteFromSQL {
 	//if(sqlite3_open([databasePath UTF8String], &database) == SQLITE_OK) {
 		
@@ -156,9 +168,14 @@
 -(void)dealloc {
 	sqlite3_close(database);
 	
+	[bookmarkedStopsDataStore release];
+	[busMapDataStore release];
+	
 	[busStops release];
 	[busRoutes release];
-	[bookmarkedStops release];
+	[parserString release];
+	[databasePath release];
+	
 	[super dealloc];
 }
 

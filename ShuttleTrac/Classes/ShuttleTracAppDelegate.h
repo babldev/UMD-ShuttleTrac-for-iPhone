@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ShuttleTracDataStore.h"
 
-@interface ShuttleTracAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
+@interface ShuttleTracAppDelegate : NSObject <UIApplicationDelegate, 
+		UITabBarControllerDelegate> {
     UIWindow *window;
     UITabBarController *tabBarController;
 	

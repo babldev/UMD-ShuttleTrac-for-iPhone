@@ -15,20 +15,18 @@
 #import "BusStop.h"
 
 @interface BusMapViewController ( )
-- (void)addBusStops;
+-(void)addBusStops;
 -(void)zoomToFitMapAnnotations;
 @end
 
 
 @implementation BusMapViewController
 
-@synthesize busStops;
-
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	dataStore = GetShuttleTracDataStore();
+	dataStore = [GetShuttleTracDataStore() busMapDataStore];
 	[self addBusStops];
 	
 	// FIXME - We probably shouldn't run this for > 10 stops
@@ -53,7 +51,6 @@
 
 
 - (void)dealloc {
-	[busStops release];
 	[busStopViewController release];
 	[routeSelectorController release];
 	
@@ -61,9 +58,9 @@
 }
 
 - (void)addBusStops {
-	self.busStops = [dataStore allBusStops];
+	[dataStore loadStopsForActiveRoute];
 	
-	for (BusStop *stop in busStops)
+	for (BusStop *stop in [dataStore mappedStops])
 		[mapView addAnnotation:stop];
 }
 
@@ -153,15 +150,13 @@
 
 - (void)mapView:(MKMapView *)aMapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
 	busStopViewController = [[BusStopViewController alloc] initWithNibName:@"BusStopView" bundle:nil];
-
-	[busStopViewController setDataStore:dataStore];
 	
 	// FIXME - Any data leaks here?
 	
 	BusStop *stop = (BusStop *) [view annotation];
 	BusStopArrivals *activeStop = [[[BusStopArrivals alloc] initWithBusStop:stop] autorelease];
 	
-	[dataStore setMapActiveStop:activeStop];
+	[dataStore setActiveStop:activeStop];
 	[busStopViewController setArrivals:activeStop];
 	
 	[self.navigationController pushViewController:busStopViewController animated:YES];

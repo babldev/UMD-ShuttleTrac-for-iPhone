@@ -9,14 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "BusStop.h"
-#import "ShuttleTracDataStore.h"
+#import "BusMapDataStore.h"
 #import "BusStopViewController.h"
 #import "RouteSelectorController.h"
 
 @interface BusMapViewController : UIViewController <MKMapViewDelegate, 
 							UINavigationControllerDelegate, 
 							RouteSelectorControllerDelegate> {
-	ShuttleTracDataStore *dataStore;
+	BusMapDataStore *dataStore;
 	
 	BusStopViewController *busStopViewController;
 	RouteSelectorController *routeSelectorController;
@@ -25,13 +25,10 @@
 	IBOutlet UIButton	*routeButton;
 	
 	MKReverseGeocoder   *reverseGeocoder;
-	NSArray				*busStops;
 }
 
 - (IBAction)changeType:(UISegmentedControl *)sender;
 - (IBAction)findMe:(UIBarButtonItem *)sender;
 - (IBAction)selectRoute:(UIButton *)sender;
-
-@property (retain, readwrite) NSArray *busStops;
 
 @end

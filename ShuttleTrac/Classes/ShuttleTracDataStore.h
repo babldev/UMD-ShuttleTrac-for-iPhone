@@ -9,21 +9,22 @@
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
 
+#import "BookmarkedStopsDataStore.h"
+#import "BusMapDataStore.h"
+
 #import "BusStopArrivals.h"
 #import "BusStop.h"
 #import "BusRoute.h"
 
+@class BookmarkedStopsDataStore, BusMapDataStore;
+
 @interface ShuttleTracDataStore : NSObject {
-	// BookmarkedStops Data
-	NSMutableArray *bookmarkedStops;	
-	
-	// BusMap Data
-	BusStopArrivals *mapActiveStop;
+	// Database
 	sqlite3 *database;
 	
-	NSInteger temp; // used for testing purposes REMOVE! 
-
-	
+	BookmarkedStopsDataStore *bookmarkedStopsDataStore;
+	BusMapDataStore *busMapDataStore;
+		
 @private
 	// Temporary
 	NSMutableArray *busStops;
@@ -37,10 +38,9 @@
 -(NSArray *)allBusStops;
 -(NSArray *)allBusRoutes;
 
-// Send notifications
--(void)refreshAllBookmarkedStops;
+-(void)refreshStopAndRouteData;
 
-@property (retain, readonly) NSMutableArray *bookmarkedStops;
-@property (retain, readwrite) BusStopArrivals *mapActiveStop;
+@property (retain, readonly) BookmarkedStopsDataStore *bookmarkedStopsDataStore;
+@property (retain, readonly) BusMapDataStore *busMapDataStore;
 
 @end

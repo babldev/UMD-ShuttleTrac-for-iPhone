@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ShuttleTracDataStore.h"
+#import "BookmarkedStopsDataStore.h"
 #import "BusStopArrivals.h"
 #import "BookmarksEditorController.h"
 
@@ -16,7 +16,7 @@
 		UITableViewDataSource,
 		BookmarksEditorControllerDelegate> {
 	IBOutlet UITableView *tableView;
-	ShuttleTracDataStore *dataStore;
+	BookmarkedStopsDataStore *dataStore;
 	
 	BookmarksEditorController *bookmarksEditorController;
 	
@@ -28,7 +28,5 @@
 
 -(IBAction)refreshBookmarks:(UIBarButtonItem *)sender;
 -(IBAction)editBookmarks:(UIBarButtonItem *)sender;
-
-@property (assign, readwrite) ShuttleTracDataStore *dataStore;
 
 @end

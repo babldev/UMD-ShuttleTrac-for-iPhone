@@ -11,7 +11,7 @@
 
 @implementation BusStopViewController
 
-@synthesize dataStore, arrivals;
+@synthesize arrivals;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {

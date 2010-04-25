@@ -13,12 +13,10 @@
 
 @interface BusStopViewController : UIViewController <UITableViewDataSource, BusStopArrivalsDelegate> {
 	IBOutlet UITableView *tableView;
-	
-	ShuttleTracDataStore *dataStore;
+
 	BusStopArrivals *arrivals;
 }
 
-@property (assign, readwrite) ShuttleTracDataStore *dataStore;
 @property (retain, readwrite) BusStopArrivals *arrivals;
 
 @end

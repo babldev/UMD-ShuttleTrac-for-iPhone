@@ -13,6 +13,8 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
 		28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD73870D9D96C1002E5188 /* MainWindow.xib */; };
+		410CD9BC1183EC2700FACEF5 /* BookmarkedStopsDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 410CD9BB1183EC2700FACEF5 /* BookmarkedStopsDataStore.m */; };
+		410CD9BF1183EC4100FACEF5 /* BusMapDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 410CD9BE1183EC4100FACEF5 /* BusMapDataStore.m */; };
 		41127319117C03E40082FBF7 /* BusTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41127318117C03E40082FBF7 /* BusTimeTableViewCell.m */; };
 		41127433117C10940082FBF7 /* BusRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 4112742F117C10940082FBF7 /* BusRoute.m */; };
 		41127434117C10940082FBF7 /* BusStop.m in Sources */ = {isa = PBXBuildFile; fileRef = 41127431117C10940082FBF7 /* BusStop.m */; };
@@ -50,6 +52,10 @@
 		28A0AB4B0D9B1048005BE974 /* ShuttleTrac_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShuttleTrac_Prefix.pch; sourceTree = "<group>"; };
 		28AD73870D9D96C1002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		410CD9BA1183EC2700FACEF5 /* BookmarkedStopsDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkedStopsDataStore.h; sourceTree = "<group>"; };
+		410CD9BB1183EC2700FACEF5 /* BookmarkedStopsDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkedStopsDataStore.m; sourceTree = "<group>"; };
+		410CD9BD1183EC4100FACEF5 /* BusMapDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusMapDataStore.h; sourceTree = "<group>"; };
+		410CD9BE1183EC4100FACEF5 /* BusMapDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusMapDataStore.m; sourceTree = "<group>"; };
 		41127317117C03E40082FBF7 /* BusTimeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusTimeTableViewCell.h; sourceTree = "<group>"; };
 		41127318117C03E40082FBF7 /* BusTimeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusTimeTableViewCell.m; sourceTree = "<group>"; };
 		4112742E117C10940082FBF7 /* BusRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusRoute.h; sourceTree = "<group>"; };
@@ -245,6 +251,10 @@
 			children = (
 				418D7D6E117EA1660027754F /* ShuttleTracDataStore.h */,
 				418D7D6F117EA1660027754F /* ShuttleTracDataStore.m */,
+				410CD9BA1183EC2700FACEF5 /* BookmarkedStopsDataStore.h */,
+				410CD9BB1183EC2700FACEF5 /* BookmarkedStopsDataStore.m */,
+				410CD9BD1183EC4100FACEF5 /* BusMapDataStore.h */,
+				410CD9BE1183EC4100FACEF5 /* BusMapDataStore.m */,
 			);
 			name = Persistent;
 			sourceTree = "<group>";
@@ -348,6 +358,8 @@
 				41C3E2D0118000B200EEFD50 /* BusStopViewController.m in Sources */,
 				4163C55A11812F3B004592F3 /* RouteSelectorController.m in Sources */,
 				85624D8E1181E74C007AE93C /* BookmarksEditorController.m in Sources */,
+				410CD9BC1183EC2700FACEF5 /* BookmarkedStopsDataStore.m in Sources */,
+				410CD9BF1183EC4100FACEF5 /* BusMapDataStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
