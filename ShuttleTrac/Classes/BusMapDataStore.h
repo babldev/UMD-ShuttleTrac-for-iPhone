@@ -40,6 +40,8 @@
 // Load all stops for activeRoute
 -(void)loadStopsForActiveRoute;
 
+-(NSArray *)allRoutes;
+
 
 @property (retain, readonly) NSArray *mappedStops;
 @property (retain, readwrite) BusRoute *activeRoute;

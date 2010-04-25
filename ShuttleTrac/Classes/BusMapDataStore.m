@@ -34,4 +34,8 @@
 	self.mappedStops = [dataStore allBusStops];
 }
 
+-(NSArray *)allRoutes {
+	return [dataStore allBusRoutes];
+}
+
 @end

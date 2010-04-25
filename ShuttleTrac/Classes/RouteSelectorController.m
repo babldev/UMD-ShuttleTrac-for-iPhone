@@ -7,7 +7,7 @@
 //
 
 #import "RouteSelectorController.h"
-
+#import "RouteSelectorTableViewCell.h"
 
 @implementation RouteSelectorController
 
@@ -83,15 +83,16 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"BusRouteSelector";
     
-    UITableViewCell *cell = [tView dequeueReusableCellWithIdentifier:CellIdentifier];
+    RouteSelectorTableViewCell *cell = (RouteSelectorTableViewCell *) [tView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[RouteSelectorTableViewCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
     }
     
     // Configure the cell...
-    
+	cell.route = [busRoutes objectAtIndex:indexPath.row];
+	
     return cell;
 }
 
@@ -140,14 +141,7 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
+    [delegate routeSelected:[busRoutes objectAtIndex:[indexPath row]]];
 }
 
 #pragma mark -

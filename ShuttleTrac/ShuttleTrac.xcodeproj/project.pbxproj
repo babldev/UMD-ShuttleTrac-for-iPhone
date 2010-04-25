@@ -21,6 +21,7 @@
 		41127484117C12BF0082FBF7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41127483117C12BF0082FBF7 /* MapKit.framework */; };
 		4112748E117C13500082FBF7 /* BusMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4112748C117C13500082FBF7 /* BusMapViewController.m */; };
 		4112748F117C13500082FBF7 /* BusMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4112748D117C13500082FBF7 /* BusMapViewController.xib */; };
+		411E12B91183FE95004D7070 /* RouteSelectorTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 411E12B81183FE95004D7070 /* RouteSelectorTableViewCell.m */; };
 		4163C55A11812F3B004592F3 /* RouteSelectorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4163C55911812F3B004592F3 /* RouteSelectorController.m */; };
 		4163C5F911813EB0004592F3 /* RouteSelectorController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4163C5F811813EB0004592F3 /* RouteSelectorController.xib */; };
 		418D7D51117E9E210027754F /* MKAddressDictionaryPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7D50117E9E210027754F /* MKAddressDictionaryPlacemark.m */; };
@@ -66,6 +67,8 @@
 		4112748B117C13500082FBF7 /* BusMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusMapViewController.h; sourceTree = "<group>"; };
 		4112748C117C13500082FBF7 /* BusMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusMapViewController.m; sourceTree = "<group>"; };
 		4112748D117C13500082FBF7 /* BusMapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusMapViewController.xib; sourceTree = "<group>"; };
+		411E12B71183FE95004D7070 /* RouteSelectorTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteSelectorTableViewCell.h; sourceTree = "<group>"; };
+		411E12B81183FE95004D7070 /* RouteSelectorTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteSelectorTableViewCell.m; sourceTree = "<group>"; };
 		4163C55811812F3B004592F3 /* RouteSelectorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteSelectorController.h; sourceTree = "<group>"; };
 		4163C55911812F3B004592F3 /* RouteSelectorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteSelectorController.m; sourceTree = "<group>"; };
 		4163C5F811813EB0004592F3 /* RouteSelectorController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteSelectorController.xib; sourceTree = "<group>"; };
@@ -227,6 +230,8 @@
 				4163C55811812F3B004592F3 /* RouteSelectorController.h */,
 				4163C55911812F3B004592F3 /* RouteSelectorController.m */,
 				4163C5F811813EB0004592F3 /* RouteSelectorController.xib */,
+				411E12B71183FE95004D7070 /* RouteSelectorTableViewCell.h */,
+				411E12B81183FE95004D7070 /* RouteSelectorTableViewCell.m */,
 			);
 			name = BusMap;
 			sourceTree = "<group>";
@@ -360,6 +365,7 @@
 				85624D8E1181E74C007AE93C /* BookmarksEditorController.m in Sources */,
 				410CD9BC1183EC2700FACEF5 /* BookmarkedStopsDataStore.m in Sources */,
 				410CD9BF1183EC4100FACEF5 /* BusMapDataStore.m in Sources */,
+				411E12B91183FE95004D7070 /* RouteSelectorTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

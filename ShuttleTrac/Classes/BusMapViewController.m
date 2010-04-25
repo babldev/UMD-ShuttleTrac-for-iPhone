@@ -117,6 +117,7 @@
 	}
 	
 	routeSelectorController.delegate = self;
+	routeSelectorController.busRoutes = [dataStore allRoutes];
 	routeSelectorController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	
 	[self presentModalViewController:routeSelectorController animated:YES];
