@@ -55,9 +55,10 @@
 }
 
 - (void)reloadMap {
+	[mapView removeAnnotations:[dataStore mappedStops]];
+	
 	[dataStore loadStopsForActiveRoute];
 	
-	[mapView removeAnnotations:mapView.annotations];
 	for (BusStop *stop in [dataStore mappedStops])
 		[mapView addAnnotation:stop];
 	
