@@ -12,6 +12,8 @@
 
 -(void)loadStopsAndRouteFromSQL;
 -(void)requestStopsFromWeb;
+-(void)installTables;
+-(void)emptyTables;
 
 @property (retain, readwrite) BookmarkedStopsDataStore *bookmarkedStopsDataStore;
 @property (retain, readwrite) BusMapDataStore *busMapDataStore;
@@ -28,9 +30,17 @@
 		busStops = [[NSMutableArray alloc] init];
 		busRoutes = [[NSMutableArray alloc] init];
 		
-		databasePath = [[NSBundle mainBundle] pathForResource:@"shuttleTracDataStore" ofType:@"sqlite"];
+		NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+		databasePath = [docsDir stringByAppendingFormat:@"/shuttleTracDataStore_v1.sqlite"];
 		
-		if(sqlite3_open([databasePath UTF8String], &database) == SQLITE_OK) {			
+		BOOL installRequired = ![[NSFileManager defaultManager] fileExistsAtPath:databasePath];
+		
+		if(sqlite3_open([databasePath UTF8String], &database) == SQLITE_OK) {
+			// Check if 
+			if (installRequired) {
+				[self installTables];
+			}
+			
 			[self refreshStopAndRouteData];
 		} else {
 			NSLog(@"SQLite database failed to open");
@@ -44,7 +54,72 @@
 	return self;
 }
 
+-(void)installTables {
+	const char *createStopsSql = "CREATE TABLE stops(id integer primary key, name text, latitude real, longitude real, roadName text, bearingToRoad real);";
+	const char *createRotuesSql = "CREATE TABLE routes(id integer primary key, name text, stops text);";
+	
+	// CREATE STOPS TABLE
+	
+	sqlite3_stmt *compiledStatement;
+	
+	if(sqlite3_prepare_v2(database, createStopsSql, -1, &compiledStatement, NULL) == SQLITE_OK) {
+		// Anything here?
+	}
+	
+	if(SQLITE_DONE != sqlite3_step(compiledStatement)) {
+		NSLog(@"Error while creating STOPS table. Error: '%s'.", sqlite3_errmsg(database));
+	}
+	
+	
+	// CREATE ROUTES TABLE
+	
+	sqlite3_reset(compiledStatement);
+	
+	if(sqlite3_prepare_v2(database, createRotuesSql, -1, &compiledStatement, NULL) == SQLITE_OK) {
+		// Anything here?
+	}
+	
+	if(SQLITE_DONE != sqlite3_step(compiledStatement)) {
+		NSLog(@"Error while creating ROUTES table. Error: '%s'.", sqlite3_errmsg(database));
+	}
+	
+	sqlite3_reset(compiledStatement);
+}
+
+-(void)emptyTables {
+	const char *createStopsSql = "TRUNCATE TABLE stops;";
+	const char *createRotuesSql = "TRUNCATE TABLE routes;";
+	
+	// TRUNCATE STOPS TABLE
+	
+	sqlite3_stmt *compiledStatement;
+	
+	if(sqlite3_prepare_v2(database, createStopsSql, -1, &compiledStatement, NULL) == SQLITE_OK) {
+		// Anything here?
+	}
+	
+	if(SQLITE_DONE != sqlite3_step(compiledStatement)) {
+		NSLog(@"Error while creating STOPS table. Error: '%s'.", sqlite3_errmsg(database));
+	}
+	
+	
+	// TRUNCATE ROUTES TABLE
+	
+	sqlite3_reset(compiledStatement);
+	
+	if(sqlite3_prepare_v2(database, createRotuesSql, -1, &compiledStatement, NULL) == SQLITE_OK) {
+		// Anything here?
+	}
+	
+	if(SQLITE_DONE != sqlite3_step(compiledStatement)) {
+		NSLog(@"Error while creating ROUTES table. Error: '%s'.", sqlite3_errmsg(database));
+	}
+	
+	sqlite3_reset(compiledStatement);
+}
+
 -(void)refreshStopAndRouteData {
+	[self emptyTables];
 	[self requestStopsFromWeb];
 	[self loadStopsAndRouteFromSQL];
 	

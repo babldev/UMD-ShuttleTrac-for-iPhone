@@ -30,7 +30,6 @@
 		418D7D73117EA1FB0027754F /* BusStopArrivals.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7D72117EA1FB0027754F /* BusStopArrivals.m */; };
 		418D7D90117EA7D70027754F /* BusArrival.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7D8F117EA7D70027754F /* BusArrival.m */; };
 		418D7E3A117EB9490027754F /* DataStoreGrabber.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7E39117EB9490027754F /* DataStoreGrabber.m */; };
-		418D7F18117F5B200027754F /* shuttleTracDataStore.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 418D7F17117F5B200027754F /* shuttleTracDataStore.sqlite */; };
 		418D7F70117F65EC0027754F /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 418D7F6F117F65EC0027754F /* libsqlite3.0.dylib */; };
 		41C3E2D0118000B200EEFD50 /* BusStopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C3E2CE118000B200EEFD50 /* BusStopViewController.m */; };
 		41C3E2D1118000B200EEFD50 /* BusStopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41C3E2CF118000B200EEFD50 /* BusStopView.xib */; };
@@ -83,7 +82,6 @@
 		418D7D8F117EA7D70027754F /* BusArrival.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusArrival.m; sourceTree = "<group>"; };
 		418D7E38117EB9490027754F /* DataStoreGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStoreGrabber.h; sourceTree = "<group>"; };
 		418D7E39117EB9490027754F /* DataStoreGrabber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStoreGrabber.m; sourceTree = "<group>"; };
-		418D7F17117F5B200027754F /* shuttleTracDataStore.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = shuttleTracDataStore.sqlite; sourceTree = "<group>"; };
 		418D7F6F117F65EC0027754F /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		41C3E2CD118000B200EEFD50 /* BusStopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusStopViewController.h; sourceTree = "<group>"; };
 		41C3E2CE118000B200EEFD50 /* BusStopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusStopViewController.m; sourceTree = "<group>"; };
@@ -166,7 +164,6 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				418D7F17117F5B200027754F /* shuttleTracDataStore.sqlite */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* ShuttleTrac-Info.plist */,
 			);
@@ -332,7 +329,6 @@
 				28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */,
 				853D4C7A11595E5A00F3E812 /* BusTimeLookupController.xib in Resources */,
 				4112748F117C13500082FBF7 /* BusMapViewController.xib in Resources */,
-				418D7F18117F5B200027754F /* shuttleTracDataStore.sqlite in Resources */,
 				8528A31F117F7730000CDEF3 /* BookmarkedStopsController.xib in Resources */,
 				41C3E2D1118000B200EEFD50 /* BusStopView.xib in Resources */,
 				4163C5F911813EB0004592F3 /* RouteSelectorController.xib in Resources */,
