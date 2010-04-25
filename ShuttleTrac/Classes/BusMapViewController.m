@@ -61,7 +61,7 @@
 }
 
 - (void)addBusStops {
-	self.busStops = [GetShuttleTracDataStore() allBusStops];
+	self.busStops = [dataStore allBusStops];
 	
 	for (BusStop *stop in busStops)
 		[mapView addAnnotation:stop];
@@ -152,14 +152,14 @@
 }
 
 - (void)mapView:(MKMapView *)aMapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-	busStopViewController = [[[BusStopViewController alloc] initWithNibName:@"BusStopView" bundle:nil] autorelease];
+	busStopViewController = [[BusStopViewController alloc] initWithNibName:@"BusStopView" bundle:nil];
 
 	[busStopViewController setDataStore:dataStore];
 	
 	// FIXME - Any data leaks here?
 	
 	BusStop *stop = (BusStop *) [view annotation];
-	BusStopArrivals *activeStop = [[BusStopArrivals alloc] initWithBusStop:stop];
+	BusStopArrivals *activeStop = [[[BusStopArrivals alloc] initWithBusStop:stop] autorelease];
 	
 	[dataStore setMapActiveStop:activeStop];
 	[busStopViewController setArrivals:activeStop];
@@ -192,6 +192,9 @@
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {	
 	if (viewController == self) {
+		[busStopViewController release];
+		busStopViewController = nil;
+		
 		[navigationController setNavigationBarHidden:YES animated:YES];
 	} else if (viewController == busStopViewController)
 		[navigationController setNavigationBarHidden:NO animated:YES];

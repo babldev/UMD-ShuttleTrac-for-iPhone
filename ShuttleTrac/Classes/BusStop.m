@@ -33,9 +33,9 @@
 
 -(id)initWithBusStop:(BusStop *)bStop {
 	if (self = [super init]) {
-		[self setName:[[bStop name] copy]];
-		[self setStopNumber:[bStop stopNumber]];
-		[self setCoordinate:[bStop coordinate]];
+		self.name		= [[bStop.name copy] autorelease];
+		self.stopNumber = bStop.stopNumber;
+		self.coordinate = bStop.coordinate;
 	}
 	
 	return self;
@@ -59,6 +59,15 @@
 
 - (NSString *)subtitle {
 	return [NSString stringWithFormat:@"#%d", [self stopNumber]];
+}
+
+#pragma mark dealloc
+
+-(void)dealloc {
+	[name release];
+	name = nil;
+	
+	[super dealloc];
 }
 
 @end

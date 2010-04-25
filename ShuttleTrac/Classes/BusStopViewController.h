@@ -19,6 +19,6 @@
 }
 
 @property (assign, readwrite) ShuttleTracDataStore *dataStore;
-@property (assign, readwrite) BusStopArrivals *arrivals;
+@property (retain, readwrite) BusStopArrivals *arrivals;
 
 @end
