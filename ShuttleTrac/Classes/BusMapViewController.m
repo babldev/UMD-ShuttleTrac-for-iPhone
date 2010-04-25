@@ -118,6 +118,7 @@
 	
 	routeSelectorController.delegate = self;
 	routeSelectorController.busRoutes = [dataStore allRoutes];
+	routeSelectorController.selectedRoute = [dataStore activeRoute];
 	routeSelectorController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	
 	[self presentModalViewController:routeSelectorController animated:YES];
@@ -180,9 +181,10 @@
 -(void)routeSelected:(BusRoute *)route {
 	if (route != [dataStore activeRoute]) {
 		[dataStore setActiveRoute:route];
-		[self dismissModalViewControllerAnimated:YES];
 		[self reloadMap];
 	}
+	
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark -
