@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ShuttleTracDataStore.h"
+#import "LoadingViewController.h"
 
 @interface ShuttleTracAppDelegate : NSObject <UIApplicationDelegate, 
 		UITabBarControllerDelegate> {
@@ -15,7 +16,11 @@
     UITabBarController *tabBarController;
 	
 	ShuttleTracDataStore *dataStore;
+
+	LoadingViewController *loadingViewController;
 }
+
+-(void)loadDataStore;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;

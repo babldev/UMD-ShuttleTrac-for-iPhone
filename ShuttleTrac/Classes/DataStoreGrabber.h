@@ -10,4 +10,5 @@
 #import "ShuttleTracDataStore.h"
 #import "ShuttleTracAppDelegate.h"
 
+ShuttleTracAppDelegate *GetAppDelegate();
 ShuttleTracDataStore* GetShuttleTracDataStore();

@@ -7,7 +7,7 @@
 //
 
 #import "ShuttleTracAppDelegate.h"
-
+#import "LoadingViewController.h"
 
 @implementation ShuttleTracAppDelegate
 
@@ -17,14 +17,29 @@
 @synthesize dataStore;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-    dataStore = [[ShuttleTracDataStore alloc] init];
-		
-    // Add the tab bar controller's current view as a subview of the window
-    [window addSubview:tabBarController.view];
+	loadingViewController = [[LoadingViewController alloc] initWithNibName:@"LoadingViewController" bundle:nil];
+	[window	addSubview:loadingViewController.view];
+	[self performSelectorInBackground:@selector(loadDataStore) withObject:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
 	[dataStore release];
+}
+
+-(void)loadDataStore {
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	
+	dataStore = [[ShuttleTracDataStore alloc] init];
+	[self performSelectorOnMainThread:@selector(loadMainApp) withObject:nil waitUntilDone:YES];
+	
+	[pool release];
+}
+
+-(void)loadMainApp {
+	[loadingViewController.view removeFromSuperview];
+	[loadingViewController release];
+	
+	[window addSubview:tabBarController.view];
 }
 
 /*
@@ -42,6 +57,7 @@
 
 - (void)dealloc {
     [tabBarController release];
+	[loadingViewController release];
     [window release];
     [super dealloc];
 }

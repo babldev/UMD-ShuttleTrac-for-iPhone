@@ -31,6 +31,8 @@
 		418D7F70117F65EC0027754F /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 418D7F6F117F65EC0027754F /* libsqlite3.0.dylib */; };
 		41D34A3A1184BBA30038A7A7 /* BusStopLookupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D34A391184BBA30038A7A7 /* BusStopLookupController.m */; };
 		41D34A3D1184BBE20038A7A7 /* BusStopLookupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41D34A3C1184BBE20038A7A7 /* BusStopLookupController.xib */; };
+		41D34C081184DDCD0038A7A7 /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D34C061184DDCD0038A7A7 /* LoadingViewController.m */; };
+		41D34C091184DDCD0038A7A7 /* LoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41D34C071184DDCD0038A7A7 /* LoadingViewController.xib */; };
 		8528A31E117F7730000CDEF3 /* BookmarkedStopsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8528A31C117F7730000CDEF3 /* BookmarkedStopsController.m */; };
 		8528A31F117F7730000CDEF3 /* BookmarkedStopsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8528A31D117F7730000CDEF3 /* BookmarkedStopsController.xib */; };
 		855893CE117BC85F005DF0F5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 855893CD117BC85F005DF0F5 /* CoreLocation.framework */; };
@@ -79,6 +81,9 @@
 		41D34A381184BBA30038A7A7 /* BusStopLookupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusStopLookupController.h; sourceTree = "<group>"; };
 		41D34A391184BBA30038A7A7 /* BusStopLookupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusStopLookupController.m; sourceTree = "<group>"; };
 		41D34A3C1184BBE20038A7A7 /* BusStopLookupController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusStopLookupController.xib; sourceTree = "<group>"; };
+		41D34C051184DDCD0038A7A7 /* LoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingViewController.h; sourceTree = "<group>"; };
+		41D34C061184DDCD0038A7A7 /* LoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingViewController.m; sourceTree = "<group>"; };
+		41D34C071184DDCD0038A7A7 /* LoadingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingViewController.xib; sourceTree = "<group>"; };
 		8528A31B117F7730000CDEF3 /* BookmarkedStopsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkedStopsController.h; sourceTree = "<group>"; };
 		8528A31C117F7730000CDEF3 /* BookmarkedStopsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkedStopsController.m; sourceTree = "<group>"; };
 		8528A31D117F7730000CDEF3 /* BookmarkedStopsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookmarkedStopsController.xib; sourceTree = "<group>"; };
@@ -177,6 +182,7 @@
 		41127424117C0FE40082FBF7 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				41D34C021184DDBE0038A7A7 /* Loading Stops */,
 				8528A31A117F771F000CDEF3 /* Bookmarked Stops */,
 				41127487117C12C50082FBF7 /* Bus Maps */,
 				41127425117C0FEA0082FBF7 /* Bus Stop Lookup */,
@@ -247,6 +253,16 @@
 			name = Persistent;
 			sourceTree = "<group>";
 		};
+		41D34C021184DDBE0038A7A7 /* Loading Stops */ = {
+			isa = PBXGroup;
+			children = (
+				41D34C051184DDCD0038A7A7 /* LoadingViewController.h */,
+				41D34C061184DDCD0038A7A7 /* LoadingViewController.m */,
+				41D34C071184DDCD0038A7A7 /* LoadingViewController.xib */,
+			);
+			name = "Loading Stops";
+			sourceTree = "<group>";
+		};
 		8528A31A117F771F000CDEF3 /* Bookmarked Stops */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +323,7 @@
 				8528A31F117F7730000CDEF3 /* BookmarkedStopsController.xib in Resources */,
 				85624D8F1181E74C007AE93C /* BookmarksEditorController.xib in Resources */,
 				41D34A3D1184BBE20038A7A7 /* BusStopLookupController.xib in Resources */,
+				41D34C091184DDCD0038A7A7 /* LoadingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +351,7 @@
 				410CD9BF1183EC4100FACEF5 /* BusMapDataStore.m in Sources */,
 				411E12B91183FE95004D7070 /* RouteSelectorTableViewCell.m in Sources */,
 				41D34A3A1184BBA30038A7A7 /* BusStopLookupController.m in Sources */,
+				41D34C081184DDCD0038A7A7 /* LoadingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
