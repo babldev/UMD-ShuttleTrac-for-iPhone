@@ -23,7 +23,7 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-	[dataStore release];
+	
 }
 
 -(void)loadDataStore {
@@ -59,6 +59,7 @@
     [tabBarController release];
 	[loadingViewController release];
     [window release];
+	[dataStore release];
     [super dealloc];
 }
 
