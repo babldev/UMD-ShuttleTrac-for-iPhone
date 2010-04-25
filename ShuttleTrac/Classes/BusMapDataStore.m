@@ -19,6 +19,10 @@
 -(id)initWithDataStore:(ShuttleTracDataStore *)dStore {
 	if (self = [super init]) {
 		dataStore = dStore;
+		
+		// FIXME - This isn't necessary
+		self.activeStop = [[BusStopArrivals alloc] initWithBusStop:[[dataStore allBusStops] objectAtIndex:100]];
+		self.activeStop.delegate = self;
 	}
 	
 	return self;
@@ -26,6 +30,7 @@
 
 // Begin loading of upcoming buses for activeStop
 -(void)loadSelectedBusArrivals {
+	[self.activeStop refreshUpcomingBuses];
 }
 
 // Load all stops for activeRoute
@@ -39,6 +44,20 @@
 
 -(NSArray *)allRoutes {
 	return [dataStore allBusRoutes];
+}
+
+#pragma mark BusStopArrivalsDelegate
+-(void)arrivalsRefreshComplete:(BusStopArrivals *)arrivals {
+	[delegate loadSelectedBusArrivalsCompleted:activeStop];
+}
+
+#pragma mark dealloc
+-(void)dealloc {
+	[mappedStops release];
+	[activeStop release];
+	[activeRoute release];
+	
+	[super dealloc];
 }
 
 @end

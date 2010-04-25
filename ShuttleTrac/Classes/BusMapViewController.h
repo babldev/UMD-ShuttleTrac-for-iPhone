@@ -10,25 +10,30 @@
 #import <MapKit/MapKit.h>
 #import "BusStop.h"
 #import "BusMapDataStore.h"
-#import "BusStopViewController.h"
-#import "RouteSelectorController.h"
 
-@interface BusMapViewController : UIViewController <MKMapViewDelegate, 
-							UINavigationControllerDelegate, 
-							RouteSelectorControllerDelegate> {
+@protocol BusMapViewControllerDelegate
+
+-(void)busStopSelected:(BusStop *)stop;
+
+@end
+
+
+@interface BusMapViewController : UIViewController <MKMapViewDelegate> {
 	BusMapDataStore *dataStore;
 	
-	BusStopViewController *busStopViewController;
-	RouteSelectorController *routeSelectorController;
-	
 	IBOutlet MKMapView  *mapView;
-	IBOutlet UIButton	*routeButton;
 	
 	MKReverseGeocoder   *reverseGeocoder;
+	
+	id <BusMapViewControllerDelegate> delegate;
 }
 
-- (IBAction)changeType:(UISegmentedControl *)sender;
+- (IBAction)cancelSearch:(UIBarButtonItem *)sender;
 - (IBAction)findMe:(UIBarButtonItem *)sender;
-- (IBAction)selectRoute:(UIButton *)sender;
+
+@property (assign, readwrite) BusMapDataStore *dataStore;
+@property (assign, readwrite) id <BusMapViewControllerDelegate> delegate;
+
+-(void)reloadMap;
 
 @end

@@ -15,22 +15,18 @@
 #import "BusStop.h"
 
 @interface BusMapViewController ( )
--(void)reloadMap;
 -(void)zoomToFitMapAnnotations;
 @end
 
 
 @implementation BusMapViewController
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-	
-	dataStore = [GetShuttleTracDataStore() busMapDataStore];
-	[self reloadMap];
-	
-	[self.navigationController setDelegate:self];
-}
+@synthesize dataStore, delegate;
+//
+//// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+//- (void)viewDidLoad {
+//    [super viewDidLoad];
+//}
 
 
 - (void)didReceiveMemoryWarning {
@@ -48,8 +44,6 @@
 
 
 - (void)dealloc {
-	[busStopViewController release];
-	[routeSelectorController release];
 	
     [super dealloc];
 }
@@ -103,28 +97,14 @@
 #pragma mark -
 #pragma mark Actions
 
-- (IBAction)changeType:(UISegmentedControl *)sender {
-	NSInteger index = sender.selectedSegmentIndex;
-	mapView.mapType = (MKMapType)index;
+- (IBAction)cancelSearch:(UIBarButtonItem *)sender {
+	[delegate busStopSelected:nil];
 }
 
 - (IBAction)findMe:(UIBarButtonItem *)sender {
 	if (mapView.userLocation.location) {
 		[mapView setCenterCoordinate:mapView.userLocation.location.coordinate animated:YES];
 	}
-}
-
-- (IBAction)selectRoute:(UIButton *)sender {
-	if (routeSelectorController == nil) {
-		routeSelectorController = [[RouteSelectorController alloc] initWithNibName:@"RouteSelectorController" bundle:nil];
-	}
-	
-	routeSelectorController.delegate = self;
-	routeSelectorController.busRoutes = [dataStore allRoutes];
-	routeSelectorController.selectedRoute = [dataStore activeRoute];
-	routeSelectorController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-	
-	[self presentModalViewController:routeSelectorController animated:YES];
 }
 
 #pragma mark -
@@ -154,17 +134,7 @@
 }
 
 - (void)mapView:(MKMapView *)aMapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-	busStopViewController = [[BusStopViewController alloc] initWithNibName:@"BusStopView" bundle:nil];
-	
-	// FIXME - Any data leaks here?
-	
-	BusStop *stop = (BusStop *) [view annotation];
-	BusStopArrivals *activeStop = [[[BusStopArrivals alloc] initWithBusStop:stop] autorelease];
-	
-	[dataStore setActiveStop:activeStop];
-	[busStopViewController setArrivals:activeStop];
-	
-	[self.navigationController pushViewController:busStopViewController animated:YES];
+	[delegate busStopSelected:view.annotation];
 }
 
 #pragma mark -
@@ -188,19 +158,6 @@
 	}
 	
 	[self dismissModalViewControllerAnimated:YES];
-}
-
-#pragma mark -
-#pragma mark UINavigationControllerDelegate
-
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {	
-	if (viewController == self) {
-		[busStopViewController release];
-		busStopViewController = nil;
-		
-		[navigationController setNavigationBarHidden:YES animated:YES];
-	} else if (viewController == busStopViewController)
-		[navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 

@@ -6,6 +6,7 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "BusStopArrivals.h"
 #import "DataStoreGrabber.h"
 
@@ -39,7 +40,8 @@
 	 
 	 // TODO - Implement XML fetching of bus times
 	 // TAREK - Implement your code here
-	BusRoute *badRoute = [[GetShuttleTracDataStore() allBusRoutes] objectAtIndex:0];
+	ShuttleTracDataStore *dataStore = GetShuttleTracDataStore();
+	BusRoute *badRoute = [[dataStore allBusRoutes] objectAtIndex:0];
 	[self setUpcomingBuses:[NSArray arrayWithObject:
 							[BusArrival busArrivalWithRoute:badRoute
 													   stop:self 

@@ -29,8 +29,12 @@
 }
 
 - (void)layoutSubviews {
-	self.textLabel.text = route.routeName;
-	self.detailTextLabel.text = [NSString stringWithFormat:@"#%d", route.routeID];
+	if (route == nil) {
+		self.textLabel.text = @"All Stops";
+	} else {
+		self.textLabel.text = route.routeName;
+		self.detailTextLabel.text = [NSString stringWithFormat:@"#%d", route.routeID];
+	}
 	
 	[super layoutSubviews];
 }

@@ -34,4 +34,12 @@
 	[delegate refreshBookmarkedStopArrivalsCompleted:self.bookmarkedStops];
 }
 
+#pragma mark dealloc
+-(void)dealloc {
+	[bookmarkedStops release];
+	bookmarkedStops = nil;
+	
+	[super dealloc];
+}
+
 @end

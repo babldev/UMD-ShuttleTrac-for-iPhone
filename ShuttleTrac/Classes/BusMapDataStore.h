@@ -20,7 +20,7 @@
 @end
 
 
-@interface BusMapDataStore : NSObject {
+@interface BusMapDataStore : NSObject <BusStopArrivalsDelegate> {
 	ShuttleTracDataStore *dataStore;
 	
 	// All mapped stops

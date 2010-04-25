@@ -29,7 +29,7 @@
 	if (self = [super init]) {
 		busStops = [[NSMutableArray alloc] init];
 		busRoutes = [[NSMutableArray alloc] init];
-		
+				
 		NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 		databasePath = [docsDir stringByAppendingFormat:@"/shuttleTracDataStore_v1.sqlite"];
 		
@@ -198,10 +198,6 @@
 -(NSArray *)allBusRoutes {
 	return busRoutes;
 }
-
--(void)refreshAllBookmarkedStops {
-}
-
 
 #pragma mark XML Parsing
 
