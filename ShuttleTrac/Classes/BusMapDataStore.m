@@ -21,7 +21,6 @@
 		dataStore = dStore;
 		
 		// FIXME - This isn't necessary
-		self.activeStop = [[BusStopArrivals alloc] initWithBusStop:[[dataStore allBusStops] objectAtIndex:100]];
 		self.activeStop.delegate = self;
 	}
 	
