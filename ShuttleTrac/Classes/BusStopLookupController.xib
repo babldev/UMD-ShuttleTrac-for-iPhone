@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="24"/>
+			<integer value="23"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -55,6 +55,7 @@
 								<int key="IBUIContentMode">3</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBBarStyle">1</int>
+								<string key="IBText"/>
 								<string key="IBPrompt"/>
 								<string key="IBPlaceholder">Enter Bus Stop #</string>
 								<object class="NSColor" key="IBTintColor" id="901926179">
@@ -62,13 +63,13 @@
 									<bytes key="NSRGB">MC44MjM1Mjk0ODE5IDAuMDAzOTIxNTY4ODU5IDAAA</bytes>
 								</object>
 								<object class="IBUITextInputTraits" key="IBTextInputTraits">
-									<int key="IBUIKeyboardType">6</int>
+									<int key="IBUIKeyboardType">4</int>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
 								<object class="NSArray" key="IBScopeButtonTitles">
 									<bool key="EncodedWithXMLCoder">YES</bool>
-									<string>Scope</string>
-									<string>Scope</string>
+									<string>Bus Stop</string>
+									<string>Bus Route</string>
 								</object>
 							</object>
 						</object>
@@ -197,6 +198,14 @@
 					</object>
 					<int key="connectionID">36</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="926666256"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">37</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -295,7 +304,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{742, 108}, {320, 480}}</string>
+					<string>{{910, 179}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
@@ -315,7 +324,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">36</int>
+			<int key="maxID">37</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

@@ -159,13 +159,46 @@
 -(void)busStopSelected:(BusStop *)stop {
 	[self dismissModalViewControllerAnimated:YES];
 	
-	if (stop != nil)
+	if (stop != nil) {
 		dataStore.activeStop = [[BusStopArrivals alloc] initWithBusStop:stop forBusRoute:nil];
+		searchBar.text = [NSString stringWithFormat:@"%d", dataStore.activeStop.stopNumber];
+	}
 	
 	[dataStore loadSelectedBusArrivals];
 	[stopSelectorTableViewController.tableView reloadData];
 	
 	[self updateBookmarkLock];
+}
+
+#pragma mark UISearchBarDelegate
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)sBar {
+	[sBar setShowsCancelButton:YES animated:YES];
+}
+
+-(void)searchBarTextDidEndEditing:(UISearchBar *)sBar {
+	[sBar setShowsCancelButton:NO animated:YES];
+}
+
+- (void)searchBar:(UISearchBar *)sBar textDidChange:(NSString *)searchText {
+	if ([searchText length] == 5) { // Set the active stop
+		[searchBar resignFirstResponder];
+		
+		// FIXME
+		dataStore.activeStop = nil;
+		
+		[dataStore loadSelectedBusArrivals];
+		[stopSelectorTableViewController.tableView reloadData];
+	} else if (dataStore.activeStop != nil) { // Clear the active stop
+		dataStore.activeStop = nil;
+		
+		[dataStore loadSelectedBusArrivals];
+		[stopSelectorTableViewController.tableView reloadData];
+	}
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)sBar {
+	[sBar resignFirstResponder];
 }
 
 #pragma mark dealloc

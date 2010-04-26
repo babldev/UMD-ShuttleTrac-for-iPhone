@@ -12,7 +12,8 @@
 #import "BusMapViewController.h"
 #import "BookmarkedStopsDataStore.h"
 
-@interface BusStopLookupController : UIViewController <BusMapDataStoreDelegate, BusMapViewControllerDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface BusStopLookupController : UIViewController <BusMapDataStoreDelegate, BusMapViewControllerDelegate, UITableViewDataSource, UITableViewDelegate,
+	UISearchBarDelegate> {
 	IBOutlet UISearchBar *searchBar;
 	IBOutlet UITableView *stopSelectorTableView;
 	IBOutlet UIBarButtonItem *bookmarkButton;
