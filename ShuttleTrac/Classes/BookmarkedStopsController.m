@@ -17,10 +17,9 @@
 	dataStore = [GetShuttleTracDataStore() bookmarkedStopsDataStore];
 	bookmarkedStops = [dataStore bookmarkedStops];
 	
-	tableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-	[tableViewController setView:tableView];
-	
 	[self refreshBookmarks:nil];
+	self.navigationItem.leftBarButtonItem = refreshButton;
+	self.navigationItem.rightBarButtonItem = editButton;
 	
     [super viewDidLoad];
 }
@@ -65,7 +64,7 @@
 #pragma mark -
 #pragma mark BusStopArrivalsDelegate protocol
 -(void)arrivalsRefreshComplete:(BusStopArrivals *)arrivals {
-	[tableView reloadData];
+	[self.tableView reloadData];
 }
 
 #pragma mark -
@@ -100,7 +99,7 @@
 	[bookmarkedStops setArray:bookmarks];
 	
 	[self refreshBookmarks:nil];
-	[tableView reloadData];
+	[self.tableView reloadData];
 }
 
 -(void)bookmarkEditingCancelled {
