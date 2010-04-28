@@ -49,6 +49,9 @@
 	return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone{
+	return [[[BusStop alloc] initWithBusStop:self] autorelease];
+}
 
 #pragma mark -
 #pragma mark MKAnnotation

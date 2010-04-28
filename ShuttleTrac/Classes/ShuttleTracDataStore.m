@@ -88,7 +88,7 @@
 
 -(void)emptyTables {
 	const char *createStopsSql = "DELETE FROM stops;";
-	const char *createRotuesSql = "DELETE FROM routes;";
+	const char *createRoutesSql = "DELETE FROM routes;";
 	
 	// TRUNCATE STOPS TABLE
 	
@@ -107,7 +107,7 @@
 	
 	sqlite3_reset(compiledStatement);
 	
-	if(sqlite3_prepare_v2(database, createRotuesSql, -1, &compiledStatement, NULL) == SQLITE_OK) {
+	if(sqlite3_prepare_v2(database, createRoutesSql, -1, &compiledStatement, NULL) == SQLITE_OK) {
 		// Anything here?
 	}
 	
@@ -121,10 +121,11 @@
 -(void)refreshStopAndRouteData {
 	[self emptyTables];
 	[self requestStopsFromWeb];
+	[self requestRoutesFromWeb];
 	[self loadStopsAndRouteFromSQL];
 	
 	// FIXME Remove this debug line
-	[busRoutes addObject:[BusRoute busRouteWithID:105 name:@"Courtyards Express" stops:nil]];
+	//[busRoutes addObject:[BusRoute busRouteWithID:105 name:@"Courtyards Express" stops:nil]];
 }
 
 -(void)requestStopsFromWeb{
@@ -138,43 +139,49 @@
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
+-(void)requestRoutesFromWeb{
+	NSURL *url = [NSURL URLWithString:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=RoutePattern.xml"];
+	
+	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+	NSXMLParser *parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
+	[parser setDelegate:self];
+	[parser parse];
+	[parser release];
+	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+
 #pragma mark SQL
 
--(void)loadStopsAndRouteFromSQL {
-	//if(sqlite3_open([databasePath UTF8String], &database) == SQLITE_OK) {
-		
+-(void)loadStopsAndRouteFromSQL {		
 		// Get all stops from SQLite file
-		sqlite3_stmt *compiledStatement;
-		const char *sqlStatement = "SELECT id,name,latitude,longitude FROM stops;";
-		if (sqlite3_prepare(database, sqlStatement, -1, &compiledStatement, NULL) == SQLITE_OK) {
-			while (sqlite3_step(compiledStatement) == SQLITE_ROW) {
-				CLLocationCoordinate2D loc = {sqlite3_column_double(compiledStatement, 2), sqlite3_column_double(compiledStatement, 3)};
-				const char *name = (const char *) sqlite3_column_text(compiledStatement, 1);
-				
-				BusStopArrivals *newBusStop = [[BusStopArrivals alloc] initWithName:[NSString stringWithUTF8String:name] 
-																		 stopNumber:sqlite3_column_int(compiledStatement, 0) 
-																		 coordinate:loc];
-				[busStops addObject:[newBusStop autorelease]];
-			}
+	sqlite3_stmt *compiledStatement;
+	const char *sqlStatement = "SELECT id,name,latitude,longitude FROM stops;";
+	if (sqlite3_prepare(database, sqlStatement, -1, &compiledStatement, NULL) == SQLITE_OK) {
+		while (sqlite3_step(compiledStatement) == SQLITE_ROW) {
+			CLLocationCoordinate2D loc = {sqlite3_column_double(compiledStatement, 2), sqlite3_column_double(compiledStatement, 3)};
+			const char *name = (const char *) sqlite3_column_text(compiledStatement, 1);
+			
+			BusStopArrivals *newBusStop = [[BusStopArrivals alloc] initWithName:[NSString stringWithUTF8String:name] 
+																	 stopNumber:sqlite3_column_int(compiledStatement, 0) 
+																	 coordinate:loc];
+			[busStops addObject:[newBusStop autorelease]];
 		}
-		
-		// Get all routes from SQLite file
-		const char *sqlStatement2 = "SELECT id,name,stops FROM routes;";
-		if (sqlite3_prepare(database, sqlStatement2, -1, &compiledStatement, NULL) == SQLITE_OK) {
-			while (sqlite3_step(compiledStatement) == SQLITE_ROW) {
-				const char *name = (const char *) sqlite3_column_text(compiledStatement, 1);
-				
-				[busRoutes addObject:[BusRoute busRouteWithID:sqlite3_column_int(compiledStatement, 0) 
-														 name:[NSString stringWithUTF8String:name] 
-														stops:nil]];
-			}
-		//}
-		
+	}
+	
+	// Get all routes from SQLite file
+	const char *sqlStatement2 = "SELECT id,name,stops FROM routes;";
+	if (sqlite3_prepare(database, sqlStatement2, -1, &compiledStatement, NULL) == SQLITE_OK) {
+		while (sqlite3_step(compiledStatement) == SQLITE_ROW) {
+			const char *name = (const char *) sqlite3_column_text(compiledStatement, 1);
+			
+			[busRoutes addObject:[BusRoute busRouteWithID:sqlite3_column_int(compiledStatement, 0) 
+													 name:[NSString stringWithUTF8String:name] 
+													stops:nil]];
+		}		
 	}
 }
 
--(void) addBusStopToDatabaseWithName:(BusStop *)stop {
-	// const char *sql = "INSERT INTO stops(id, name, latitude, longitude, roadName, bearingToRoad) VALUES(?, ?, ?, ?, null, null);";
+-(void) addBusStopToDatabaseWithStop:(BusStop *)stop {
 	const char *sql = "INSERT INTO stops(id, name, latitude, longitude) VALUES(?, ?, ?, ?);";
 	sqlite3_stmt *compiledStatement;
 	
@@ -191,6 +198,26 @@
 	sqlite3_reset(compiledStatement);
 }
 
+-(void) addBusRouteToDatabaseWithRoute:(BusStop *)stop {
+	;
+	/*
+	const char *sql = "INSERT INTO route(id, name, latitude, longitude) VALUES(?, ?, ?, ?);";
+	sqlite3_stmt *compiledStatement;
+	
+	if(sqlite3_prepare_v2(database, sql, -1, &compiledStatement, NULL) == SQLITE_OK){
+		sqlite3_bind_int(compiledStatement, 1, stop.stopNumber);
+		sqlite3_bind_text(compiledStatement, 2, [stop.name UTF8String], [stop.name length], SQLITE_TRANSIENT);
+		sqlite3_bind_double(compiledStatement, 3, stop.coordinate.latitude );
+		sqlite3_bind_double(compiledStatement, 4, stop.coordinate.longitude );
+	}
+	
+	if(SQLITE_DONE != sqlite3_step(compiledStatement)) {
+		NSLog(@"Error while inserting data. Error: '%s'. Stop: '%@'", sqlite3_errmsg(database), [stop name]);
+	}
+	sqlite3_reset(compiledStatement);*/
+}
+
+
 -(NSArray *)allBusStops {	
 	return busStops;
 }
@@ -203,6 +230,7 @@
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
+	
 	if ([elementName isEqual: @"Platform"]) {
 		if (!parserString) 
 			parserString = [[NSMutableString alloc] init];
@@ -212,6 +240,9 @@
 			currBusStop = [[BusStop alloc] init];
 			[currBusStop setName:name];
 			[currBusStop setStopNumber:busNo];
+			
+			if(currRouteBusStops)
+				[currRouteBusStops addObject:[currBusStop copy]];
 		}
 	}
 	else if([elementName isEqual:@"Position"]){
@@ -220,6 +251,20 @@
 			loc.latitude = [[attributeDict objectForKey:@"Lat"] doubleValue];
 			loc.longitude = [[attributeDict objectForKey:@"Long"] doubleValue];
 			[currBusStop setCoordinate:loc];
+		}
+	}
+	
+	//Get Routes
+	else if([elementName isEqual:@"Route"]){
+		if(!currBusRoute){
+			NSInteger routeNum = [[attributeDict objectForKey:@"RouteNo"] integerValue];
+			NSString *routeName = [attributeDict objectForKey:@"Name"];
+			
+			currRouteBusStops = [[NSMutableArray alloc] init]; // create array to store bus stops reached on route
+			
+			currBusRoute = [[BusRoute alloc] init];
+			[currBusRoute setRouteName:routeName];
+			[currBusRoute setRouteID:routeNum];
 		}
 	}
 }
@@ -232,9 +277,19 @@
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {	
 	if([elementName isEqual:@"Platform"]){
-		[self addBusStopToDatabaseWithName:currBusStop];
+		[self addBusStopToDatabaseWithStop:currBusStop];
 		[currBusStop release]; 
 		currBusStop = nil;
+	}
+	else if([elementName isEqual:@"Route"]){
+		/* Need to send Copies of these things*/
+		[currBusRoute setStops:currRouteBusStops];
+		[busRoutes addObject:currBusRoute ];
+		
+		[currRouteBusStops release];
+		currRouteBusStops = nil;
+		[currBusRoute release];
+		currBusRoute = nil;
 	}
 }
 
@@ -244,7 +299,6 @@
 	
 	[bookmarkedStopsDataStore release];
 	[busMapDataStore release];
-	
 	[busStops release];
 	[busRoutes release];
 	[parserString release];

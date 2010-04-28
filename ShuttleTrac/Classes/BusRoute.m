@@ -35,5 +35,8 @@
 	
 	return self;
 }
+- (id)copyWithZone:(NSZone *)zone{
+	return [[BusRoute alloc] initRouteWithID:self.routeID name:self.routeName stops:self.stops];
+}
 
 @end

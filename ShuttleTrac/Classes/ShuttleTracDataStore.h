@@ -32,6 +32,8 @@
 	NSMutableString *parserString;
 	NSString *databasePath;
 	BusStop *currBusStop; //used for parsing
+	BusRoute *currBusRoute;//used for parsing
+	NSMutableArray *currRouteBusStops; //used for parsing
 
 }
 

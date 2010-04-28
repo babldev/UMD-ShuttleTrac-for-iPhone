@@ -24,7 +24,7 @@
 
 -(id)initRouteWithID:(NSInteger)rID name:(NSString *)rName stops:(NSArray *)rStops;
 
-@property (retain, readonly) NSString *routeName;
+@property (copy, readonly) NSString *routeName;
 @property (assign, readonly) NSInteger routeID;
 @property (retain, readonly) NSArray *stops;
 
