@@ -27,8 +27,10 @@
 		
 @private
 	// Temporary
-	NSMutableArray *busStops;
-	NSMutableArray *busRoutes;
+	NSMutableDictionary *busStops;
+	NSMutableDictionary *busRoutes;
+	
+	NSMutableDictionary *routeDict;
 	NSMutableString *parserString;
 	NSString *databasePath;
 	BusStop *currBusStop; //used for parsing
@@ -37,8 +39,8 @@
 
 }
 
--(NSArray *)allBusStops;
--(NSArray *)allBusRoutes;
+-(NSMutableDictionary *)allBusStops;
+-(NSMutableDictionary *)allBusRoutes;
 
 -(void)refreshStopAndRouteData;
 

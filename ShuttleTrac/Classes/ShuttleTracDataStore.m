@@ -27,8 +27,8 @@
 
 -(id)init {
 	if (self = [super init]) {
-		busStops = [[NSMutableArray alloc] init];
-		busRoutes = [[NSMutableArray alloc] init];
+		busStops = [[NSMutableDictionary alloc] init];
+		busRoutes = [[NSMutableDictionary alloc] init];
 				
 		NSString *docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 		databasePath = [docsDir stringByAppendingFormat:@"/shuttleTracDataStore_v1.sqlite"];
@@ -121,8 +121,9 @@
 -(void)refreshStopAndRouteData {
 	[self emptyTables];
 	[self requestStopsFromWeb];
-	[self requestRoutesFromWeb];
 	[self loadStopsAndRouteFromSQL];
+
+	[self requestRoutesFromWeb];
 	
 	// FIXME Remove this debug line
 	//[busRoutes addObject:[BusRoute busRouteWithID:105 name:@"Courtyards Express" stops:nil]];
@@ -160,11 +161,12 @@
 		while (sqlite3_step(compiledStatement) == SQLITE_ROW) {
 			CLLocationCoordinate2D loc = {sqlite3_column_double(compiledStatement, 2), sqlite3_column_double(compiledStatement, 3)};
 			const char *name = (const char *) sqlite3_column_text(compiledStatement, 1);
-			
-			BusStopArrivals *newBusStop = [[BusStopArrivals alloc] initWithName:[NSString stringWithUTF8String:name] 
-																	 stopNumber:sqlite3_column_int(compiledStatement, 0) 
+			NSInteger stopNumber = sqlite3_column_int(compiledStatement, 0);
+			BusStop *newBusStop = [[BusStop alloc] initWithName:[NSString stringWithUTF8String:name] 
+																	 stopNumber:stopNumber
 																	 coordinate:loc];
-			[busStops addObject:[newBusStop autorelease]];
+			if(stopNumber != 0)
+				[busStops setObject:newBusStop forKey:[NSNumber numberWithInteger:stopNumber]];
 		}
 	}
 	
@@ -218,11 +220,11 @@
 }
 
 
--(NSArray *)allBusStops {	
+-(NSMutableDictionary *)allBusStops {	
 	return busStops;
 }
 
--(NSArray *)allBusRoutes {
+-(NSMutableDictionary *)allBusRoutes {
 	return busRoutes;
 }
 
@@ -241,8 +243,10 @@
 			[currBusStop setName:name];
 			[currBusStop setStopNumber:busNo];
 			
-			if(currRouteBusStops)
-				[currRouteBusStops addObject:[currBusStop copy]];
+			if(currRouteBusStops){
+				currBusStop = [busStops objectForKey:[NSNumber numberWithInteger:busNo]];
+				if(currBusStop) [currRouteBusStops addObject: currBusStop];
+			}
 		}
 	}
 	else if([elementName isEqual:@"Position"]){
@@ -261,6 +265,7 @@
 			NSString *routeName = [attributeDict objectForKey:@"Name"];
 			
 			currRouteBusStops = [[NSMutableArray alloc] init]; // create array to store bus stops reached on route
+			routeDict = [[NSMutableDictionary alloc] init];
 			
 			currBusRoute = [[BusRoute alloc] init];
 			[currBusRoute setRouteName:routeName];
@@ -282,12 +287,11 @@
 		currBusStop = nil;
 	}
 	else if([elementName isEqual:@"Route"]){
-		/* Need to send Copies of these things*/
 		[currBusRoute setStops:currRouteBusStops];
-		[busRoutes addObject:currBusRoute ];
+		[busRoutes setObject:currBusRoute forKey:[NSNumber numberWithInteger:currBusRoute.routeID]];
 		
-		[currRouteBusStops release];
-		currRouteBusStops = nil;
+		//[currRouteBusStops release];
+		//currRouteBusStops = nil;
 		[currBusRoute release];
 		currBusRoute = nil;
 	}
@@ -296,6 +300,7 @@
 
 -(void)dealloc {
 	sqlite3_close(database);
+	
 	
 	[bookmarkedStopsDataStore release];
 	[busMapDataStore release];

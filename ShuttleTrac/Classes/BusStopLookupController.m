@@ -91,7 +91,7 @@
 	if (section == 0)
 		return [[[dataStore activeStop] upcomingBuses] count];
 	else 
-		return [[dataStore allRoutes] count]+1;
+		return [[[dataStore allRoutes] allValues] count]+1;
 }
 
 
@@ -119,7 +119,8 @@
 		if (indexPath.row == 0) {
 			cell.route = nil;
 		} else {
-			cell.route = [[dataStore allRoutes] objectAtIndex:(indexPath.row - 1)];
+			NSArray *dict = [[dataStore allRoutes] allValues];
+			cell.route = [[[dataStore allRoutes] allValues] objectAtIndex:(indexPath.row - 1)];
 		}
 		
 		return cell;
@@ -141,7 +142,7 @@
 		if (indexPath.row == 0)
 			dataStore.activeRoute = nil;
 		else
-			dataStore.activeRoute = [[dataStore allRoutes] objectAtIndex:(indexPath.row - 1)];
+			dataStore.activeRoute = [[[dataStore allRoutes] allValues] objectAtIndex:(indexPath.row - 1)];
 		
 		if (busMapViewController == nil) {
 			busMapViewController = [[BusMapViewController alloc] initWithNibName:@"BusMapViewController" bundle:nil];

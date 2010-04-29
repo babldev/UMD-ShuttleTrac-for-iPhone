@@ -31,7 +31,7 @@
 
 -(id)initWithBusStop:(BusStop *)bStop;
 
-@property (retain, readwrite) NSString *name;
+@property (copy, readwrite) NSString *name;
 @property (assign, readwrite) NSInteger stopNumber;
 @property (assign, readwrite, nonatomic) CLLocationCoordinate2D coordinate;
 

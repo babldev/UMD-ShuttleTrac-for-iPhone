@@ -35,13 +35,13 @@
 // Load all stops for activeRoute
 -(void)loadStopsForActiveRoute {
 	if (activeRoute == nil) {
-		self.mappedStops = [dataStore allBusStops];
+		self.mappedStops = [[dataStore allBusStops] allValues];
 	} else {
 		self.mappedStops = [activeRoute stops];
 	}
 }
 
--(NSArray *)allRoutes {
+-(NSMutableDictionary *)allRoutes {
 	return [dataStore allBusRoutes];
 }
 
