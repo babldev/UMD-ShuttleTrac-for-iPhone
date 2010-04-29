@@ -119,7 +119,6 @@
 		if (indexPath.row == 0) {
 			cell.route = nil;
 		} else {
-			NSArray *dict = [[dataStore allRoutes] allValues];
 			cell.route = [[[dataStore allRoutes] allValues] objectAtIndex:(indexPath.row - 1)];
 		}
 		

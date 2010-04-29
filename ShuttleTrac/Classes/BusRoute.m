@@ -12,7 +12,6 @@
 
 @property (retain, readwrite) NSString *routeName;
 @property (assign, readwrite) NSInteger routeID;
-@property (retain, readwrite) NSArray *stops;
 
 @end
 

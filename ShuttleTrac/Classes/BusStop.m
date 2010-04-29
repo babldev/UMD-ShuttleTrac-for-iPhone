@@ -50,7 +50,7 @@
 }
 
 - (id)copyWithZone:(NSZone *)zone{
-	return [[[BusStop alloc] initWithBusStop:self] autorelease];
+	return [[BusStop alloc] initWithBusStop:self];
 }
 
 #pragma mark -

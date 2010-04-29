@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <sqlite3.h>
 
 #import "BookmarkedStopsDataStore.h"
 #import "BusMapDataStore.h"
@@ -19,24 +18,20 @@
 @class BookmarkedStopsDataStore, BusMapDataStore;
 
 @interface ShuttleTracDataStore : NSObject {
-	// Database
-	sqlite3 *database;
 	//Test
 	BookmarkedStopsDataStore *bookmarkedStopsDataStore;
 	BusMapDataStore *busMapDataStore;
+	
+	NSInteger parsingMode;
 		
 @private
 	// Temporary
 	NSMutableDictionary *busStops;
 	NSMutableDictionary *busRoutes;
 	
-	NSMutableDictionary *routeDict;
-	NSMutableString *parserString;
-	NSString *databasePath;
 	BusStop *currBusStop; //used for parsing
 	BusRoute *currBusRoute;//used for parsing
 	NSMutableArray *currRouteBusStops; //used for parsing
-
 }
 
 -(NSMutableDictionary *)allBusStops;

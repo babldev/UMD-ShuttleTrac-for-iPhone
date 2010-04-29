@@ -41,9 +41,9 @@
 	 // TODO - Implement XML fetching of bus times
 	 // TAREK - Implement your code here
 	ShuttleTracDataStore *dataStore = GetShuttleTracDataStore();
-	BusRoute *badRoute = [[dataStore allBusRoutes] objectAtIndex:0];
+	// BusRoute *badRoute = [[dataStore allBusRoutes] objectAtIndex:0];
 	[self setUpcomingBuses:[NSArray arrayWithObject:
-							[BusArrival busArrivalWithRoute:badRoute
+							[BusArrival busArrivalWithRoute:nil
 													   stop:self 
 												arrivalTime:[NSDate date]]]];
 	[delegate arrivalsRefreshComplete:self];
