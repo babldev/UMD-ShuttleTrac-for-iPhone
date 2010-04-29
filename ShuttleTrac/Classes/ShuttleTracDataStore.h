@@ -21,7 +21,7 @@
 @interface ShuttleTracDataStore : NSObject {
 	// Database
 	sqlite3 *database;
-	
+	//Test
 	BookmarkedStopsDataStore *bookmarkedStopsDataStore;
 	BusMapDataStore *busMapDataStore;
 		
