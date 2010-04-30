@@ -25,12 +25,20 @@
 	BusRoute *route;
 	
 	// NSArray of BusArrival
-	NSArray *upcomingBuses;
+	NSMutableArray *upcomingBuses;
 	
 	// Time of last refresh
 	NSDate *lastRefresh;
 	
+	//used for XML parsing
+	BusArrival *currBusArrival;
+	
 	id <BusStopArrivalsDelegate> delegate;
+	
+	NSDictionary *routes; 
+	NSDictionary *stops;
+	
+	
 }
 
 -(id)initWithBusStop:(BusStop *)bStop forBusRoute:(BusRoute *)bRoute;
@@ -38,7 +46,7 @@
 -(void)refreshUpcomingBuses;
 
 @property (assign, readonly) BusRoute *route;
-@property (retain, readonly) NSArray *upcomingBuses;
+@property (retain, readwrite) NSMutableArray *upcomingBuses;
 @property (retain, readonly) NSDate *lastRefresh;
 @property (assign, readwrite) id <BusStopArrivalsDelegate> delegate;
 

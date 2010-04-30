@@ -18,8 +18,12 @@
 	// ShuttleTrac stop number 
 	NSInteger stopNumber;
 	
+	//ShuttleTrac tag number
+	NSInteger tagNumber;
+	
 	// Geolocation of the bus stop
 	CLLocationCoordinate2D coordinate;
+	
 }
 
 +(BusStop *)busStopWithName:(NSString *)sName stopNumber:(NSInteger)sNumber coordinate:(CLLocationCoordinate2D)sLoc;
@@ -33,6 +37,7 @@
 
 @property (copy, readwrite) NSString *name;
 @property (assign, readwrite) NSInteger stopNumber;
+@property (assign, readwrite) NSInteger tagNumber;
 @property (assign, readwrite, nonatomic) CLLocationCoordinate2D coordinate;
 
 @end

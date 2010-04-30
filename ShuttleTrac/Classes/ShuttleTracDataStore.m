@@ -87,17 +87,20 @@
 {
 	
 	if ([elementName isEqual: @"Platform"]) {
-		NSInteger busNo = [[attributeDict objectForKey:@"PlatformNo"] integerValue];
+		NSInteger busNumber = [[attributeDict objectForKey:@"PlatformNo"] integerValue];
 		if(parsingMode == PARSING_STOPS){
 			if(!currBusStop){
 				NSString *name = [attributeDict objectForKey:@"Name"];
+				NSInteger tagNumber = [[attributeDict objectForKey:@"PlatformTag"] integerValue];
+
 				currBusStop = [[BusStop alloc] init];
 				[currBusStop setName:name];
-				[currBusStop setStopNumber:busNo];
+				[currBusStop setStopNumber:busNumber];
+				[currBusStop setTagNumber:tagNumber];
 			}
 		}
 		if(parsingMode == PARSING_ROUTES){
-			BusStop *b = [busStops objectForKey:[NSNumber numberWithInteger: busNo]];
+			BusStop *b = [busStops objectForKey:[NSNumber numberWithInteger: busNumber]];
 			if(b)
 				[currRouteBusStops addObject: b];
 		}

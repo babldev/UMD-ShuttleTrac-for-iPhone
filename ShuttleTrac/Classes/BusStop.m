@@ -10,7 +10,7 @@
 
 @implementation BusStop
 
-@synthesize name, stopNumber, coordinate;
+@synthesize name, stopNumber, tagNumber, coordinate;
 
 +(BusStop *)busStopWithName:(NSString *)sName stopNumber:(NSInteger)sNumber coordinate:(CLLocationCoordinate2D)sLoc {
 	BusStop *newStop = [[BusStop alloc] initWithName:sName stopNumber:sNumber coordinate:sLoc];
@@ -36,6 +36,7 @@
 		self.name		= [[bStop.name copy] autorelease];
 		self.stopNumber = bStop.stopNumber;
 		self.coordinate = bStop.coordinate;
+		self.tagNumber = bStop.tagNumber;
 	}
 	
 	return self;

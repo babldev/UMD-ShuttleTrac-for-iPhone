@@ -16,8 +16,6 @@
 
 @end
 
-
-
 @implementation BusArrival
 
 @synthesize route, stop, arrivalTime;
