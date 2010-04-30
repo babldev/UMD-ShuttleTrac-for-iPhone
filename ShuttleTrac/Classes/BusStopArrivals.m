@@ -13,7 +13,6 @@
 @interface BusStopArrivals ()
 
 @property (assign, readwrite) BusRoute *route;
-@property (retain, readwrite) NSMutableArray *upcomingBuses;
 @property (retain, readwrite) NSDate *lastRefresh;
 
 @end
