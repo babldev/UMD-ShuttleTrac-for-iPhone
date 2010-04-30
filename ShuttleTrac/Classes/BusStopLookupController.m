@@ -91,7 +91,7 @@
 	if (section == 0)
 		return [[[dataStore activeStop] upcomingBuses] count];
 	else 
-		return [[[dataStore allRoutes] allValues] count]+1;
+		return [[[dataStore allRoutes] allValues] count];
 }
 
 
@@ -116,11 +116,7 @@
 			cell = [[[RouteSelectorTableViewCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
 		}
 		
-		if (indexPath.row == 0) {
-			cell.route = nil;
-		} else {
-			cell.route = [[[dataStore allRoutes] allValues] objectAtIndex:(indexPath.row - 1)];
-		}
+		cell.route = [[[dataStore allRoutes] allValues] objectAtIndex:indexPath.row];
 		
 		return cell;
 	}
@@ -138,10 +134,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == 1) {
-		if (indexPath.row == 0)
-			dataStore.activeRoute = nil;
-		else
-			dataStore.activeRoute = [[[dataStore allRoutes] allValues] objectAtIndex:(indexPath.row - 1)];
+		dataStore.activeRoute = [[[dataStore allRoutes] allValues] objectAtIndex:indexPath.row];
 		
 		if (busMapViewController == nil) {
 			busMapViewController = [[BusMapViewController alloc] initWithNibName:@"BusMapViewController" bundle:nil];
