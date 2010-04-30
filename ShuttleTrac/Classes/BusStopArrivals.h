@@ -26,6 +26,7 @@
 	
 	// NSArray of BusArrival
 	NSMutableArray *upcomingBuses;
+	NSInteger currRouteNum;
 	
 	// Time of last refresh
 	NSDate *lastRefresh;

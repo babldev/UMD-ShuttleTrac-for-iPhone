@@ -28,6 +28,7 @@
 		ShuttleTracDataStore *mainDataStore = GetShuttleTracDataStore();
 		stops = [mainDataStore allBusStops];
 		routes = [mainDataStore allBusRoutes];
+		upcomingBuses = [[NSMutableArray alloc] init];
 	}
 	
 	return self;
@@ -40,7 +41,6 @@
 	[self setLastRefresh:[NSDate date]];
 	 
 	[self requestBusArrivalFromWeb];
-	//[self setUpcomingBuses:[upcomingBuses autorelease]];
 	[delegate arrivalsRefreshComplete:self];
 }
 
@@ -54,13 +54,11 @@
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
 	if ([elementName isEqual: @"Route"]) {
-		NSInteger routeNum = [[attributeDict objectForKey:@"RouteNo"] integerValue];
-		currBusArrival = [[BusArrival busArrivalWithRoute:[self getBusRouteForID:routeNum] stop:[self getBusStopForID:self.stopNumber] arrivalTime:nil] retain];
-		upcomingBuses = [[NSMutableArray alloc] init];
+		 currRouteNum = [[attributeDict objectForKey:@"RouteNo"] integerValue];
 	}
 	if ([elementName isEqual: @"Trip"]) {
 		NSInteger eta = [[attributeDict objectForKey:@"ETA"] integerValue];
-		[currBusArrival setArrivalTime: [NSDate dateWithTimeIntervalSinceNow:eta * 60]];
+		currBusArrival = [[BusArrival busArrivalWithRoute:[self getBusRouteForID:currRouteNum] stop:[self getBusStopForID:self.stopNumber] arrivalTime:[NSDate dateWithTimeIntervalSinceNow:eta * 60]] retain];
 	}
 }
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
@@ -73,7 +71,8 @@
 }
 # pragma mark refresh arrival times
 -(void)requestBusArrivalFromWeb{	
-	NSString *request = [NSString stringWithFormat:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=RoutePositionET.xml&PlatformTag=%d", self.tagNumber];
+	NSString *request = [NSString stringWithFormat:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=RoutePositionET.xml&PlatformNo=%d", self.stopNumber];
+	
 	NSURL *url = [NSURL URLWithString:request];
 	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
