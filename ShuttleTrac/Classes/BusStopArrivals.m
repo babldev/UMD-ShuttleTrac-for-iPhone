@@ -41,7 +41,7 @@
 	[self setLastRefresh:[NSDate date]];
 	 
 	[self requestBusArrivalFromWeb];
-	[self setUpcomingBuses:[upcomingBuses autorelease]];
+	//[self setUpcomingBuses:[upcomingBuses autorelease]];
 	[delegate arrivalsRefreshComplete:self];
 }
 
