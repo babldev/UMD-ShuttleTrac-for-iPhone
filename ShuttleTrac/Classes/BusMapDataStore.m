@@ -31,6 +31,11 @@
 	self.activeStopArrivals = newArrivals;
 }
 
+-(void)setActiveStopWithStopId:(NSInteger)stopId {
+	BusStop *stop = [[dataStore allBusStops] objectForKey:[NSNumber numberWithInt:stopId]];
+	[self setActiveStop:stop];
+}
+
 // Begin loading of upcoming buses for activeStop
 -(void)loadSelectedBusArrivals {
 	[activeStopArrivals refreshUpcomingBuses];

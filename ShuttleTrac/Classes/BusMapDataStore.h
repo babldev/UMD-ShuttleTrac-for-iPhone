@@ -35,6 +35,7 @@
 -(id)initWithDataStore:(ShuttleTracDataStore *)dStore;
 
 -(void)setActiveStop:(BusStop *)bStop;
+-(void)setActiveStopWithStopId:(NSInteger)stopId;
 
 // Begin loading of upcoming buses for activeStop
 -(void)loadSelectedBusArrivals;

@@ -177,16 +177,11 @@
 	if ([searchText length] == 5) { // Set the active stop
 		[searchBar resignFirstResponder];
 		
-		// FIXME
-		[dataStore setActiveStop:nil];
-		
+		[dataStore setActiveStopWithStopId:[searchText intValue]];
 		[dataStore loadSelectedBusArrivals];
-		[stopSelectorTableViewController.tableView reloadData];
 	} else if (dataStore.activeStopArrivals != nil) { // Clear the active stop
 		[dataStore setActiveStop:nil];
-		
 		[dataStore loadSelectedBusArrivals];
-		[stopSelectorTableViewController.tableView reloadData];
 	}
 }
 
