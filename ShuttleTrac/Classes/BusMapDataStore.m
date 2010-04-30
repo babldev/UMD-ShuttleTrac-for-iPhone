@@ -10,26 +10,30 @@
 
 @interface BusMapDataStore ( )
 @property (retain, readwrite) NSArray *mappedStops;
+@property (retain, readwrite) BusStopArrivals *activeStopArrivals;
 @end
 
 @implementation BusMapDataStore
 
-@synthesize mappedStops, activeRoute, activeStop, delegate;
+@synthesize mappedStops, activeRoute, activeStopArrivals, delegate;
 
 -(id)initWithDataStore:(ShuttleTracDataStore *)dStore {
 	if (self = [super init]) {
 		dataStore = dStore;
-		
-		// FIXME - This isn't necessary
-		self.activeStop.delegate = self;
 	}
 	
 	return self;
 }
 
+-(void)setActiveStop:(BusStop *)bStop {
+	BusStopArrivals *newArrivals = [[[BusStopArrivals alloc] initWithBusStop:bStop forBusRoute:nil] autorelease];
+	newArrivals.delegate = self;
+	self.activeStopArrivals = newArrivals;
+}
+
 // Begin loading of upcoming buses for activeStop
 -(void)loadSelectedBusArrivals {
-	[self.activeStop refreshUpcomingBuses];
+	[activeStopArrivals refreshUpcomingBuses];
 }
 
 // Load all stops for activeRoute
@@ -46,14 +50,14 @@
 }
 
 #pragma mark BusStopArrivalsDelegate
--(void)arrivalsRefreshComplete:(BusStopArrivals *)arrivals {
-	[delegate loadSelectedBusArrivalsCompleted:activeStop];
+-(void)arrivalsRefreshComplete:(BusStopArrivals *)bArrivals {
+	[delegate loadSelectedBusArrivalsCompleted:activeStopArrivals];
 }
 
 #pragma mark dealloc
 -(void)dealloc {
 	[mappedStops release];
-	[activeStop release];
+	[activeStopArrivals release];
 	[activeRoute release];
 	
 	[super dealloc];

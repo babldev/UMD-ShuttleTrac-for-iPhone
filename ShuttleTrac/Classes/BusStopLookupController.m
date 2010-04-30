@@ -38,7 +38,7 @@
 
 -(void)updateBookmarkLock {
 	NSMutableArray *bookmarkedStops = bookmarksDataStore.bookmarkedStops;
-	BusStopArrivals *newBookmark = dataStore.activeStop;
+	BusStopArrivals *newBookmark = dataStore.activeStopArrivals;
 	
 	bookmarkButton.enabled = (![bookmarkedStops containsObject:newBookmark]);
 }
@@ -63,7 +63,7 @@
 
 -(IBAction)bookmarkActiveStop:(UIBarButtonItem *)sender {
 	NSMutableArray *bookmarkedStops = bookmarksDataStore.bookmarkedStops;
-	BusStopArrivals *newBookmark = dataStore.activeStop;
+	BusStopArrivals *newBookmark = dataStore.activeStopArrivals;
 	
 	if (![bookmarkedStops containsObject:newBookmark])
 		[bookmarkedStops insertObject:newBookmark atIndex:0];
@@ -89,7 +89,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
 	if (section == 0)
-		return [[[dataStore activeStop] upcomingBuses] count];
+		return [[[dataStore activeStopArrivals] upcomingBuses] count];
 	else 
 		return [[[dataStore allRoutes] allValues] count];
 }
@@ -105,7 +105,7 @@
 			cell = [[[BusTimeTableViewCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
 		}
 		
-		cell.busArrival = [[[dataStore activeStop] upcomingBuses] objectAtIndex:indexPath.row];
+		cell.busArrival = [[[dataStore activeStopArrivals] upcomingBuses] objectAtIndex:indexPath.row];
 			 
 		return cell;
 	} else {
@@ -124,7 +124,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	if (section == 0) {
-		return [[dataStore activeStop] name];
+		return [[dataStore activeStopArrivals] name];
 	} else {
 		return @"Select Route";
 	}
@@ -153,8 +153,8 @@
 	[self dismissModalViewControllerAnimated:YES];
 	
 	if (stop != nil) {
-		dataStore.activeStop = [[BusStopArrivals alloc] initWithBusStop:stop forBusRoute:nil];
-		searchBar.text = [NSString stringWithFormat:@"%d", dataStore.activeStop.stopNumber];
+		[dataStore setActiveStop:stop];
+		searchBar.text = [NSString stringWithFormat:@"%d", dataStore.activeStopArrivals.stopNumber];
 	}
 	
 	[dataStore loadSelectedBusArrivals];
@@ -178,12 +178,12 @@
 		[searchBar resignFirstResponder];
 		
 		// FIXME
-		dataStore.activeStop = nil;
+		[dataStore setActiveStop:nil];
 		
 		[dataStore loadSelectedBusArrivals];
 		[stopSelectorTableViewController.tableView reloadData];
-	} else if (dataStore.activeStop != nil) { // Clear the active stop
-		dataStore.activeStop = nil;
+	} else if (dataStore.activeStopArrivals != nil) { // Clear the active stop
+		[dataStore setActiveStop:nil];
 		
 		[dataStore loadSelectedBusArrivals];
 		[stopSelectorTableViewController.tableView reloadData];
