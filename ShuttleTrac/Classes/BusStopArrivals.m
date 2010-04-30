@@ -56,16 +56,15 @@
 	if ([elementName isEqual: @"Route"]) {
 		 currRouteNum = [[attributeDict objectForKey:@"RouteNo"] integerValue];
 	}
-	if ([elementName isEqual: @"Trip"]) {
+	else if ([elementName isEqual: @"Trip"]) {
 		NSInteger eta = [[attributeDict objectForKey:@"ETA"] integerValue];
 		currBusArrival = [[BusArrival busArrivalWithRoute:[self getBusRouteForID:currRouteNum] stop:[self getBusStopForID:self.stopNumber] arrivalTime:[NSDate dateWithTimeIntervalSinceNow:eta * 60]] retain];
 	}
 }
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {	
-	if([elementName isEqual:@"Route"]){
-		[upcomingBuses addObject:currBusArrival];
-		[currBusArrival autorelease];
+	if([elementName isEqual:@"Trip"]){
+		[upcomingBuses addObject:[currBusArrival autorelease]];
 		currBusArrival = nil;
 	}
 }
@@ -74,7 +73,6 @@
 	NSString *request = [NSString stringWithFormat:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=RoutePositionET.xml&PlatformNo=%d", self.stopNumber];
 	
 	NSURL *url = [NSURL URLWithString:request];
-	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 	NSXMLParser *parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
 	[parser setDelegate:self];
@@ -82,7 +80,6 @@
 	[parser release];
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
-
 
 
 @end
