@@ -24,6 +24,8 @@
 	BusMapViewController *busMapViewController;
 	
 	UITableViewController *stopSelectorTableViewController;
+		
+	NSTimer *refreshTimer;
 }
 
 -(IBAction)refreshView:(UIBarButtonItem *)sender;

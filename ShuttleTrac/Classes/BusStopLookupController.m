@@ -11,13 +11,17 @@
 #import "BusTimeTableViewCell.h"
 #import "RouteSelectorTableViewCell.h"
 
+#define REFRESH_RATE 30
+
 @interface BusStopLookupController ( )
+@property (retain, readwrite) NSTimer *refreshTimer;
+
 -(void)updateBookmarkLock;
 @end
 
 
 @implementation BusStopLookupController
-
+@synthesize refreshTimer;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -32,7 +36,10 @@
 	stopSelectorTableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
 	[stopSelectorTableViewController setView:stopSelectorTableView];
 	
-	[dataStore loadSelectedBusArrivals];
+	[self setRefreshTimer:[NSTimer scheduledTimerWithTimeInterval:REFRESH_RATE target:dataStore
+														 selector:@selector(loadSelectedBusArrivals)
+														 userInfo:nil repeats:YES]];
+	
 	[self updateBookmarkLock];
 }
 
@@ -197,6 +204,9 @@
 	
 	[busMapViewController release];
 	busMapViewController = nil;
+	
+	[refreshTimer release];
+	refreshTimer = nil;
 	
     [super dealloc];
 }
