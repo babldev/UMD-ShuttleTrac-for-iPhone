@@ -32,13 +32,11 @@
     return [bookmarkedStops count];
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
 	NSArray *arrivals = [[bookmarkedStops objectAtIndex:section] upcomingBuses];
     return [arrivals count];
 }
-
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

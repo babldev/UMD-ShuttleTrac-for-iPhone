@@ -38,6 +38,7 @@
 	upcomingBuses = [[coder decodeObjectForKey:@"upcomingBuses"]retain];
 	stops = [[coder decodeObjectForKey:@"stops"] retain];
 	route = [[coder decodeObjectForKey:@"route"]retain];
+	lastRefresh = [[coder decodeObjectForKey:@"lastRefresh"] retain];
 	return self;
 }
 
@@ -45,7 +46,9 @@
 	[super encodeWithCoder:coder];
 	[coder encodeObject:upcomingBuses forKey:@"upcomingBuses"];	
 	[coder encodeObject:route forKey:@"route"];	
-	[coder encodeObject:stops forKey:@"route"];	
+	[coder encodeObject:lastRefresh forKey:@"lastRefresh"];	
+
+	[coder encodeObject:stops forKey:@"stops"];	
 
 }
 
