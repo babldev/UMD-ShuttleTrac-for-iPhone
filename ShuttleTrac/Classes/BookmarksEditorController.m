@@ -81,7 +81,7 @@
     }
     
     // Configure the cell...
-    [[cell textLabel] setText:[[bookmarkedStops objectAtIndex:[indexPath row]] name]];
+    [[cell textLabel] setText:[[bookmarkedStops objectAtIndex:[indexPath row]] getBusStopName]];
 	
     return cell;
 }

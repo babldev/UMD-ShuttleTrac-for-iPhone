@@ -13,6 +13,8 @@
 @interface BusStopArrivals ()
 
 @property (assign, readwrite) BusRoute *route;
+@property (assign, readwrite) BusStop *stop;
+
 @property (retain, readwrite) NSDate *lastRefresh;
 @property (retain, readwrite) NSArray *upcomingBuses;
 
@@ -20,11 +22,12 @@
 
 @implementation BusStopArrivals
 
-@synthesize route, upcomingBuses, lastRefresh, delegate;
+@synthesize route, upcomingBuses, lastRefresh, delegate, stop;
 
 -(id)initWithBusStop:(BusStop *)bStop forBusRoute:(BusRoute *)bRoute {
-	if (self = [super initWithBusStop:bStop]) {
+	if (self = [super init]) {
 		[self setRoute:bRoute];
+		[self setStop:bStop];
 		
 		ShuttleTracDataStore *mainDataStore = GetShuttleTracDataStore();
 		stops = [mainDataStore allBusStops];
@@ -37,22 +40,27 @@
 	return self;
 }
 - (id)initWithCoder:(NSCoder *)coder {
-	[super initWithCoder:coder];
+	stop = [[coder decodeObjectForKey:@"stop"] retain];
 	upcomingBuses = [[coder decodeObjectForKey:@"upcomingBuses"]retain];
 	stops = [[coder decodeObjectForKey:@"stops"] retain];
 	route = [[coder decodeObjectForKey:@"route"]retain];
+	routes = [[coder decodeObjectForKey:@"routes"]retain];
 	lastRefresh = [[coder decodeObjectForKey:@"lastRefresh"] retain];
 	return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
-	[super encodeWithCoder:coder];
+	[coder encodeObject:stop forKey:@"stop"];
 	[coder encodeObject:upcomingBuses forKey:@"upcomingBuses"];	
 	[coder encodeObject:route forKey:@"route"];	
 	[coder encodeObject:lastRefresh forKey:@"lastRefresh"];	
-
+	[coder encodeObject:routes forKey:@"routes"];
 	[coder encodeObject:stops forKey:@"stops"];	
 
+}
+
+-(NSString *) getBusStopName{
+	return stop.name;	
 }
 
 #pragma mark -
@@ -83,7 +91,7 @@
 	}
 	else if ([elementName isEqual: @"Trip"]) {
 		NSInteger eta = [[attributeDict objectForKey:@"ETA"] integerValue];
-		currBusArrival = [[BusArrival busArrivalWithRoute:[self getBusRouteForID:currRouteNum] stop:[self getBusStopForID:self.stopNumber] arrivalTime:[NSDate dateWithTimeIntervalSinceNow:eta * 60]] retain];
+		currBusArrival = [[BusArrival busArrivalWithRoute:[self getBusRouteForID:currRouteNum] stop:[self getBusStopForID:stop.stopNumber] arrivalTime:[NSDate dateWithTimeIntervalSinceNow:eta * 60]] retain];
 	}
 }
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
@@ -97,7 +105,7 @@
 -(void)requestBusArrivalFromWeb{
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
-	NSString *request = [NSString stringWithFormat:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=RoutePositionET.xml&PlatformNo=%d", self.stopNumber];
+	NSString *request = [NSString stringWithFormat:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=RoutePositionET.xml&PlatformNo=%d", stop.stopNumber];
 	
 	newUpcomingBuses = [[NSMutableArray alloc] init];
 	

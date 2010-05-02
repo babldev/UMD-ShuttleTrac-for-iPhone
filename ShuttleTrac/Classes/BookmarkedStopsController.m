@@ -9,6 +9,7 @@
 #import "BusTimeTableViewCell.h"
 #import "BookmarkedStopsController.h"
 #import "DataStoreGrabber.h"
+#import "BusStopArrivals.h"
 
 #define REFRESH_RATE 30
 
@@ -72,7 +73,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	return [[bookmarkedStops objectAtIndex:section] name];
+	return [[bookmarkedStops objectAtIndex:section] getBusStopName];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {

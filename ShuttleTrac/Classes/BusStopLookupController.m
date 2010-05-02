@@ -134,7 +134,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	if ([dataStore activeStopArrivals] != nil) {
-		return [[dataStore activeStopArrivals] name];
+		return [[dataStore activeStopArrivals] getBusStopName];
 	} else {
 		return @"Or Select Route";
 	}
@@ -174,7 +174,7 @@
 	
 	if (stop != nil) {
 		[dataStore setActiveStop:stop];
-		searchBar.text = [NSString stringWithFormat:@"%d", dataStore.activeStopArrivals.stopNumber];
+		searchBar.text = [NSString stringWithFormat:@"%d", dataStore.activeStopArrivals.stop.stopNumber];
 	}
 	
 	[dataStore loadSelectedBusArrivals];
