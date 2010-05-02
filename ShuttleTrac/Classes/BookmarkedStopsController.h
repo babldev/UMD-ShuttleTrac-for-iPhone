@@ -11,12 +11,11 @@
 #import "BusStopArrivals.h"
 #import "BookmarksEditorController.h"
 
-@interface BookmarkedStopsController : UITableViewController <BusStopArrivalsDelegate, 
+@interface BookmarkedStopsController : UIViewController <BusStopArrivalsDelegate, 
 		UITableViewDelegate, 
 		UITableViewDataSource,
 		BookmarksEditorControllerDelegate> {
 	BookmarkedStopsDataStore *dataStore;
-	
 	BookmarksEditorController *bookmarksEditorController;
 	
 	NSMutableArray *bookmarkedStops;
@@ -28,6 +27,7 @@
 			
 	IBOutlet UIBarButtonItem *refreshButton;
 	IBOutlet UIBarButtonItem *editButton;
+	IBOutlet UITableView *tableView;
 }
 
 -(IBAction)refreshBookmarksPressed:(UIBarButtonItem *)sender;
