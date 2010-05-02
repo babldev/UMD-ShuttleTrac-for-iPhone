@@ -17,6 +17,7 @@
 	IBOutlet UISearchBar *searchBar;
 	IBOutlet UITableView *stopSelectorTableView;
 	IBOutlet UIBarButtonItem *bookmarkButton;
+	IBOutlet UIBarButtonItem *refreshButton;
 	
 	BusMapDataStore	*dataStore;
 	BookmarkedStopsDataStore *bookmarksDataStore;
@@ -24,6 +25,8 @@
 	BusMapViewController *busMapViewController;
 	
 	UITableViewController *stopSelectorTableViewController;
+		
+	NSTimer *refreshTimer;
 }
 
 -(IBAction)refreshView:(UIBarButtonItem *)sender;

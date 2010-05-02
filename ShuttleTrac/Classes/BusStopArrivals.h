@@ -21,7 +21,7 @@
 @end
 
 @interface BusStopArrivals : BusStop <NSCoding> {
-	// Route for the arriving buses (OPTIONAL)
+	// Route for the arriving buses
 	BusRoute *route;
 	
 	// NSArray of BusArrival
@@ -30,16 +30,22 @@
 	// Time of last refresh
 	NSDate *lastRefresh;
 	
-	NSInteger currRouteNum;
-	//used for XML parsing
-	BusArrival *currBusArrival;
-	
 	id <BusStopArrivalsDelegate> delegate;
 	
+	// ----
+	
+	BOOL refreshing;
+	
+	// From ShuttleTracDataStore
 	NSDictionary *routes; 
 	NSDictionary *stops;
 	
+	//used for XML parsing
+	BusArrival *currBusArrival;
 	
+	NSInteger currRouteNum;
+	
+	NSMutableArray *newUpcomingBuses;
 }
 
 -(id)initWithBusStop:(BusStop *)bStop forBusRoute:(BusRoute *)bRoute;
@@ -47,7 +53,7 @@
 -(void)refreshUpcomingBuses;
 
 @property (assign, readonly) BusRoute *route;
-@property (retain, readwrite) NSMutableArray *upcomingBuses;
+@property (retain, readonly) NSArray *upcomingBuses;
 @property (retain, readonly) NSDate *lastRefresh;
 @property (assign, readwrite) id <BusStopArrivalsDelegate> delegate;
 

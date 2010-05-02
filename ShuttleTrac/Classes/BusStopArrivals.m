@@ -14,6 +14,7 @@
 
 @property (assign, readwrite) BusRoute *route;
 @property (retain, readwrite) NSDate *lastRefresh;
+@property (retain, readwrite) NSArray *upcomingBuses;
 
 @end
 
@@ -29,6 +30,8 @@
 		stops = [mainDataStore allBusStops];
 		routes = [mainDataStore allBusRoutes];
 		upcomingBuses = [[NSMutableArray alloc] init];
+		
+		refreshing = NO;
 	}
 	
 	return self;
@@ -55,10 +58,14 @@
 #pragma mark -
 #pragma mark Refresh routes
 -(void)refreshUpcomingBuses {
-	// Set last refresh to today
-	[self setLastRefresh:[NSDate date]];
-	 
-	[self requestBusArrivalFromWeb];
+	if (!refreshing) {
+		refreshing = YES;
+		[self performSelectorInBackground:@selector(requestBusArrivalFromWeb) withObject:nil];
+	}
+}
+
+-(void)doneRefreshing {
+	refreshing = NO;
 	[delegate arrivalsRefreshComplete:self];
 }
 
@@ -82,13 +89,17 @@
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {	
 	if([elementName isEqual:@"Trip"]){
-		[upcomingBuses addObject:[currBusArrival autorelease]];
+		[newUpcomingBuses addObject:[currBusArrival autorelease]];
 		currBusArrival = nil;
 	}
 }
 # pragma mark refresh arrival times
--(void)requestBusArrivalFromWeb{	
+-(void)requestBusArrivalFromWeb{
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	
 	NSString *request = [NSString stringWithFormat:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=RoutePositionET.xml&PlatformNo=%d", self.stopNumber];
+	
+	newUpcomingBuses = [[NSMutableArray alloc] init];
 	
 	NSURL *url = [NSURL URLWithString:request];
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -97,6 +108,14 @@
 	[parser parse];
 	[parser release];
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+	
+	self.upcomingBuses = newUpcomingBuses;
+	[newUpcomingBuses release];
+	
+	[self setLastRefresh:[NSDate date]];
+	[self performSelectorOnMainThread:@selector(doneRefreshing) withObject:nil waitUntilDone:NO];
+	
+	[pool release];
 }
 
 

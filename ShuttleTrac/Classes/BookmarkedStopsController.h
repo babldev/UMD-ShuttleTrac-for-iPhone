@@ -23,12 +23,14 @@
 	NSMutableDictionary *bookmarkedStopsArrivals;
 	
 	UITableViewController *tableViewController;
+	
+	NSTimer *refreshTimer;
 			
 	IBOutlet UIBarButtonItem *refreshButton;
 	IBOutlet UIBarButtonItem *editButton;
 }
 
--(IBAction)refreshBookmarks:(UIBarButtonItem *)sender;
+-(IBAction)refreshBookmarksPressed:(UIBarButtonItem *)sender;
 -(IBAction)editBookmarks:(UIBarButtonItem *)sender;
 
 @end

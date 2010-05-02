@@ -10,14 +10,30 @@
 #import "BookmarkedStopsController.h"
 #import "DataStoreGrabber.h"
 
+#define REFRESH_RATE 30
+
+@interface BookmarkedStopsController ( )
+
+@property (retain, readwrite) NSTimer *refreshTimer;
+
+-(void)refreshBookmarks;
+
+@end
+
+
 @implementation BookmarkedStopsController
+
+@synthesize refreshTimer;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	dataStore = [GetShuttleTracDataStore() bookmarkedStopsDataStore];
 	bookmarkedStops = [dataStore bookmarkedStops];
 	
-	[self refreshBookmarks:nil];
+	[self setRefreshTimer:[NSTimer scheduledTimerWithTimeInterval:REFRESH_RATE target:self
+													  selector:@selector(refreshBookmarks)
+													  userInfo:nil repeats:YES]];
+	
 	self.navigationItem.leftBarButtonItem = refreshButton;
 	self.navigationItem.rightBarButtonItem = editButton;
 	
@@ -59,6 +75,18 @@
 	return [[bookmarkedStops objectAtIndex:section] name];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+	return [NSString stringWithFormat:@"Last Update: %@", [[[bookmarkedStops objectAtIndex:section] lastRefresh] description]];
+}
+
+-(void)refreshBookmarks {
+	// Get new arrivals for all bookmarked stops
+	for (BusStopArrivals *bookmarkStop in bookmarkedStops) {
+		[bookmarkStop setDelegate:self];
+		[bookmarkStop refreshUpcomingBuses];
+	}
+}
+
 #pragma mark -
 #pragma mark BusStopArrivalsDelegate protocol
 -(void)arrivalsRefreshComplete:(BusStopArrivals *)arrivals {
@@ -68,7 +96,7 @@
 #pragma mark -
 #pragma mark Actions
 
--(IBAction)refreshBookmarks:(UIBarButtonItem *)sender {
+-(IBAction)refreshBookmarksPressed:(UIBarButtonItem *)sender {
 	// Get new arrivals for all bookmarked stops
 	for (BusStopArrivals *bookmarkStop in bookmarkedStops) {
 		[bookmarkStop setDelegate:self];
@@ -96,7 +124,7 @@
 	[self dismissModalViewControllerAnimated:YES];
 	[bookmarkedStops setArray:bookmarks];
 	
-	[self refreshBookmarks:nil];
+	[self refreshBookmarks];
 	[self.tableView reloadData];
 }
 
@@ -123,6 +151,9 @@
 - (void)dealloc {
 	[bookmarksEditorController release];
 	bookmarksEditorController = nil;
+	
+	[refreshTimer release];
+	refreshTimer = nil;
 	
     [super dealloc];
 }

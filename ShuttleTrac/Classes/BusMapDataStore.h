@@ -27,12 +27,15 @@
 	NSArray *mappedStops;
 
 	BusRoute *activeRoute;
-	BusStopArrivals *activeStop;
+	BusStopArrivals *activeStopArrivals;
 	
 	id <BusMapDataStoreDelegate> delegate;
 }
 
 -(id)initWithDataStore:(ShuttleTracDataStore *)dStore;
+
+-(void)setActiveStop:(BusStop *)bStop;
+-(void)setActiveStopWithStopId:(NSInteger)stopId;
 
 // Begin loading of upcoming buses for activeStop
 -(void)loadSelectedBusArrivals;
@@ -45,7 +48,7 @@
 
 @property (retain, readonly) NSArray *mappedStops;
 @property (retain, readwrite) BusRoute *activeRoute;
-@property (retain, readwrite) BusStopArrivals *activeStop;
+@property (retain, readonly) BusStopArrivals *activeStopArrivals;
 
 @property (assign, readwrite) id <BusMapDataStoreDelegate> delegate;
 
