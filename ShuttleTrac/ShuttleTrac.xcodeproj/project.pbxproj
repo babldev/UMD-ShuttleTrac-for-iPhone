@@ -38,9 +38,6 @@
 		85624D8E1181E74C007AE93C /* BookmarksEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85624D8C1181E74C007AE93C /* BookmarksEditorController.m */; };
 		85624D8F1181E74C007AE93C /* BookmarksEditorController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85624D8D1181E74C007AE93C /* BookmarksEditorController.xib */; };
 		8659A930118CC2F500DB7A51 /* magnifying-glass.png in Resources */ = {isa = PBXBuildFile; fileRef = 8659A92D118CC2F500DB7A51 /* magnifying-glass.png */; };
-		8659A931118CC2F500DB7A51 /* map-marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 8659A92E118CC2F500DB7A51 /* map-marker.png */; };
-		8659A932118CC2F500DB7A51 /* map-pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 8659A92F118CC2F500DB7A51 /* map-pin.png */; };
-		8659A934118CC30C00DB7A51 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 8659A933118CC30C00DB7A51 /* plus.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,9 +91,6 @@
 		85624D8C1181E74C007AE93C /* BookmarksEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarksEditorController.m; sourceTree = "<group>"; };
 		85624D8D1181E74C007AE93C /* BookmarksEditorController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookmarksEditorController.xib; sourceTree = "<group>"; };
 		8659A92D118CC2F500DB7A51 /* magnifying-glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "magnifying-glass.png"; sourceTree = "<group>"; };
-		8659A92E118CC2F500DB7A51 /* map-marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-marker.png"; sourceTree = "<group>"; };
-		8659A92F118CC2F500DB7A51 /* map-pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-pin.png"; sourceTree = "<group>"; };
-		8659A933118CC30C00DB7A51 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ShuttleTrac-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ShuttleTrac-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -164,10 +158,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8659A933118CC30C00DB7A51 /* plus.png */,
 				8659A92D118CC2F500DB7A51 /* magnifying-glass.png */,
-				8659A92E118CC2F500DB7A51 /* map-marker.png */,
-				8659A92F118CC2F500DB7A51 /* map-pin.png */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* ShuttleTrac-Info.plist */,
 			);
@@ -332,9 +323,6 @@
 				41D34A3D1184BBE20038A7A7 /* BusStopLookupController.xib in Resources */,
 				41D34C091184DDCD0038A7A7 /* LoadingViewController.xib in Resources */,
 				8659A930118CC2F500DB7A51 /* magnifying-glass.png in Resources */,
-				8659A931118CC2F500DB7A51 /* map-marker.png in Resources */,
-				8659A932118CC2F500DB7A51 /* map-pin.png in Resources */,
-				8659A934118CC30C00DB7A51 /* plus.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
