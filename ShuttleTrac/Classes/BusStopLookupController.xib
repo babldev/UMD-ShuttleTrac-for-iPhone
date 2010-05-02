@@ -52,38 +52,35 @@
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
+					<object class="IBUISearchBar" id="926666256">
+						<reference key="NSNextResponder" ref="723610231"/>
+						<int key="NSvFlags">290</int>
+						<string key="NSFrameSize">{320, 44}</string>
+						<reference key="NSSuperview" ref="723610231"/>
+						<int key="IBUIContentMode">3</int>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBBarStyle">1</int>
+						<string key="IBText"/>
+						<string key="IBPrompt"/>
+						<string key="IBPlaceholder">Enter Bus Stop #</string>
+						<object class="NSColor" key="IBTintColor">
+							<int key="NSColorSpace">2</int>
+							<bytes key="NSRGB">MC44MjM1Mjk0ODE5IDAuMDAzOTIxNTY4ODU5IDAAA</bytes>
+						</object>
+						<object class="IBUITextInputTraits" key="IBTextInputTraits">
+							<int key="IBUIKeyboardType">4</int>
+							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						</object>
+						<object class="NSArray" key="IBScopeButtonTitles">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>Bus Stop</string>
+							<string>Bus Route</string>
+						</object>
+					</object>
 					<object class="IBUITableView" id="963809261">
 						<reference key="NSNextResponder" ref="723610231"/>
 						<int key="NSvFlags">274</int>
-						<object class="NSMutableArray" key="NSSubviews">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUISearchBar" id="926666256">
-								<reference key="NSNextResponder" ref="963809261"/>
-								<int key="NSvFlags">290</int>
-								<string key="NSFrameSize">{320, 44}</string>
-								<reference key="NSSuperview" ref="963809261"/>
-								<int key="IBUIContentMode">3</int>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<int key="IBBarStyle">1</int>
-								<string key="IBText"/>
-								<string key="IBPrompt"/>
-								<string key="IBPlaceholder">Enter Bus Stop #</string>
-								<object class="NSColor" key="IBTintColor">
-									<int key="NSColorSpace">2</int>
-									<bytes key="NSRGB">MC44MjM1Mjk0ODE5IDAuMDAzOTIxNTY4ODU5IDAAA</bytes>
-								</object>
-								<object class="IBUITextInputTraits" key="IBTextInputTraits">
-									<int key="IBUIKeyboardType">4</int>
-									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								</object>
-								<object class="NSArray" key="IBScopeButtonTitles">
-									<bool key="EncodedWithXMLCoder">YES</bool>
-									<string>Bus Stop</string>
-									<string>Bus Route</string>
-								</object>
-							</object>
-						</object>
-						<string key="NSFrameSize">{320, 367}</string>
+						<string key="NSFrame">{{0, 44}, {320, 323}}</string>
 						<reference key="NSSuperview" ref="723610231"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -95,7 +92,6 @@
 						<float key="IBUIRowHeight">44</float>
 						<float key="IBUISectionHeaderHeight">10</float>
 						<float key="IBUISectionFooterHeight">10</float>
-						<reference key="IBUITableHeaderView" ref="926666256"/>
 					</object>
 				</object>
 				<string key="NSFrameSize">{320, 367}</string>
@@ -223,6 +219,7 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="963809261"/>
+							<reference ref="926666256"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -231,14 +228,8 @@
 						<reference key="object" ref="963809261"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="926666256"/>
 						</object>
 						<reference key="parent" ref="723610231"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">23</int>
-						<reference key="object" ref="926666256"/>
-						<reference key="parent" ref="963809261"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">29</int>
@@ -249,6 +240,11 @@
 						<int key="objectID">25</int>
 						<reference key="object" ref="72289245"/>
 						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">23</int>
+						<reference key="object" ref="926666256"/>
+						<reference key="parent" ref="723610231"/>
 					</object>
 				</object>
 			</object>
