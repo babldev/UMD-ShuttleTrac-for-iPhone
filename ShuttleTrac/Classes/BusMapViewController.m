@@ -134,7 +134,7 @@
 }
 
 - (void)mapView:(MKMapView *)aMapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-	[delegate busStopSelected:view.annotation];
+	[delegate busStopSelected:(BusStop *) view.annotation];
 }
 
 #pragma mark -
