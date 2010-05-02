@@ -77,6 +77,10 @@
 	return [[bookmarkedStops objectAtIndex:section] name];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+	return [NSString stringWithFormat:@"Last Update: %@", [[[bookmarkedStops objectAtIndex:section] lastRefresh] description]];
+}
+
 -(void)refreshBookmarks {
 	// Get new arrivals for all bookmarked stops
 	for (BusStopArrivals *bookmarkStop in bookmarkedStops) {

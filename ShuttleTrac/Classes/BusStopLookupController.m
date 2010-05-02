@@ -26,6 +26,9 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	UINavigationItem *navItem = self.navigationItem;
+	[navItem setLeftBarButtonItem:refreshButton];
+	[navItem setRightBarButtonItem:bookmarkButton];
 	
 	ShuttleTracDataStore *mainDataStore = GetShuttleTracDataStore();
 	dataStore = mainDataStore.busMapDataStore;
@@ -89,13 +92,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 2;
+    return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-	if (section == 0)
+	if ([dataStore activeStopArrivals] != nil)
 		return [[[dataStore activeStopArrivals] upcomingBuses] count];
 	else 
 		return [[[dataStore allRoutes] allValues] count];
@@ -104,7 +107,7 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([indexPath section] == 0) {
+    if ([dataStore activeStopArrivals] != nil) {
 		static NSString *CellIdentifier = @"BusTimes";
 		
 		BusTimeTableViewCell *cell = (BusTimeTableViewCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -130,17 +133,27 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	if (section == 0) {
+	if ([dataStore activeStopArrivals] != nil) {
 		return [[dataStore activeStopArrivals] name];
 	} else {
-		return @"Select Route";
+		return @"Or Select Route";
 	}
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+	BusStopArrivals *arrivals = [dataStore activeStopArrivals];
+	
+	if ([dataStore activeStopArrivals] != nil)
+		return [NSString stringWithFormat:@"Last Update: %@", [[arrivals lastRefresh] description]];
+	else
+		return nil;
+
 }
 
 #pragma mark UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 1) {
+	if ([dataStore activeStopArrivals] == nil) {
 		dataStore.activeRoute = [[[dataStore allRoutes] allValues] objectAtIndex:indexPath.row];
 		
 		if (busMapViewController == nil) {
@@ -189,12 +202,16 @@
 	} else if (dataStore.activeStopArrivals != nil) { // Clear the active stop
 		[dataStore setActiveStop:nil];
 		[dataStore loadSelectedBusArrivals];
+		
+		if ([searchText length] == 0)
+			[sBar resignFirstResponder];
 	}
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)sBar {
 	[sBar resignFirstResponder];
 }
+
 
 #pragma mark dealloc
 

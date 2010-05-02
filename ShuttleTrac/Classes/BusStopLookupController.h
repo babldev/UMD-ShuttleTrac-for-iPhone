@@ -17,6 +17,7 @@
 	IBOutlet UISearchBar *searchBar;
 	IBOutlet UITableView *stopSelectorTableView;
 	IBOutlet UIBarButtonItem *bookmarkButton;
+	IBOutlet UIBarButtonItem *refreshButton;
 	
 	BusMapDataStore	*dataStore;
 	BookmarkedStopsDataStore *bookmarksDataStore;

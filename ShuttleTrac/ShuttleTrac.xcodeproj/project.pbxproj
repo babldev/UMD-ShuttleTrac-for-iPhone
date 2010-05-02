@@ -190,9 +190,11 @@
 		41127425117C0FEA0082FBF7 /* Bus Stop Lookup */ = {
 			isa = PBXGroup;
 			children = (
-				41D34A3C1184BBE20038A7A7 /* BusStopLookupController.xib */,
 				41D34A381184BBA30038A7A7 /* BusStopLookupController.h */,
 				41D34A391184BBA30038A7A7 /* BusStopLookupController.m */,
+				41D34A3C1184BBE20038A7A7 /* BusStopLookupController.xib */,
+				411E12B71183FE95004D7070 /* RouteSelectorTableViewCell.h */,
+				411E12B81183FE95004D7070 /* RouteSelectorTableViewCell.m */,
 				41127317117C03E40082FBF7 /* BusTimeTableViewCell.h */,
 				41127318117C03E40082FBF7 /* BusTimeTableViewCell.m */,
 			);
@@ -214,8 +216,6 @@
 				4112748D117C13500082FBF7 /* BusMapViewController.xib */,
 				4112748B117C13500082FBF7 /* BusMapViewController.h */,
 				4112748C117C13500082FBF7 /* BusMapViewController.m */,
-				411E12B71183FE95004D7070 /* RouteSelectorTableViewCell.h */,
-				411E12B81183FE95004D7070 /* RouteSelectorTableViewCell.m */,
 			);
 			name = "Bus Maps";
 			sourceTree = "<group>";

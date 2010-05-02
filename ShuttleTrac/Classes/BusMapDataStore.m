@@ -26,9 +26,13 @@
 }
 
 -(void)setActiveStop:(BusStop *)bStop {
-	BusStopArrivals *newArrivals = [[[BusStopArrivals alloc] initWithBusStop:bStop forBusRoute:nil] autorelease];
-	newArrivals.delegate = self;
-	self.activeStopArrivals = newArrivals;
+	if (bStop != nil) {
+		BusStopArrivals *newArrivals = [[[BusStopArrivals alloc] initWithBusStop:bStop forBusRoute:nil] autorelease];
+		newArrivals.delegate = self;
+		self.activeStopArrivals = newArrivals;
+	} else {
+		[self setActiveStopArrivals:nil];
+	}
 }
 
 -(void)setActiveStopWithStopId:(NSInteger)stopId {
@@ -38,7 +42,10 @@
 
 // Begin loading of upcoming buses for activeStop
 -(void)loadSelectedBusArrivals {
-	[activeStopArrivals refreshUpcomingBuses];
+	if (activeStopArrivals != nil)
+		[activeStopArrivals refreshUpcomingBuses];
+	else
+		[delegate loadSelectedBusArrivalsCompleted:nil];
 }
 
 // Load all stops for activeRoute
