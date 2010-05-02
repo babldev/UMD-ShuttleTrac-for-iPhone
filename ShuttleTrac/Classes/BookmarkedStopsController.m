@@ -34,9 +34,6 @@
 													  selector:@selector(refreshBookmarks)
 													  userInfo:nil repeats:YES]];
 	
-	self.navigationItem.leftBarButtonItem = refreshButton;
-	self.navigationItem.rightBarButtonItem = editButton;
-	
     [super viewDidLoad];
 }
 
@@ -90,7 +87,7 @@
 #pragma mark -
 #pragma mark BusStopArrivalsDelegate protocol
 -(void)arrivalsRefreshComplete:(BusStopArrivals *)arrivals {
-	[self.tableView reloadData];
+	[tableView reloadData];
 }
 
 #pragma mark -
@@ -125,7 +122,7 @@
 	[bookmarkedStops setArray:bookmarks];
 	
 	[self refreshBookmarks];
-	[self.tableView reloadData];
+	[tableView reloadData];
 }
 
 -(void)bookmarkEditingCancelled {
