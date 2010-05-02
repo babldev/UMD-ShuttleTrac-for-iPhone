@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface BusRoute : NSObject {
+@interface BusRoute : NSObject  <NSCoding> {
 	// Name of the route
 	NSString *routeName;
 	

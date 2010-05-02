@@ -20,17 +20,17 @@
 
 @end
 
-@interface BusStopArrivals : BusStop {
+@interface BusStopArrivals : BusStop <NSCoding> {
 	// Route for the arriving buses (OPTIONAL)
 	BusRoute *route;
 	
 	// NSArray of BusArrival
 	NSMutableArray *upcomingBuses;
-	NSInteger currRouteNum;
 	
 	// Time of last refresh
 	NSDate *lastRefresh;
 	
+	NSInteger currRouteNum;
 	//used for XML parsing
 	BusArrival *currBusArrival;
 	

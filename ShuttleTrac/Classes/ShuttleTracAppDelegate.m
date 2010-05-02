@@ -19,19 +19,37 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
 	loadingViewController = [[LoadingViewController alloc] initWithNibName:@"LoadingViewController" bundle:nil];
 	[window	addSubview:loadingViewController.view];
+	
+	NSString *path = [self myArchivePath];
+
+	if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        NSData *archiveData = [NSData dataWithContentsOfFile:path];
+        dataStore = [NSKeyedUnarchiver unarchiveObjectWithData:archiveData];
+    }
+	
 	[self performSelectorInBackground:@selector(loadDataStore) withObject:nil];
 }
 
+- (NSString *)myArchivePath {
+    // Get a path to the sandbox'd documents directory
+    NSString *documentsFolderPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    // Save / read from a file named "MyToDoEvent" in the documents directory
+    NSString *path = [documentsFolderPath stringByAppendingPathComponent:@"MyArchive"];
+    return path;
+}
+
 - (void)applicationWillTerminate:(UIApplication *)application {
-	
+	NSString *path = [self myArchivePath];
+    NSData *archiveData = [NSKeyedArchiver archivedDataWithRootObject:dataStore];
+    [archiveData writeToFile:path atomically:YES];
 }
 
 -(void)loadDataStore {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
-	dataStore = [[ShuttleTracDataStore alloc] init];
+	if(!dataStore) 
+		dataStore = [[ShuttleTracDataStore alloc] init];
 	[self performSelectorOnMainThread:@selector(loadMainApp) withObject:nil waitUntilDone:YES];
-	
 	[pool release];
 }
 

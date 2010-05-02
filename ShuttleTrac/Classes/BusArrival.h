@@ -13,7 +13,7 @@
 
 @class BusStop;
 
-@interface BusArrival : NSObject {
+@interface BusArrival : NSObject <NSCoding> {
 	// Route for the arriving bus
 	BusRoute *route;
 	

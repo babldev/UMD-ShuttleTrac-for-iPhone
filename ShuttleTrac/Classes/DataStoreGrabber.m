@@ -15,6 +15,7 @@ ShuttleTracAppDelegate *GetAppDelegate()
 
 ShuttleTracDataStore* GetShuttleTracDataStore()
 {
-    return [GetAppDelegate() dataStore];
+    ShuttleTracDataStore *ds = [GetAppDelegate() dataStore];
+	return ds;
 }
 

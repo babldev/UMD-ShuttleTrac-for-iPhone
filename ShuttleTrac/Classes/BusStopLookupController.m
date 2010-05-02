@@ -160,7 +160,7 @@
 	[self dismissModalViewControllerAnimated:YES];
 	
 	if (stop != nil) {
-		dataStore.activeStop = [[BusStopArrivals alloc] initWithBusStop:stop forBusRoute:nil];
+		dataStore.activeStop = [[BusStopArrivals alloc] initWithBusStop: stop forBusRoute:nil];
 		searchBar.text = [NSString stringWithFormat:@"%d", dataStore.activeStop.stopNumber];
 	}
 	

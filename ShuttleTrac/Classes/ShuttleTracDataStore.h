@@ -17,17 +17,17 @@
 
 @class BookmarkedStopsDataStore, BusMapDataStore;
 
-@interface ShuttleTracDataStore : NSObject {
+@interface ShuttleTracDataStore : NSObject <NSCoding>{
 	//Test
 	BookmarkedStopsDataStore *bookmarkedStopsDataStore;
 	BusMapDataStore *busMapDataStore;
 	
-	NSInteger parsingMode;
 		
 @private
 	// Temporary
 	NSMutableDictionary *busStops;
 	NSMutableDictionary *busRoutes;
+	NSInteger parsingMode;
 	
 	BusStop *currBusStop; //used for parsing
 	BusRoute *currBusRoute;//used for parsing

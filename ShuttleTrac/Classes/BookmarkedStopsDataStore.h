@@ -15,7 +15,7 @@
 -(void)refreshBookmarkedStopArrivalsCompleted:(NSMutableArray *)bookmarkedStops;
 @end
 
-@interface BookmarkedStopsDataStore : NSObject {
+@interface BookmarkedStopsDataStore : NSObject <NSCoding> {
 	ShuttleTracDataStore *dataStore;
 	
 	// Array of BusStopArrivals

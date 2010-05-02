@@ -28,6 +28,17 @@
 	
 	return self;
 }
+- (id)initWithCoder:(NSCoder *)coder {
+    bookmarkedStops = [[coder decodeObjectForKey:@"bookmarkedStops"] retain];
+	dataStore = [[coder decodeObjectForKey:@"dataStore"] retain];
+	return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+	[coder encodeObject:bookmarkedStops forKey :@"bookmarkedStops"];
+	[coder encodeObject:dataStore forKey :@"dataStore"];
+
+}
 
 -(void)refreshBookmarkedStopArrivals {
 	// Do nothing for now

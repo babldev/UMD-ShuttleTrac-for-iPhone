@@ -31,6 +31,30 @@
 	return [[[BusStop alloc] initWithBusStop:bStop] autorelease];
 }
 
+- (id)initWithCoder:(NSCoder *)coder {
+	name = [[coder decodeObjectForKey:@"name"]retain];
+	stopNumber =  [[coder decodeObjectForKey:@"stopNumber"] integerValue];
+	tagNumber =  [[coder decodeObjectForKey:@"tagNumber"] integerValue];
+	float lon =  [[coder decodeObjectForKey:@"longitude"] floatValue];
+	float lat =  [[coder decodeObjectForKey:@"latitude"] floatValue];
+	
+	CLLocationCoordinate2D loc;
+	loc.latitude = lat;
+	loc.longitude = lon;
+	coordinate = loc;
+
+	return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+	[coder encodeObject:name forKey:@"name"];	
+	[coder encodeObject:[NSNumber numberWithInteger:stopNumber] forKey:@"stopNumber"];	
+	[coder encodeObject:[NSNumber numberWithInteger:tagNumber] forKey:@"tagNumber"];	
+	[coder encodeObject: [NSNumber numberWithFloat: coordinate.longitude] forKey:@"longitude"];
+	[coder encodeObject: [NSNumber numberWithFloat: coordinate.latitude] forKey:@"latitude"];	
+
+}
+
 -(id)initWithBusStop:(BusStop *)bStop {
 	if (self = [super init]) {
 		self.name		= [[bStop.name copy] autorelease];

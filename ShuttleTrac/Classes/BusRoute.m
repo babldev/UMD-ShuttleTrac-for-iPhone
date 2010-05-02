@@ -31,9 +31,22 @@
 		[self setRouteName:rName];
 		[self setStops:rStops];
 	}
-	
 	return self;
 }
+
+- (id)initWithCoder:(NSCoder *)coder {
+	routeID = [[coder decodeObjectForKey:@"routeID"] integerValue];
+	routeName =  [[coder decodeObjectForKey:@"routeName"]retain];
+	stops =  [[coder decodeObjectForKey:@"stops"]retain];	
+	return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+	[coder encodeObject:[NSNumber numberWithInteger:routeID] forKey:@"routeID"];	
+	[coder encodeObject:routeName forKey:@"routeName"];	
+	[coder encodeObject:stops forKey:@"stops"];	
+}
+
 - (id)copyWithZone:(NSZone *)zone{
 	return [[BusRoute alloc] initRouteWithID:self.routeID name:self.routeName stops:self.stops];
 }

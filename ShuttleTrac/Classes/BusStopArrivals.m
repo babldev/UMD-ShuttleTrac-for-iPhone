@@ -33,6 +33,21 @@
 	
 	return self;
 }
+- (id)initWithCoder:(NSCoder *)coder {
+	[super initWithCoder:coder];
+	upcomingBuses = [[coder decodeObjectForKey:@"upcomingBuses"]retain];
+	stops = [[coder decodeObjectForKey:@"stops"] retain];
+	route = [[coder decodeObjectForKey:@"route"]retain];
+	return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+	[super encodeWithCoder:coder];
+	[coder encodeObject:upcomingBuses forKey:@"upcomingBuses"];	
+	[coder encodeObject:route forKey:@"route"];	
+	[coder encodeObject:stops forKey:@"route"];	
+
+}
 
 #pragma mark -
 #pragma mark Refresh routes

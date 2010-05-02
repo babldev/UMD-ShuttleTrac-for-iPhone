@@ -27,6 +27,22 @@
 	return self;
 }
 
+- (id)initWithCoder:(NSCoder *)coder {
+    mappedStops = [[coder decodeObjectForKey:@"mappedStops"] retain];
+    activeStop = [[coder decodeObjectForKey:@"activeStop"] retain];
+    activeRoute = [[coder decodeObjectForKey:@"activeRoute"] retain];
+	dataStore = [[coder decodeObjectForKey:@"dataStore"] retain]; //Extremely inefficient
+	return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+	[coder encodeObject:mappedStops forKey :@"mappedStops"];
+	[coder encodeObject:activeStop forKey :@"activeStop"];
+	[coder encodeObject:activeRoute forKey :@"activeRoute"];
+	[coder encodeObject:dataStore forKey :@"dataStore"];
+
+}
+
 // Begin loading of upcoming buses for activeStop
 -(void)loadSelectedBusArrivals {
 	[self.activeStop refreshUpcomingBuses];

@@ -36,4 +36,19 @@
 	return self;
 }
 
+- (id)initWithCoder:(NSCoder *)coder {
+	route = [[coder decodeObjectForKey:@"route"]retain];
+	stop =  [[coder decodeObjectForKey:@"stop"]retain];
+	arrivalTime =  [[coder decodeObjectForKey:@"arrivalTime"]retain];
+
+	return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+	[coder encodeObject:route forKey:@"route"];	
+	[coder encodeObject:stop forKey:@"stop"];	
+	[coder encodeObject:arrivalTime forKey:@"arrivalTime"];	
+
+}
+
 @end

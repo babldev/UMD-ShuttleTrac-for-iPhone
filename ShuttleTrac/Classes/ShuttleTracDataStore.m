@@ -37,14 +37,27 @@
 		self.bookmarkedStopsDataStore	= [[[BookmarkedStopsDataStore alloc] initWithDataStore:self] autorelease];
 		self.busMapDataStore			= [[[BusMapDataStore alloc] initWithDataStore:self] autorelease];
 	}
-	
 	return self;
+}
+- (id)initWithCoder:(NSCoder *)coder {
+    bookmarkedStopsDataStore = [[coder decodeObjectForKey:@"bookmarkedStopsDataStore"] retain];
+	busMapDataStore = [[coder decodeObjectForKey:@"busMapDataStore"] retain];
+	busStops = [[coder decodeObjectForKey:@"busStops"] retain];
+	busRoutes = [[coder decodeObjectForKey:@"busRoutes"] retain];
+
+	return [self retain]; //Shouldn't have to retain here...
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    [coder encodeObject:bookmarkedStopsDataStore forKey: @"bookmarkedStopsDataStore"];
+	[coder encodeObject:busMapDataStore forKey: @"busMapDataStore"];
+	[coder encodeObject:busRoutes forKey: @"busRoutes"];
+	[coder encodeObject:busStops forKey: @"busStops"];
 }
 
 -(void)refreshStopAndRouteData {
 	[self requestStopsFromWeb];
 	[self requestRoutesFromWeb];
-	
 }
 
 -(void)requestStopsFromWeb{
@@ -83,9 +96,7 @@
 
 #pragma mark XML Parsing
 
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
-{
-	
+- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
 	if ([elementName isEqual: @"Platform"]) {
 		NSInteger busNumber = [[attributeDict objectForKey:@"PlatformNo"] integerValue];
 		if(parsingMode == PARSING_STOPS){
@@ -157,8 +168,8 @@
 
 -(void)dealloc {
 	// 2 Main Data Stores
-	[bookmarkedStopsDataStore release];
-	[busMapDataStore release];
+	//[bookmarkedStopsDataStore release];
+	//[busMapDataStore release];
 	
 	[busStops release];
 	[busRoutes release];
