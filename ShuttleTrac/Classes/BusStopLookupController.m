@@ -165,6 +165,8 @@
 		
 		busMapViewController.delegate = self;
 		busMapViewController.dataStore = dataStore;
+		busMapViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+		
 		[self presentModalViewController:busMapViewController animated:YES];
 		[busMapViewController reloadMap];
 	}
