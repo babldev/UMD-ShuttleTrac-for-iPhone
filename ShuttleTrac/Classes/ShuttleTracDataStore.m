@@ -101,7 +101,7 @@
 		NSInteger busNumber = [[attributeDict objectForKey:@"PlatformNo"] integerValue];
 		if(parsingMode == PARSING_STOPS){
 			if(!currBusStop){
-				NSString *name = [attributeDict objectForKey:@"Name"];
+				NSString *name = [[attributeDict objectForKey:@"Name"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 				NSInteger tagNumber = [[attributeDict objectForKey:@"PlatformTag"] integerValue];
 
 				currBusStop = [[BusStop alloc] init];
@@ -129,7 +129,7 @@
 	else if([elementName isEqual:@"Route"]){
 		if(!currBusRoute){
 			NSInteger routeNum = [[attributeDict objectForKey:@"RouteNo"] integerValue];
-			NSString *routeName = [attributeDict objectForKey:@"Name"];
+			NSString *routeName = [[attributeDict objectForKey:@"Name"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 			
 			currRouteBusStops = [[NSMutableArray alloc] init]; // create array to store bus stops reached on route
 			
