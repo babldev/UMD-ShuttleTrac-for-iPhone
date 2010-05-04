@@ -15,8 +15,6 @@
 
 @interface BusStopLookupController ( )
 @property (retain, readwrite) NSTimer *refreshTimer;
-
--(void)updateBookmarkLock;
 @end
 
 
@@ -26,9 +24,6 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	UINavigationItem *navItem = self.navigationItem;
-	[navItem setLeftBarButtonItem:refreshButton];
-	[navItem setRightBarButtonItem:bookmarkButton];
 	
 	ShuttleTracDataStore *mainDataStore = GetShuttleTracDataStore();
 	dataStore = mainDataStore.busMapDataStore;
@@ -40,21 +35,14 @@
 	[stopSelectorTableViewController setView:stopSelectorTableView];
 	
 	BusStopArrivals *arrivals = dataStore.activeStopArrivals;
-	if (arrivals != nil)
+	if (arrivals != nil) {
 		searchBar.text = [NSString stringWithFormat:@"%d", arrivals.stop.stopNumber];
+		navItem.rightBarButtonItem = cancelButton;
+	}
 	
 	[self setRefreshTimer:[NSTimer scheduledTimerWithTimeInterval:REFRESH_RATE target:dataStore
 														 selector:@selector(loadSelectedBusArrivals)
 														 userInfo:nil repeats:YES]];
-	
-	[self updateBookmarkLock];
-}
-
--(void)updateBookmarkLock {
-	NSMutableArray *bookmarkedStops = bookmarksDataStore.bookmarkedStops;
-	BusStopArrivals *newBookmark = dataStore.activeStopArrivals;
-	
-	bookmarkButton.enabled = (![bookmarkedStops containsObject:newBookmark]);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,14 +63,25 @@
 	[dataStore loadSelectedBusArrivals];
 }
 
+/*
 -(IBAction)bookmarkActiveStop:(UIBarButtonItem *)sender {
 	NSMutableArray *bookmarkedStops = bookmarksDataStore.bookmarkedStops;
 	BusStopArrivals *newBookmark = dataStore.activeStopArrivals;
 	
 	if (![bookmarkedStops containsObject:newBookmark])
 		[bookmarkedStops insertObject:newBookmark atIndex:0];
-	
-	[self updateBookmarkLock];
+}
+*/
+
+-(IBAction)cancelEditing:(UIBarButtonItem *)sender {
+	searchBar.text = nil;
+	[dataStore setActiveStop:nil];
+	[dataStore loadSelectedBusArrivals];
+	[navItem setRightBarButtonItem:nil animated:YES];
+}
+
+-(IBAction)doneEditing:(UIBarButtonItem *)sender {
+	[searchBar resignFirstResponder];
 }
 
 #pragma mark -
@@ -183,18 +182,20 @@
 	
 	[dataStore loadSelectedBusArrivals];
 	[stopSelectorTableViewController.tableView reloadData];
-	
-	[self updateBookmarkLock];
 }
 
 #pragma mark UISearchBarDelegate
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)sBar {
-	[sBar setShowsCancelButton:YES animated:YES];
+	[navItem setRightBarButtonItem:doneButton animated:YES];
 }
 
 -(void)searchBarTextDidEndEditing:(UISearchBar *)sBar {
-	[sBar setShowsCancelButton:NO animated:YES];
+	
+	if ([dataStore activeStopArrivals] != nil) {
+		[navItem setRightBarButtonItem:cancelButton animated:YES];
+	} else 
+		[navItem setRightBarButtonItem:nil animated:YES];
 }
 
 - (void)searchBar:(UISearchBar *)sBar textDidChange:(NSString *)searchText {
@@ -203,19 +204,19 @@
 		
 		[dataStore setActiveStopWithStopId:[searchText intValue]];
 		[dataStore loadSelectedBusArrivals];
+		
+		if ([dataStore activeStopArrivals] != nil) {
+			[navItem setRightBarButtonItem:cancelButton animated:YES];
+		}
 	} else if (dataStore.activeStopArrivals != nil) { // Clear the active stop
 		[dataStore setActiveStop:nil];
 		[dataStore loadSelectedBusArrivals];
 		
-		if ([searchText length] == 0)
+		if ([searchText length] == 0) {
 			[sBar resignFirstResponder];
+		}
 	}
 }
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)sBar {
-	[sBar resignFirstResponder];
-}
-
 
 #pragma mark dealloc
 

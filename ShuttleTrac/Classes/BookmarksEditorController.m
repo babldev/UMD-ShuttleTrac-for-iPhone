@@ -7,7 +7,7 @@
 //
 
 #import "BookmarksEditorController.h"
-
+#import "BusStopArrivals.h"
 
 @implementation BookmarksEditorController
 
@@ -81,7 +81,8 @@
     }
     
     // Configure the cell...
-    [[cell textLabel] setText:[[bookmarkedStops objectAtIndex:[indexPath row]] getBusStopName]];
+	BusStopArrivals *arrivals = [bookmarkedStops objectAtIndex:indexPath.row];
+	cell.textLabel.text = arrivals.stop.name;
 	
     return cell;
 }

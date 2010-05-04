@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="39"/>
+			<integer value="4"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -36,6 +36,16 @@
 			<object class="IBProxyObject" id="975951072">
 				<string key="IBProxiedObjectIdentifier">IBFirstResponder</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+			</object>
+			<object class="IBUIBarButtonItem" id="986105569">
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<int key="IBUIStyle">1</int>
+				<int key="IBUISystemItemIdentifier">0</int>
+			</object>
+			<object class="IBUIBarButtonItem" id="109005595">
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<int key="IBUIStyle">1</int>
+				<int key="IBUISystemItemIdentifier">1</int>
 			</object>
 			<object class="IBUIView" id="723610231">
 				<reference key="NSNextResponder"/>
@@ -80,12 +90,6 @@
 									<reference key="IBUINavigationItem" ref="281692041"/>
 									<int key="IBUISystemItemIdentifier">13</int>
 								</object>
-								<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="72289245">
-									<string key="IBUITitle">Bookmark</string>
-									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-									<int key="IBUIStyle">1</int>
-									<reference key="IBUINavigationItem" ref="281692041"/>
-								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</object>
@@ -108,8 +112,8 @@
 						</object>
 						<object class="NSArray" key="IBScopeButtonTitles">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>Bus Stop</string>
-							<string>Bus Route</string>
+							<string>Scope</string>
+							<string>Scope</string>
 						</object>
 					</object>
 				</object>
@@ -154,14 +158,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">bookmarkActiveStop:</string>
-						<reference key="source" ref="72289245"/>
-						<reference key="destination" ref="372490531"/>
-					</object>
-					<int key="connectionID">32</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">refreshView:</string>
 						<reference key="source" ref="181870677"/>
 						<reference key="destination" ref="372490531"/>
@@ -186,14 +182,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">bookmarkButton</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="72289245"/>
-					</object>
-					<int key="connectionID">36</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="926666256"/>
 						<reference key="destination" ref="372490531"/>
@@ -207,6 +195,46 @@
 						<reference key="destination" ref="181870677"/>
 					</object>
 					<int key="connectionID">38</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">doneButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="986105569"/>
+					</object>
+					<int key="connectionID">42</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">navItem</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="281692041"/>
+					</object>
+					<int key="connectionID">43</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">doneEditing:</string>
+						<reference key="source" ref="986105569"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">44</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">cancelButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="109005595"/>
+					</object>
+					<int key="connectionID">46</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">cancelEditing:</string>
+						<reference key="source" ref="109005595"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">47</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -234,9 +262,9 @@
 						<reference key="object" ref="723610231"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="963809261"/>
 							<reference ref="497071086"/>
 							<reference ref="926666256"/>
+							<reference ref="963809261"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -268,7 +296,6 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="181870677"/>
-							<reference ref="72289245"/>
 						</object>
 						<reference key="parent" ref="497071086"/>
 					</object>
@@ -278,9 +305,14 @@
 						<reference key="parent" ref="281692041"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">25</int>
-						<reference key="object" ref="72289245"/>
-						<reference key="parent" ref="281692041"/>
+						<int key="objectID">41</int>
+						<reference key="object" ref="986105569"/>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">45</int>
+						<reference key="object" ref="109005595"/>
+						<reference key="parent" ref="0"/>
 					</object>
 				</object>
 			</object>
@@ -292,12 +324,13 @@
 					<string>-2.CustomClassName</string>
 					<string>18.IBPluginDependency</string>
 					<string>23.IBPluginDependency</string>
-					<string>25.IBPluginDependency</string>
 					<string>29.IBPluginDependency</string>
 					<string>39.IBPluginDependency</string>
 					<string>4.IBEditorWindowLastContentRect</string>
 					<string>4.IBPluginDependency</string>
 					<string>40.IBPluginDependency</string>
+					<string>41.IBPluginDependency</string>
+					<string>45.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -307,8 +340,9 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>{{910, 179}, {320, 480}}</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
@@ -329,7 +363,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">40</int>
+			<int key="maxID">47</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -341,11 +375,13 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>bookmarkActiveStop:</string>
+							<string>cancelEditing:</string>
+							<string>doneEditing:</string>
 							<string>refreshView:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
 						</object>
@@ -354,7 +390,9 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>bookmarkButton</string>
+							<string>cancelButton</string>
+							<string>doneButton</string>
+							<string>navItem</string>
 							<string>refreshButton</string>
 							<string>searchBar</string>
 							<string>stopSelectorTableView</string>
@@ -362,6 +400,8 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIBarButtonItem</string>
+							<string>UIBarButtonItem</string>
+							<string>UINavigationItem</string>
 							<string>UIBarButtonItem</string>
 							<string>UISearchBar</string>
 							<string>UITableView</string>

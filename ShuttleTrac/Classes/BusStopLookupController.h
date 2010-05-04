@@ -12,13 +12,18 @@
 #import "BusMapViewController.h"
 #import "BookmarkedStopsDataStore.h"
 
-@interface BusStopLookupController : UIViewController <BusMapDataStoreDelegate, BusMapViewControllerDelegate, UITableViewDataSource, UITableViewDelegate,
-	UISearchBarDelegate> {
+@interface BusStopLookupController : UIViewController <BusMapDataStoreDelegate, BusMapViewControllerDelegate, 
+UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate> 
+{
 	IBOutlet UISearchBar *searchBar;
 	IBOutlet UITableView *stopSelectorTableView;
-	IBOutlet UIBarButtonItem *bookmarkButton;
+		
 	IBOutlet UIBarButtonItem *refreshButton;
-	
+	IBOutlet UIBarButtonItem *doneButton;
+	IBOutlet UIBarButtonItem *cancelButton;
+		
+	IBOutlet UINavigationItem *navItem;
+		
 	BusMapDataStore	*dataStore;
 	BookmarkedStopsDataStore *bookmarksDataStore;
 	
@@ -30,6 +35,7 @@
 }
 
 -(IBAction)refreshView:(UIBarButtonItem *)sender;
--(IBAction)bookmarkActiveStop:(UIBarButtonItem *)sender;
+-(IBAction)doneEditing:(UIBarButtonItem *)sender;
+-(IBAction)cancelEditing:(UIBarButtonItem *)sender;
 
 @end
