@@ -7,7 +7,6 @@
 //
 
 #import "ShuttleTracAppDelegate.h"
-#import "LoadingViewController.h"
 
 @implementation ShuttleTracAppDelegate
 
@@ -17,17 +16,18 @@
 @synthesize dataStore;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-	loadingViewController = [[LoadingViewController alloc] initWithNibName:@"LoadingViewController" bundle:nil];
-	[window	addSubview:loadingViewController.view];
-	
 	NSString *path = [self myArchivePath];
 
 	if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
         NSData *archiveData = [NSData dataWithContentsOfFile:path];
         dataStore = [NSKeyedUnarchiver unarchiveObjectWithData:archiveData];
     }
+		
+	if(!dataStore) 
+		dataStore = [[ShuttleTracDataStore alloc] init];
 	
-	[self performSelectorInBackground:@selector(loadDataStore) withObject:nil];
+	[window addSubview:tabBarController.view];
+	// [self performSelectorInBackground:@selector(loadDataStore) withObject:nil];
 }
 
 - (NSString *)myArchivePath {
@@ -42,22 +42,6 @@
 	NSString *path = [self myArchivePath];
     NSData *archiveData = [NSKeyedArchiver archivedDataWithRootObject:dataStore];
     [archiveData writeToFile:path atomically:YES];
-}
-
--(void)loadDataStore {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	
-	if(!dataStore) 
-		dataStore = [[ShuttleTracDataStore alloc] init];
-	[self performSelectorOnMainThread:@selector(loadMainApp) withObject:nil waitUntilDone:YES];
-	[pool release];
-}
-
--(void)loadMainApp {
-	[loadingViewController.view removeFromSuperview];
-	[loadingViewController release];
-	
-	[window addSubview:tabBarController.view];
 }
 
 /*
@@ -75,7 +59,6 @@
 
 - (void)dealloc {
     [tabBarController release];
-	[loadingViewController release];
     [window release];
 	[dataStore release];
     [super dealloc];
