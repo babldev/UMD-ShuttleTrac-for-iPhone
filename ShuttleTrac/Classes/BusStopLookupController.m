@@ -39,6 +39,10 @@
 	stopSelectorTableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
 	[stopSelectorTableViewController setView:stopSelectorTableView];
 	
+	BusStopArrivals *arrivals = dataStore.activeStopArrivals;
+	if (arrivals != nil)
+		searchBar.text = [NSString stringWithFormat:@"%d", arrivals.stop.stopNumber];
+	
 	[self setRefreshTimer:[NSTimer scheduledTimerWithTimeInterval:REFRESH_RATE target:dataStore
 														 selector:@selector(loadSelectedBusArrivals)
 														 userInfo:nil repeats:YES]];
