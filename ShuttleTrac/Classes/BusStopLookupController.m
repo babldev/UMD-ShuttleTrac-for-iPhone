@@ -178,6 +178,7 @@
 	if (stop != nil) {
 		[dataStore setActiveStop:stop];
 		searchBar.text = [NSString stringWithFormat:@"%d", dataStore.activeStopArrivals.stop.stopNumber];
+		navItem.rightBarButtonItem = cancelButton;
 	}
 	
 	[dataStore loadSelectedBusArrivals];
