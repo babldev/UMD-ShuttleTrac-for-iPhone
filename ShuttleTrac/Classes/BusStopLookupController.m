@@ -43,10 +43,6 @@
 		navItem.rightBarButtonItem = cancelButton;
 	}
 	
-	// Update bookmark button if we have an active stop
-	if (dataStore.activeStopArrivals != nil)
-		bookmarkCell.bookmarked = [bookmarksDataStore containsStop:dataStore.activeStopArrivals];
-	
 	[self setRefreshTimer:[NSTimer scheduledTimerWithTimeInterval:REFRESH_RATE target:dataStore
 														 selector:@selector(loadSelectedBusArrivals)
 														 userInfo:nil repeats:YES]];
@@ -147,6 +143,7 @@
 		
 		// Section 2 - Add/Remove Bookmark
 		else {
+			bookmarkCell.bookmarked = [bookmarksDataStore containsStop:dataStore.activeStopArrivals];
 			return bookmarkCell;
 		}
 	}
