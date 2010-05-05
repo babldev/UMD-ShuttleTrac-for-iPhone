@@ -13,6 +13,9 @@
 
 #define REFRESH_RATE 30
 
+#define STOP_SECTION		0
+#define BOOKMARK_SECTION	1
+
 @interface BusStopLookupController ( )
 @property (retain, readwrite) NSTimer *refreshTimer;
 @end
@@ -40,6 +43,10 @@
 		navItem.rightBarButtonItem = cancelButton;
 	}
 	
+	// Update bookmark button if we have an active stop
+	if (dataStore.activeStopArrivals != nil)
+		bookmarkCell.bookmarked = [bookmarksDataStore containsStop:dataStore.activeStopArrivals];
+	
 	[self setRefreshTimer:[NSTimer scheduledTimerWithTimeInterval:REFRESH_RATE target:dataStore
 														 selector:@selector(loadSelectedBusArrivals)
 														 userInfo:nil repeats:YES]];
@@ -63,16 +70,6 @@
 	[dataStore loadSelectedBusArrivals];
 }
 
-/*
--(IBAction)bookmarkActiveStop:(UIBarButtonItem *)sender {
-	NSMutableArray *bookmarkedStops = bookmarksDataStore.bookmarkedStops;
-	BusStopArrivals *newBookmark = dataStore.activeStopArrivals;
-	
-	if (![bookmarkedStops containsObject:newBookmark])
-		[bookmarkedStops insertObject:newBookmark atIndex:0];
-}
-*/
-
 -(IBAction)cancelEditing:(UIBarButtonItem *)sender {
 	searchBar.text = nil;
 	[dataStore setActiveStop:nil];
@@ -94,15 +91,36 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
+	// Stop selected
+    if ([dataStore activeStopArrivals] != nil)
+		/*
+		Section 1 - Upcoming Arrivals
+		Section 2 - Add/Remove Bookmark
+		 */
+		return 2;
+	
+	// Select route
+	else 
+		// Section 1 - All Routes
+		return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-	if ([dataStore activeStopArrivals] != nil)
-		return [[[dataStore activeStopArrivals] upcomingBuses] count];
+    // Stop selected
+	if ([dataStore activeStopArrivals] != nil) {
+		/*
+		 Section 1 - Upcoming Arrivals
+		 Section 2 - Add/Remove Bookmark
+		 */
+		
+		if (section == STOP_SECTION)
+			return [[[dataStore activeStopArrivals] upcomingBuses] count];
+		else
+			return 1; // Add/remove bookmark button
+	}
+	
+	// Select route
 	else 
 		return [[[dataStore allRoutes] allValues] count];
 }
@@ -110,18 +128,31 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	// Stop selected
     if ([dataStore activeStopArrivals] != nil) {
-		static NSString *CellIdentifier = @"BusTimes";
 		
-		BusTimeTableViewCell *cell = (BusTimeTableViewCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-		if (cell == nil) {
-			cell = [[[BusTimeTableViewCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
+		// Section 1 - Upcoming Arrivals
+		if ([indexPath section] == STOP_SECTION) {
+			static NSString *CellIdentifier = @"BusTimes";
+			
+			BusTimeTableViewCell *cell = (BusTimeTableViewCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+			if (cell == nil) {
+				cell = [[[BusTimeTableViewCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
+			}
+			
+			cell.busArrival = [[[dataStore activeStopArrivals] upcomingBuses] objectAtIndex:indexPath.row];
+				 
+			return cell;
 		}
 		
-		cell.busArrival = [[[dataStore activeStopArrivals] upcomingBuses] objectAtIndex:indexPath.row];
-			 
-		return cell;
-	} else {
+		// Section 2 - Add/Remove Bookmark
+		else {
+			return bookmarkCell;
+		}
+	}
+	
+	// Select route
+	else {
 		static NSString *CellIdentifier = @"BusRoutes";
 		
 		RouteSelectorTableViewCell *cell = (RouteSelectorTableViewCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -136,9 +167,16 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	// Stop selected
 	if ([dataStore activeStopArrivals] != nil) {
-		return [[dataStore activeStopArrivals] getBusStopName];
-	} else {
+		if (section == STOP_SECTION)
+			return [[dataStore activeStopArrivals] getBusStopName];
+		else
+			return nil;
+	}
+	
+	// Route selected
+	else {
 		return @"Or Select Route";
 	}
 }
@@ -147,7 +185,10 @@
 	BusStopArrivals *arrivals = [dataStore activeStopArrivals];
 	
 	if ([dataStore activeStopArrivals] != nil)
-		return [NSString stringWithFormat:@"Last Update: %@", [[arrivals lastRefresh] description]];
+		if (section == STOP_SECTION)
+			return [NSString stringWithFormat:@"Last Update: %@", [[arrivals lastRefresh] description]];
+		else
+			return nil;
 	else
 		return nil;
 
@@ -156,7 +197,22 @@
 #pragma mark UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if ([dataStore activeStopArrivals] == nil) {
+	if ([dataStore activeStopArrivals] != nil) {
+		// BOOKMARK_SECTION
+		if (indexPath.section == BOOKMARK_SECTION) {
+			BusStopArrivals *activeStop = dataStore.activeStopArrivals;
+			
+			if (![bookmarksDataStore containsStop:activeStop]) {
+				[bookmarksDataStore addStopToBookmarks:activeStop];
+				bookmarkCell.bookmarked = YES;
+			} else {
+				[bookmarksDataStore removeStopFromBookmarks:activeStop];
+				bookmarkCell.bookmarked = NO;
+			}
+
+			bookmarkCell.selected = NO;
+		}
+	} else  {
 		dataStore.activeRoute = [[[dataStore allRoutes] allValues] objectAtIndex:indexPath.row];
 		
 		if (busMapViewController == nil) {
@@ -169,6 +225,8 @@
 		
 		[self presentModalViewController:busMapViewController animated:YES];
 		[busMapViewController reloadMap];
+		
+		
 	}
 }
 

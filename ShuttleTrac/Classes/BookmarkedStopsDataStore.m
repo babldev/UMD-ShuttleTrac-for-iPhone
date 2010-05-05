@@ -40,6 +40,33 @@
 
 }
 
+-(void)addStopToBookmarks:(BusStopArrivals *)newArrivals {
+	if (![self containsStop:newArrivals])
+		[bookmarkedStops insertObject:newArrivals atIndex:0];
+}
+
+-(void)removeStopFromBookmarks:(BusStopArrivals *)oldArrivals {
+	BusStopArrivals *localArrivals = nil;
+	
+	for (BusStopArrivals *arr in bookmarkedStops) {
+		if ([arr isSameStopAs:oldArrivals]) {
+			localArrivals = arr;
+			break;
+		}
+	}
+	
+	[bookmarkedStops removeObject:localArrivals];
+}
+
+-(BOOL)containsStop:(BusStopArrivals *)compareArrivals {
+	for (BusStopArrivals *arr in bookmarkedStops) {
+		if ([arr isSameStopAs:compareArrivals])
+			return YES;
+	}
+	
+	return NO;
+}
+
 -(void)refreshBookmarkedStopArrivals {
 	// Do nothing for now
 	[delegate refreshBookmarkedStopArrivalsCompleted:self.bookmarkedStops];

@@ -30,6 +30,7 @@
 		418D7E3A117EB9490027754F /* DataStoreGrabber.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7E39117EB9490027754F /* DataStoreGrabber.m */; };
 		418D7F70117F65EC0027754F /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 418D7F6F117F65EC0027754F /* libsqlite3.0.dylib */; };
 		41C97231118FCAEB0088FBF7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 41C97230118FCAEB0088FBF7 /* Default.png */; };
+		41CF99F711910E450061BCCC /* BookmarkToggleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41CF99F611910E450061BCCC /* BookmarkToggleTableViewCell.m */; };
 		41D34A3A1184BBA30038A7A7 /* BusStopLookupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D34A391184BBA30038A7A7 /* BusStopLookupController.m */; };
 		41D34A3D1184BBE20038A7A7 /* BusStopLookupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41D34A3C1184BBE20038A7A7 /* BusStopLookupController.xib */; };
 		8528A31E117F7730000CDEF3 /* BookmarkedStopsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8528A31C117F7730000CDEF3 /* BookmarkedStopsController.m */; };
@@ -77,6 +78,8 @@
 		418D7E39117EB9490027754F /* DataStoreGrabber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStoreGrabber.m; sourceTree = "<group>"; };
 		418D7F6F117F65EC0027754F /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		41C97230118FCAEB0088FBF7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		41CF99F511910E450061BCCC /* BookmarkToggleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkToggleTableViewCell.h; sourceTree = "<group>"; };
+		41CF99F611910E450061BCCC /* BookmarkToggleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkToggleTableViewCell.m; sourceTree = "<group>"; };
 		41D34A381184BBA30038A7A7 /* BusStopLookupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusStopLookupController.h; sourceTree = "<group>"; };
 		41D34A391184BBA30038A7A7 /* BusStopLookupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusStopLookupController.m; sourceTree = "<group>"; };
 		41D34A3C1184BBE20038A7A7 /* BusStopLookupController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusStopLookupController.xib; sourceTree = "<group>"; };
@@ -197,6 +200,8 @@
 				411E12B81183FE95004D7070 /* RouteSelectorTableViewCell.m */,
 				41127317117C03E40082FBF7 /* BusTimeTableViewCell.h */,
 				41127318117C03E40082FBF7 /* BusTimeTableViewCell.m */,
+				41CF99F511910E450061BCCC /* BookmarkToggleTableViewCell.h */,
+				41CF99F611910E450061BCCC /* BookmarkToggleTableViewCell.m */,
 			);
 			name = "Bus Stop Lookup";
 			sourceTree = "<group>";
@@ -336,6 +341,7 @@
 				410CD9BF1183EC4100FACEF5 /* BusMapDataStore.m in Sources */,
 				411E12B91183FE95004D7070 /* RouteSelectorTableViewCell.m in Sources */,
 				41D34A3A1184BBA30038A7A7 /* BusStopLookupController.m in Sources */,
+				41CF99F711910E450061BCCC /* BookmarkToggleTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

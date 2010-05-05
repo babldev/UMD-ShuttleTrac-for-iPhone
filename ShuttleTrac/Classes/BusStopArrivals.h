@@ -54,6 +54,7 @@
 -(id)initWithBusStop:(BusStop *)bStop forBusRoute:(BusRoute *)bRoute;
 
 -(void)refreshUpcomingBuses;
+-(BOOL)isSameStopAs:(BusStopArrivals *)otherArrivals;
 
 @property (assign, readonly) BusRoute *route;
 @property (assign, readonly) BusStop *stop;

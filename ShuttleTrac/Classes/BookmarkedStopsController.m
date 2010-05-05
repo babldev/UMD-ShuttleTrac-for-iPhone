@@ -79,10 +79,14 @@
 
 -(void)refreshBookmarks {
 	// Get new arrivals for all bookmarked stops
+	bookmarkedStops = dataStore.bookmarkedStops;
+	
 	for (BusStopArrivals *bookmarkStop in bookmarkedStops) {
 		[bookmarkStop setDelegate:self];
 		[bookmarkStop refreshUpcomingBuses];
 	}
+	
+	[tableView reloadData];
 }
 
 #pragma mark -
@@ -95,11 +99,7 @@
 #pragma mark Actions
 
 -(IBAction)refreshBookmarksPressed:(UIBarButtonItem *)sender {
-	// Get new arrivals for all bookmarked stops
-	for (BusStopArrivals *bookmarkStop in bookmarkedStops) {
-		[bookmarkStop setDelegate:self];
-		[bookmarkStop refreshUpcomingBuses];
-	}
+	[self refreshBookmarks];
 }
 
 -(IBAction)editBookmarks:(UIBarButtonItem *)sender {

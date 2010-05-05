@@ -126,5 +126,8 @@
 	[pool release];
 }
 
+-(BOOL)isSameStopAs:(BusStopArrivals *)otherArrivals {
+	return [stop isEqual:otherArrivals.stop];
+}
 
 @end

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ShuttleTracDataStore.h"
+#import "BusStopArrivals.h"
 
 @class ShuttleTracDataStore;
 
@@ -25,6 +26,10 @@
 }
 
 -(id)initWithDataStore:(ShuttleTracDataStore *)dStore;
+
+-(BOOL)containsStop:(BusStopArrivals *)compareArrivals;
+-(void)addStopToBookmarks:(BusStopArrivals *)newArrivals;
+-(void)removeStopFromBookmarks:(BusStopArrivals *)oldArrivals;
 
 -(void)refreshBookmarkedStopArrivals;
 
