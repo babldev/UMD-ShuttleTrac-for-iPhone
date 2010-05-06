@@ -10,6 +10,8 @@
 #import "ShuttleTracDataStore.h"
 #import "BusStopArrivals.h"
 
+extern NSString *const BookmarksDidChange;
+
 @class ShuttleTracDataStore;
 
 @protocol BookmarkedStopsDataStoreDelegate
@@ -30,6 +32,7 @@
 -(BOOL)containsStop:(BusStopArrivals *)compareArrivals;
 -(void)addStopToBookmarks:(BusStopArrivals *)newArrivals;
 -(void)removeStopFromBookmarks:(BusStopArrivals *)oldArrivals;
+-(void)replaceBookmarks:(NSArray *)newBookmarks;
 
 -(void)refreshBookmarkedStopArrivals;
 

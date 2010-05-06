@@ -8,6 +8,8 @@
 
 #import "BookmarkedStopsDataStore.h"
 
+NSString *const BookmarksDidChange = @"BookmarksDidChange";
+
 @interface BookmarkedStopsDataStore ( )
 @property (retain, readwrite) NSMutableArray *bookmarkedStops;
 @end
@@ -19,11 +21,6 @@
 	if (self = [super init]) {
 		dataStore = dStore;
 		self.bookmarkedStops = [[[NSMutableArray alloc] init] autorelease];
-		
-		// FIXME - Debug statement
-		// [self.bookmarkedStops addObject:[[dataStore allBusStops] objectAtIndex:100]];
-		// [self.bookmarkedStops addObject:[[dataStore allBusStops] objectAtIndex:101]];
-		// [self.bookmarkedStops addObject:[[dataStore allBusStops] objectAtIndex:102]];
 	}
 	
 	return self;
@@ -41,8 +38,10 @@
 }
 
 -(void)addStopToBookmarks:(BusStopArrivals *)newArrivals {
-	if (![self containsStop:newArrivals])
+	if (![self containsStop:newArrivals]) {
 		[bookmarkedStops insertObject:newArrivals atIndex:0];
+		[[NSNotificationCenter defaultCenter] postNotificationName:BookmarksDidChange object:self userInfo:nil];
+	}
 }
 
 -(void)removeStopFromBookmarks:(BusStopArrivals *)oldArrivals {
@@ -56,6 +55,12 @@
 	}
 	
 	[bookmarkedStops removeObject:localArrivals];
+	[[NSNotificationCenter defaultCenter] postNotificationName:BookmarksDidChange object:self userInfo:nil];
+}
+
+-(void)replaceBookmarks:(NSArray *)newBookmarks {
+	[self setBookmarkedStops:[[newBookmarks mutableCopy] autorelease]];
+	[[NSNotificationCenter defaultCenter] postNotificationName:BookmarksDidChange object:self userInfo:nil];
 }
 
 -(BOOL)containsStop:(BusStopArrivals *)compareArrivals {

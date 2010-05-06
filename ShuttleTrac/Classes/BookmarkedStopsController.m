@@ -35,6 +35,11 @@
 													  selector:@selector(refreshBookmarks)
 													  userInfo:nil repeats:YES]];
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self 
+											 selector:@selector(bookmarksRefreshNeeded) 
+												 name:BookmarksDidChange 
+											   object:nil];
+	
     [super viewDidLoad];
 }
 
@@ -103,10 +108,8 @@
 }
 
 -(IBAction)editBookmarks:(UIBarButtonItem *)sender {
-	if (bookmarksEditorController == nil) {
-		bookmarksEditorController = [[BookmarksEditorController alloc] initWithNibName:@"BookmarksEditorController"
-																				bundle:nil];
-	}
+	bookmarksEditorController = [[BookmarksEditorController alloc] initWithNibName:@"BookmarksEditorController"
+																			bundle:nil];
 	
 	bookmarksEditorController.delegate = self;
 	bookmarksEditorController.bookmarkedStops = [[bookmarkedStops mutableCopy] autorelease];
@@ -119,15 +122,25 @@
 #pragma mark BookmarksEditorControllerDelegate
 
 -(void)bookmarkEditingCompleted:(NSArray *)bookmarks {
-	[self dismissModalViewControllerAnimated:YES];
-	[bookmarkedStops setArray:bookmarks];
+	[dataStore replaceBookmarks:bookmarks];
 	
 	[self refreshBookmarks];
 	[tableView reloadData];
+	
+	[self bookmarkEditingCancelled];
 }
 
 -(void)bookmarkEditingCancelled {
+	[bookmarksEditorController release];
+	bookmarksEditorController = nil;
+	
 	[self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark BookmarksDidChange Observer
+-(void)bookmarksRefreshNeeded {
+	bookmarkedStops = [dataStore bookmarkedStops];
+	[self refreshBookmarks];
 }
 
 #pragma mark -
@@ -152,6 +165,8 @@
 	
 	[refreshTimer release];
 	refreshTimer = nil;
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:BookmarksDidChange];
 	
     [super dealloc];
 }

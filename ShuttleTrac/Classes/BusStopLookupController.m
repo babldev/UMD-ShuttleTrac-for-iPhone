@@ -46,6 +46,11 @@
 	[self setRefreshTimer:[NSTimer scheduledTimerWithTimeInterval:REFRESH_RATE target:dataStore
 														 selector:@selector(loadSelectedBusArrivals)
 														 userInfo:nil repeats:YES]];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self 
+											 selector:@selector(bookmarksRefreshNeeded) 
+												 name:BookmarksDidChange 
+											   object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -274,6 +279,13 @@
 			[sBar resignFirstResponder];
 		}
 	}
+}
+
+#pragma mark BookmarksDidChange Observer
+
+-(void)bookmarksRefreshNeeded {
+	bookmarkCell.bookmarked = [bookmarksDataStore containsStop:dataStore.activeStopArrivals];
+	[bookmarkCell layoutSubviews];
 }
 
 #pragma mark dealloc
