@@ -21,7 +21,22 @@
 }
 
 - (void)layoutSubviews {
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"h:mm"];
+	
 	busLabel.text = arrivals.route.routeName;
+	NSArray *upcomingTimes = arrivals.upcomingArrivals;
+	NSInteger count = [upcomingTimes count];
+	
+	time1.text = (count >= 1) ? [dateFormatter stringFromDate:[upcomingTimes objectAtIndex:0]] : nil;
+	time2.text = (count >= 2) ? [dateFormatter stringFromDate:[upcomingTimes objectAtIndex:1]] : nil;
+	time3.text = (count >= 3) ? [dateFormatter stringFromDate:[upcomingTimes objectAtIndex:2]] : nil;
+	time4.text = (count >= 4) ? [dateFormatter stringFromDate:[upcomingTimes objectAtIndex:3]] : nil;
+	time5.text = (count >= 5) ? [dateFormatter stringFromDate:[upcomingTimes objectAtIndex:4]] : nil;
+	
+	NSInteger nextBusIn = (int) ([[upcomingTimes objectAtIndex:0] timeIntervalSinceNow] / 60);
+	timeUntilArrivalLabel.text = (nextBusIn >= 0 && nextBusIn < 100) ? [NSString stringWithFormat:@"%d", nextBusIn] : @"?";
+	
 	// Customize cell
 	/*
 	self.textLabel.text = [[busArrival route] routeName];
@@ -41,6 +56,8 @@
 	
 	self.detailTextLabel.text = countdown;
 	*/
+	
+	[dateFormatter release];
 	
 	[super layoutSubviews];
 }

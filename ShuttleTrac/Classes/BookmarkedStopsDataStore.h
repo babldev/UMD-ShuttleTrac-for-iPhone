@@ -25,6 +25,8 @@ extern NSString *const BookmarksDidChange;
 	NSMutableArray *bookmarkedStops;
 	
 	id <BookmarkedStopsDataStoreDelegate> delegate;
+	
+	BOOL refreshing;
 }
 
 -(id)initWithDataStore:(ShuttleTracDataStore *)dStore;

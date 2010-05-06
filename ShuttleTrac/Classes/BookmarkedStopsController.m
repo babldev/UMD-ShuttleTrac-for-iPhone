@@ -93,8 +93,13 @@
 }
 
 -(void)refreshBookmarks {
-	// Get new arrivals for all bookmarked stops
 	bookmarkedStops = dataStore.bookmarkedStops;
+	
+	for (BusStopArrivals *bookmarkStop in bookmarkedStops) {
+		[bookmarkStop setDelegate:self];
+		[bookmarkStop refreshUpcomingBuses];
+	}
+	
 	[tableView reloadData];
 }
 
@@ -147,7 +152,6 @@
 
 #pragma mark BookmarksDidChange Observer
 -(void)bookmarksRefreshNeeded {
-	bookmarkedStops = [dataStore bookmarkedStops];
 	[self refreshBookmarks];
 }
 

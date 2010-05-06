@@ -21,6 +21,7 @@ NSString *const BookmarksDidChange = @"BookmarksDidChange";
 	if (self = [super init]) {
 		dataStore = dStore;
 		self.bookmarkedStops = [[[NSMutableArray alloc] init] autorelease];
+		refreshing = NO;
 	}
 	
 	return self;
@@ -29,6 +30,7 @@ NSString *const BookmarksDidChange = @"BookmarksDidChange";
 	if (self = [super init]) {
 		bookmarkedStops = [[coder decodeObjectForKey:@"bookmarkedStops"] retain];
 		dataStore = [[coder decodeObjectForKey:@"dataStore"] retain];
+		refreshing = NO;
 	}
 	
 	return self;
@@ -76,7 +78,7 @@ NSString *const BookmarksDidChange = @"BookmarksDidChange";
 }
 
 -(void)refreshBookmarkedStopArrivals {
-	// Do nothing for now
+
 	[delegate refreshBookmarkedStopArrivalsCompleted:self.bookmarkedStops];
 }
 

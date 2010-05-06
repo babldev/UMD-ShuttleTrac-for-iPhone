@@ -61,9 +61,9 @@
 
 // Begin loading of upcoming buses for activeStop
 -(void)loadSelectedBusArrivals {
-	if (activeStopArrivals != nil)
+	if (activeStopArrivals != nil) {
 		[activeStopArrivals refreshUpcomingBuses];
-	else
+	} else
 		[delegate loadSelectedBusArrivalsCompleted:nil];
 }
 
