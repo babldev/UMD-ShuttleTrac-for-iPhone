@@ -12,7 +12,7 @@
 
 extern NSString *const BookmarksDidChange;
 
-@class ShuttleTracDataStore;
+@class BusStopArrivals, ShuttleTracDataStore;
 
 @protocol BookmarkedStopsDataStoreDelegate
 -(void)refreshBookmarkedStopArrivalsCompleted:(NSMutableArray *)bookmarkedStops;

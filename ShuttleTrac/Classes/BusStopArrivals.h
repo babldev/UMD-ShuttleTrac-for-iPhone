@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+#import "ShuttleTracDataStore.h"
+#import "BusStopArrivals.h"
+#import "BusStopArrivalsForRoute.h"
 #import "BusStop.h"
 #import "BusRoute.h"
-#import "BusArrival.h"
 
-@class BusStopArrivals;
+@class ShuttleTracDataStore, BusStopArrivals;
 
 @protocol BusStopArrivalsDelegate
 
@@ -21,12 +23,14 @@
 @end
 
 @interface BusStopArrivals : NSObject <NSCoding> {
+	ShuttleTracDataStore *dataStore;
+	
 	// Route for the arriving buses
 	BusRoute *route;
 	BusStop *stop;
 	
-	// NSArray of BusArrival
-	NSMutableArray *upcomingBuses;
+	// NSArray of BusStopArrivalsForRoute
+	NSMutableArray *upcomingBusRoutes;
 	
 	// Time of last refresh
 	NSDate *lastRefresh;
@@ -37,16 +41,13 @@
 	
 	BOOL refreshing;
 	
+	BusStopArrivalsForRoute *currentParsingArrivalsRoute;
+	
 	// From ShuttleTracDataStore
 	NSDictionary *routes; 
 	NSDictionary *stops;
-	
-	//used for XML parsing
-	BusArrival *currBusArrival;
-	
-	NSInteger currRouteNum;
-	
-	NSMutableArray *newUpcomingBuses;
+		
+	NSMutableArray *newUpcomingBusRoutes;
 }
 
 -(NSString *) getBusStopName;
@@ -59,7 +60,7 @@
 @property (assign, readonly) BusRoute *route;
 @property (assign, readonly) BusStop *stop;
 
-@property (retain, readonly) NSArray *upcomingBuses;
+@property (retain, readonly) NSMutableArray *upcomingBusRoutes;
 @property (retain, readonly) NSDate *lastRefresh;
 @property (assign, readwrite) id <BusStopArrivalsDelegate> delegate;
 

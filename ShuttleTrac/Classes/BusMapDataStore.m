@@ -7,6 +7,7 @@
 //
 
 #import "BusMapDataStore.h"
+#import "DataStoreGrabber.h"
 
 @interface BusMapDataStore ( )
 @property (retain, readwrite) NSArray *mappedStops;
@@ -26,18 +27,21 @@
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
-    mappedStops = [[coder decodeObjectForKey:@"mappedStops"] retain];
-    activeStopArrivals = [[coder decodeObjectForKey:@"activeStopArrivals"] retain];
-    activeRoute = [[coder decodeObjectForKey:@"activeRoute"] retain];
-	dataStore = [[coder decodeObjectForKey:@"dataStore"] retain]; //Extremely inefficient
+	if (self = [super init]) {
+		dataStore = [[coder decodeObjectForKey:@"dataStore"] retain];
+		mappedStops = [[coder decodeObjectForKey:@"mappedStops"] retain];
+		activeStopArrivals = [[coder decodeObjectForKey:@"activeStopArrivals"] retain];
+		activeRoute = [[coder decodeObjectForKey:@"activeRoute"] retain];
+	}
+	
 	return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
+	[coder encodeObject:dataStore forKey:@"dataStore"];
 	[coder encodeObject:mappedStops forKey :@"mappedStops"];
 	[coder encodeObject:activeStopArrivals forKey :@"activeStopArrivals"];
 	[coder encodeObject:activeRoute forKey :@"activeRoute"];
-	[coder encodeObject:dataStore forKey :@"dataStore"];
 }
 
 -(void)setActiveStop:(BusStop *)bStop {

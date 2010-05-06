@@ -40,10 +40,11 @@
 	return self;
 }
 - (id)initWithCoder:(NSCoder *)coder {
-    bookmarkedStopsDataStore = [[coder decodeObjectForKey:@"bookmarkedStopsDataStore"] retain];
-	busMapDataStore = [[coder decodeObjectForKey:@"busMapDataStore"] retain];
 	busStops = [[coder decodeObjectForKey:@"busStops"] retain];
 	busRoutes = [[coder decodeObjectForKey:@"busRoutes"] retain];
+	
+    bookmarkedStopsDataStore = [[coder decodeObjectForKey:@"bookmarkedStopsDataStore"] retain];
+	busMapDataStore = [[coder decodeObjectForKey:@"busMapDataStore"] retain];
 
 	return [self retain]; //Shouldn't have to retain here...
 }
@@ -51,6 +52,7 @@
 - (void)encodeWithCoder:(NSCoder *)coder {
     [coder encodeObject:bookmarkedStopsDataStore forKey: @"bookmarkedStopsDataStore"];
 	[coder encodeObject:busMapDataStore forKey: @"busMapDataStore"];
+	
 	[coder encodeObject:busRoutes forKey: @"busRoutes"];
 	[coder encodeObject:busStops forKey: @"busStops"];
 }

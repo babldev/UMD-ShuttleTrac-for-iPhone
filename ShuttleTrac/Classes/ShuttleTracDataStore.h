@@ -15,7 +15,8 @@
 #import "BusStop.h"
 #import "BusRoute.h"
 
-@class BookmarkedStopsDataStore, BusMapDataStore;
+@class BookmarkedStopsDataStore;
+@class BusMapDataStore;
 
 @interface ShuttleTracDataStore : NSObject <NSCoding>{
 	//Test

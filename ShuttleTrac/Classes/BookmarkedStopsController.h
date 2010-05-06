@@ -19,7 +19,6 @@
 	BookmarksEditorController *bookmarksEditorController;
 	
 	NSMutableArray *bookmarkedStops;
-	NSMutableDictionary *bookmarkedStopsArrivals;
 	
 	UITableViewController *tableViewController;
 	

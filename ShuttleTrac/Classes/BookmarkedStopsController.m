@@ -35,6 +35,7 @@
 													  selector:@selector(refreshBookmarks)
 													  userInfo:nil repeats:YES]];
 	
+	[self refreshBookmarks];
 	[[NSNotificationCenter defaultCenter] addObserver:self 
 											 selector:@selector(bookmarksRefreshNeeded) 
 												 name:BookmarksDidChange 
@@ -53,23 +54,32 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-	NSArray *arrivals = [[bookmarkedStops objectAtIndex:section] upcomingBuses];
-    return [arrivals count];
+	return [[[bookmarkedStops objectAtIndex:section] upcomingBusRoutes] count];
 }
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"BookmarkedStops";
+    static NSString *CellIdentifier = @"BusTimeCell";
     
     BusTimeTableViewCell *cell = (BusTimeTableViewCell *) [tView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[BusTimeTableViewCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
-    }
+		NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"BusTimeTableViewCell" 
+																 owner:self 
+															   options:nil];
+		
+		for (id currentObject in topLevelObjects) {
+			if ([currentObject isKindOfClass:[UITableViewCell class]]) {
+				cell = (BusTimeTableViewCell *) currentObject;
+				break;
+			}
+		}
+	}
     
     // Configure the cell...
-	NSArray *arrivals = [[bookmarkedStops objectAtIndex:[indexPath section]] upcomingBuses];
-    [cell setBusArrival:[arrivals objectAtIndex:[indexPath row]]];
+	// NSArray *arrivals = [[bookmarkedStops objectAtIndex:[indexPath section]] upcomingBusRoutes];
+    NSArray *upcomingRoutes = [[bookmarkedStops objectAtIndex:[indexPath section]] upcomingBusRoutes];
+	[cell setArrivals:[upcomingRoutes objectAtIndex:[indexPath row]]];
 	
     return cell;
 }
@@ -85,12 +95,6 @@
 -(void)refreshBookmarks {
 	// Get new arrivals for all bookmarked stops
 	bookmarkedStops = dataStore.bookmarkedStops;
-	
-	for (BusStopArrivals *bookmarkStop in bookmarkedStops) {
-		[bookmarkStop setDelegate:self];
-		[bookmarkStop refreshUpcomingBuses];
-	}
-	
 	[tableView reloadData];
 }
 

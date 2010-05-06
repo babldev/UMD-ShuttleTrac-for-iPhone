@@ -116,7 +116,7 @@
 		 */
 		
 		if (section == STOP_SECTION)
-			return [[[dataStore activeStopArrivals] upcomingBuses] count];
+			return [[[dataStore activeStopArrivals] upcomingBusRoutes] count];
 		else
 			return 1; // Add/remove bookmark button
 	}
@@ -134,14 +134,24 @@
 		
 		// Section 1 - Upcoming Arrivals
 		if ([indexPath section] == STOP_SECTION) {
-			static NSString *CellIdentifier = @"BusTimes";
+			
+			static NSString *CellIdentifier = @"BusTimeCell";
 			
 			BusTimeTableViewCell *cell = (BusTimeTableViewCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 			if (cell == nil) {
-				cell = [[[BusTimeTableViewCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
+				NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"BusTimeTableViewCell" 
+																		 owner:self 
+																	   options:nil];
+				
+				for (id currentObject in topLevelObjects) {
+					if ([currentObject isKindOfClass:[UITableViewCell class]]) {
+						cell = (BusTimeTableViewCell *) currentObject;
+						break;
+					}
+				}
 			}
-			
-			cell.busArrival = [[[dataStore activeStopArrivals] upcomingBuses] objectAtIndex:indexPath.row];
+
+			cell.arrivals = [[[dataStore activeStopArrivals] upcomingBusRoutes] objectAtIndex:[indexPath row]];
 				 
 			return cell;
 		}

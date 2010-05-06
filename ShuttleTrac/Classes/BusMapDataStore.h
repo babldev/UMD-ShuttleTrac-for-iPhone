@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ShuttleTracDataStore.h"
 #import "BusStopArrivals.h"
+#import "BusRoute.h"
+#import "BusStop.h"
 
-@class ShuttleTracDataStore;
+@protocol BusStopArrivalsDelegate;
 
 @protocol BusMapDataStoreDelegate
 
@@ -19,6 +20,7 @@
 
 @end
 
+@class BusStop;
 
 @interface BusMapDataStore : NSObject <BusStopArrivalsDelegate, NSCoding>{
 	ShuttleTracDataStore *dataStore;

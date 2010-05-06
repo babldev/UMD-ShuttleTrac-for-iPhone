@@ -11,15 +11,7 @@
 
 @implementation BusTimeTableViewCell
 
-@synthesize busArrival;
-
-- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier {
-    if ((self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier])) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-    return self;
-}
-
+@synthesize arrivals;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
 
@@ -29,7 +21,9 @@
 }
 
 - (void)layoutSubviews {
+	busLabel.text = arrivals.route.routeName;
 	// Customize cell
+	/*
 	self.textLabel.text = [[busArrival route] routeName];
 	
 	// Format countodwn
@@ -46,13 +40,14 @@
 	}
 	
 	self.detailTextLabel.text = countdown;
+	*/
 	
 	[super layoutSubviews];
 }
 
 - (void)dealloc {
-	[busArrival release];
-	busArrival = nil;
+	[arrivals release];
+	arrivals = nil;
 	
     [super dealloc];
 }

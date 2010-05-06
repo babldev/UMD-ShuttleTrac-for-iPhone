@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
-#import "BusArrival.h"
 
 @interface BusStop : NSObject <MKAnnotation, NSCoding> {
 	// Name of the bus stop

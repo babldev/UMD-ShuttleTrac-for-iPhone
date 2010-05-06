@@ -26,9 +26,10 @@
 		418D7D62117E9E880027754F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418D7D61117E9E880027754F /* AddressBook.framework */; };
 		418D7D70117EA1660027754F /* ShuttleTracDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7D6F117EA1660027754F /* ShuttleTracDataStore.m */; };
 		418D7D73117EA1FB0027754F /* BusStopArrivals.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7D72117EA1FB0027754F /* BusStopArrivals.m */; };
-		418D7D90117EA7D70027754F /* BusArrival.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7D8F117EA7D70027754F /* BusArrival.m */; };
 		418D7E3A117EB9490027754F /* DataStoreGrabber.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7E39117EB9490027754F /* DataStoreGrabber.m */; };
 		418D7F70117F65EC0027754F /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 418D7F6F117F65EC0027754F /* libsqlite3.0.dylib */; };
+		41C7BCE91193337300A48A83 /* BusTimeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41C7BCE81193337300A48A83 /* BusTimeTableViewCell.xib */; };
+		41C7BD2C11933E3100A48A83 /* BusStopArrivalsForRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C7BD2B11933E3100A48A83 /* BusStopArrivalsForRoute.m */; };
 		41C97231118FCAEB0088FBF7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 41C97230118FCAEB0088FBF7 /* Default.png */; };
 		41CF99F711910E450061BCCC /* BookmarkToggleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41CF99F611910E450061BCCC /* BookmarkToggleTableViewCell.m */; };
 		41D34A3A1184BBA30038A7A7 /* BusStopLookupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D34A391184BBA30038A7A7 /* BusStopLookupController.m */; };
@@ -72,11 +73,12 @@
 		418D7D6F117EA1660027754F /* ShuttleTracDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShuttleTracDataStore.m; sourceTree = "<group>"; };
 		418D7D71117EA1FB0027754F /* BusStopArrivals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusStopArrivals.h; sourceTree = "<group>"; };
 		418D7D72117EA1FB0027754F /* BusStopArrivals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusStopArrivals.m; sourceTree = "<group>"; };
-		418D7D8E117EA7D70027754F /* BusArrival.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusArrival.h; sourceTree = "<group>"; };
-		418D7D8F117EA7D70027754F /* BusArrival.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusArrival.m; sourceTree = "<group>"; };
 		418D7E38117EB9490027754F /* DataStoreGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStoreGrabber.h; sourceTree = "<group>"; };
 		418D7E39117EB9490027754F /* DataStoreGrabber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStoreGrabber.m; sourceTree = "<group>"; };
 		418D7F6F117F65EC0027754F /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		41C7BCE81193337300A48A83 /* BusTimeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusTimeTableViewCell.xib; sourceTree = "<group>"; };
+		41C7BD2A11933E3100A48A83 /* BusStopArrivalsForRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusStopArrivalsForRoute.h; sourceTree = "<group>"; };
+		41C7BD2B11933E3100A48A83 /* BusStopArrivalsForRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusStopArrivalsForRoute.m; sourceTree = "<group>"; };
 		41C97230118FCAEB0088FBF7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		41CF99F511910E450061BCCC /* BookmarkToggleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkToggleTableViewCell.h; sourceTree = "<group>"; };
 		41CF99F611910E450061BCCC /* BookmarkToggleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkToggleTableViewCell.m; sourceTree = "<group>"; };
@@ -183,8 +185,8 @@
 		41127424117C0FE40082FBF7 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				41C7BCE71193330200A48A83 /* Shared */,
 				8528A31A117F771F000CDEF3 /* Bookmarked Stops */,
-				41127487117C12C50082FBF7 /* Bus Maps */,
 				41127425117C0FEA0082FBF7 /* Bus Stop Lookup */,
 			);
 			name = Tabs;
@@ -193,13 +195,12 @@
 		41127425117C0FEA0082FBF7 /* Bus Stop Lookup */ = {
 			isa = PBXGroup;
 			children = (
+				41127487117C12C50082FBF7 /* Bus Maps */,
 				41D34A381184BBA30038A7A7 /* BusStopLookupController.h */,
 				41D34A391184BBA30038A7A7 /* BusStopLookupController.m */,
 				41D34A3C1184BBE20038A7A7 /* BusStopLookupController.xib */,
 				411E12B71183FE95004D7070 /* RouteSelectorTableViewCell.h */,
 				411E12B81183FE95004D7070 /* RouteSelectorTableViewCell.m */,
-				41127317117C03E40082FBF7 /* BusTimeTableViewCell.h */,
-				41127318117C03E40082FBF7 /* BusTimeTableViewCell.m */,
 				41CF99F511910E450061BCCC /* BookmarkToggleTableViewCell.h */,
 				41CF99F611910E450061BCCC /* BookmarkToggleTableViewCell.m */,
 			);
@@ -230,12 +231,12 @@
 			children = (
 				418D7D71117EA1FB0027754F /* BusStopArrivals.h */,
 				418D7D72117EA1FB0027754F /* BusStopArrivals.m */,
+				41C7BD2A11933E3100A48A83 /* BusStopArrivalsForRoute.h */,
+				41C7BD2B11933E3100A48A83 /* BusStopArrivalsForRoute.m */,
 				4112742E117C10940082FBF7 /* BusRoute.h */,
 				4112742F117C10940082FBF7 /* BusRoute.m */,
 				41127430117C10940082FBF7 /* BusStop.h */,
 				41127431117C10940082FBF7 /* BusStop.m */,
-				418D7D8E117EA7D70027754F /* BusArrival.h */,
-				418D7D8F117EA7D70027754F /* BusArrival.m */,
 			);
 			name = "Bus Data";
 			sourceTree = "<group>";
@@ -251,6 +252,16 @@
 				410CD9BE1183EC4100FACEF5 /* BusMapDataStore.m */,
 			);
 			name = Persistent;
+			sourceTree = "<group>";
+		};
+		41C7BCE71193330200A48A83 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				41127317117C03E40082FBF7 /* BusTimeTableViewCell.h */,
+				41127318117C03E40082FBF7 /* BusTimeTableViewCell.m */,
+				41C7BCE81193337300A48A83 /* BusTimeTableViewCell.xib */,
+			);
+			name = Shared;
 			sourceTree = "<group>";
 		};
 		8528A31A117F771F000CDEF3 /* Bookmarked Stops */ = {
@@ -315,6 +326,7 @@
 				41D34A3D1184BBE20038A7A7 /* BusStopLookupController.xib in Resources */,
 				4132DDC2118D4C1400BAC3AF /* shuttletrac-logo-small.png in Resources */,
 				41C97231118FCAEB0088FBF7 /* Default.png in Resources */,
+				41C7BCE91193337300A48A83 /* BusTimeTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,7 +345,6 @@
 				4112748E117C13500082FBF7 /* BusMapViewController.m in Sources */,
 				418D7D70117EA1660027754F /* ShuttleTracDataStore.m in Sources */,
 				418D7D73117EA1FB0027754F /* BusStopArrivals.m in Sources */,
-				418D7D90117EA7D70027754F /* BusArrival.m in Sources */,
 				418D7E3A117EB9490027754F /* DataStoreGrabber.m in Sources */,
 				8528A31E117F7730000CDEF3 /* BookmarkedStopsController.m in Sources */,
 				85624D8E1181E74C007AE93C /* BookmarksEditorController.m in Sources */,
@@ -342,6 +353,7 @@
 				411E12B91183FE95004D7070 /* RouteSelectorTableViewCell.m in Sources */,
 				41D34A3A1184BBA30038A7A7 /* BusStopLookupController.m in Sources */,
 				41CF99F711910E450061BCCC /* BookmarkToggleTableViewCell.m in Sources */,
+				41C7BD2C11933E3100A48A83 /* BusStopArrivalsForRoute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

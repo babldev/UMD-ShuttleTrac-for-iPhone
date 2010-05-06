@@ -26,8 +26,11 @@ NSString *const BookmarksDidChange = @"BookmarksDidChange";
 	return self;
 }
 - (id)initWithCoder:(NSCoder *)coder {
-    bookmarkedStops = [[coder decodeObjectForKey:@"bookmarkedStops"] retain];
-	dataStore = [[coder decodeObjectForKey:@"dataStore"] retain];
+	if (self = [super init]) {
+		bookmarkedStops = [[coder decodeObjectForKey:@"bookmarkedStops"] retain];
+		dataStore = [[coder decodeObjectForKey:@"dataStore"] retain];
+	}
+	
 	return self;
 }
 
