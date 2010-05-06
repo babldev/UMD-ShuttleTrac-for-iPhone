@@ -15,7 +15,7 @@
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier])) {
-        // Initialization code
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }
