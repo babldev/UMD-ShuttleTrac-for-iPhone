@@ -11,7 +11,7 @@
 #import "BusTimeTableViewCell.h"
 #import "RouteSelectorTableViewCell.h"
 
-#define REFRESH_RATE 30
+#define REFRESH_RATE 60
 
 #define STOP_SECTION		0
 #define BOOKMARK_SECTION	1

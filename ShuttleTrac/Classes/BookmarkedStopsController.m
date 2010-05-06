@@ -11,7 +11,7 @@
 #import "DataStoreGrabber.h"
 #import "BusStopArrivals.h"
 
-#define REFRESH_RATE 30
+#define REFRESH_RATE 60
 
 @interface BookmarkedStopsController ( )
 
@@ -87,10 +87,10 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	return [[bookmarkedStops objectAtIndex:section] getBusStopName];
 }
-
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-	return [NSString stringWithFormat:@"Last Update: %@", [[[bookmarkedStops objectAtIndex:section] lastRefresh] description]];
-}
+//
+//- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+//	return [NSString stringWithFormat:@"Last Update: %@", [[[bookmarkedStops objectAtIndex:section] lastRefresh] description]];
+//}
 
 -(void)refreshBookmarks {
 	bookmarkedStops = dataStore.bookmarkedStops;
