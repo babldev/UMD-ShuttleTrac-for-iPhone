@@ -225,10 +225,9 @@
 		busMapViewController.dataStore = dataStore;
 		busMapViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 		
-		[self presentModalViewController:busMapViewController animated:YES];
+		[busMapViewController loadView];
 		[busMapViewController reloadMap];
-		
-		
+		[self presentModalViewController:busMapViewController animated:YES];
 	}
 }
 

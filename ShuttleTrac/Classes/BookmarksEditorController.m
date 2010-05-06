@@ -11,7 +11,7 @@
 
 @implementation BookmarksEditorController
 
-@synthesize bookmarkedStops, delegate;
+@synthesize bookmarkedStops, delegate, tableView;
 
 #pragma mark -
 #pragma mark View lifecycle

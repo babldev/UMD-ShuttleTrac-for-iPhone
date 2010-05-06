@@ -108,12 +108,19 @@
 }
 
 -(IBAction)editBookmarks:(UIBarButtonItem *)sender {
-	bookmarksEditorController = [[BookmarksEditorController alloc] initWithNibName:@"BookmarksEditorController"
+	if (bookmarksEditorController == nil) {
+		bookmarksEditorController = [[BookmarksEditorController alloc] initWithNibName:@"BookmarksEditorController"
 																			bundle:nil];
+		bookmarksEditorController.delegate = self;
+		bookmarksEditorController.bookmarkedStops = [[bookmarkedStops mutableCopy] autorelease];
+		bookmarksEditorController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	} else {
+		bookmarksEditorController.bookmarkedStops = [[bookmarkedStops mutableCopy] autorelease];
+		[bookmarksEditorController.tableView reloadData];
+	}
 	
-	bookmarksEditorController.delegate = self;
-	bookmarksEditorController.bookmarkedStops = [[bookmarkedStops mutableCopy] autorelease];
-	bookmarksEditorController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	
+	
 	
 	[self presentModalViewController:bookmarksEditorController animated:YES];
 }
@@ -127,13 +134,10 @@
 	[self refreshBookmarks];
 	[tableView reloadData];
 	
-	[self bookmarkEditingCancelled];
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 -(void)bookmarkEditingCancelled {
-	[bookmarksEditorController release];
-	bookmarksEditorController = nil;
-	
 	[self dismissModalViewControllerAnimated:YES];
 }
 

@@ -7,12 +7,11 @@
 //
 
 #import "DataStoreGrabber.h"
-
 #import "BusMapViewController.h"
-
-
 #import "DataStoreGrabber.h"
 #import "BusStop.h"
+
+#define ZOOM_OVERSIZE	1.1
 
 @interface BusMapViewController ( )
 -(void)zoomToFitMapAnnotations;
@@ -77,6 +76,9 @@
 	
     for(id <MKAnnotation> annotation in mapView.annotations)
     {
+		if (annotation == [mapView userLocation])
+			continue; // skip user location
+		
         topLeftCoord.longitude = fmin(topLeftCoord.longitude, annotation.coordinate.longitude);
         topLeftCoord.latitude = fmax(topLeftCoord.latitude, annotation.coordinate.latitude);
 		
@@ -87,11 +89,11 @@
     MKCoordinateRegion region;
     region.center.latitude = topLeftCoord.latitude - (topLeftCoord.latitude - bottomRightCoord.latitude) * 0.5;
     region.center.longitude = topLeftCoord.longitude + (bottomRightCoord.longitude - topLeftCoord.longitude) * 0.5;
-    region.span.latitudeDelta = fabs(topLeftCoord.latitude - bottomRightCoord.latitude) * 1.2;
-    region.span.longitudeDelta = fabs(bottomRightCoord.longitude - topLeftCoord.longitude) * 1.2;
+    region.span.latitudeDelta = fabs(topLeftCoord.latitude - bottomRightCoord.latitude) * ZOOM_OVERSIZE;
+    region.span.longitudeDelta = fabs(bottomRightCoord.longitude - topLeftCoord.longitude) * ZOOM_OVERSIZE;
 	
     region = [mapView regionThatFits:region];
-    [mapView setRegion:region animated:YES];
+    [mapView setRegion:region];
 }
 
 #pragma mark -

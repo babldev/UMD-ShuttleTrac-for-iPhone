@@ -29,5 +29,6 @@
 
 @property (retain, readwrite) NSMutableArray *bookmarkedStops;
 @property (assign, readwrite) id <BookmarksEditorControllerDelegate> delegate;
+@property (assign, readonly) UITableView *tableView;
 
 @end
