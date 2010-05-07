@@ -18,6 +18,8 @@
 
 @interface BusStopLookupController ( )
 @property (retain, readwrite) NSTimer *refreshTimer;
+
+-(void)loadSelectedBusArrivals;
 @end
 
 
@@ -43,6 +45,7 @@
 		navItem.rightBarButtonItem = cancelButton;
 	}
 	
+	[dataStore loadSelectedBusArrivals];
 	[self setRefreshTimer:[NSTimer scheduledTimerWithTimeInterval:REFRESH_RATE target:dataStore
 														 selector:@selector(loadSelectedBusArrivals)
 														 userInfo:nil repeats:YES]];

@@ -34,6 +34,7 @@
 		41CF99F711910E450061BCCC /* BookmarkToggleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41CF99F611910E450061BCCC /* BookmarkToggleTableViewCell.m */; };
 		41D34A3A1184BBA30038A7A7 /* BusStopLookupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D34A391184BBA30038A7A7 /* BusStopLookupController.m */; };
 		41D34A3D1184BBE20038A7A7 /* BusStopLookupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41D34A3C1184BBE20038A7A7 /* BusStopLookupController.xib */; };
+		41E0562D1193A7FE001FB3D4 /* arrival-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 41E0562C1193A7FE001FB3D4 /* arrival-bg.png */; };
 		8528A31E117F7730000CDEF3 /* BookmarkedStopsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8528A31C117F7730000CDEF3 /* BookmarkedStopsController.m */; };
 		8528A31F117F7730000CDEF3 /* BookmarkedStopsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8528A31D117F7730000CDEF3 /* BookmarkedStopsController.xib */; };
 		855893CE117BC85F005DF0F5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 855893CD117BC85F005DF0F5 /* CoreLocation.framework */; };
@@ -85,6 +86,7 @@
 		41D34A381184BBA30038A7A7 /* BusStopLookupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusStopLookupController.h; sourceTree = "<group>"; };
 		41D34A391184BBA30038A7A7 /* BusStopLookupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusStopLookupController.m; sourceTree = "<group>"; };
 		41D34A3C1184BBE20038A7A7 /* BusStopLookupController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusStopLookupController.xib; sourceTree = "<group>"; };
+		41E0562C1193A7FE001FB3D4 /* arrival-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrival-bg.png"; sourceTree = "<group>"; };
 		8528A31B117F7730000CDEF3 /* BookmarkedStopsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkedStopsController.h; sourceTree = "<group>"; };
 		8528A31C117F7730000CDEF3 /* BookmarkedStopsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkedStopsController.m; sourceTree = "<group>"; };
 		8528A31D117F7730000CDEF3 /* BookmarkedStopsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookmarkedStopsController.xib; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				41E0562C1193A7FE001FB3D4 /* arrival-bg.png */,
 				41C97230118FCAEB0088FBF7 /* Default.png */,
 				4132DDC1118D4C1400BAC3AF /* shuttletrac-logo-small.png */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
@@ -327,6 +330,7 @@
 				4132DDC2118D4C1400BAC3AF /* shuttletrac-logo-small.png in Resources */,
 				41C97231118FCAEB0088FBF7 /* Default.png in Resources */,
 				41C7BCE91193337300A48A83 /* BusTimeTableViewCell.xib in Resources */,
+				41E0562D1193A7FE001FB3D4 /* arrival-bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
