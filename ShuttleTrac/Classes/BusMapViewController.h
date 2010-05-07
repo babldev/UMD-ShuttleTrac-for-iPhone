@@ -30,6 +30,7 @@
 
 - (IBAction)cancelSearch:(UIBarButtonItem *)sender;
 - (IBAction)findMe:(UIBarButtonItem *)sender;
+- (IBAction)changeType:(UISegmentedControl *)sender;
 
 @property (assign, readwrite) BusMapDataStore *dataStore;
 @property (assign, readwrite) id <BusMapViewControllerDelegate> delegate;

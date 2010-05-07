@@ -48,8 +48,6 @@
 }
 
 - (void)reloadMap {
-	[mapView removeAnnotations:[dataStore mappedStops]];
-	
 	[dataStore loadStopsForActiveRoute];
 	
 	for (BusStop *stop in [dataStore mappedStops])
@@ -105,8 +103,22 @@
 
 - (IBAction)findMe:(UIBarButtonItem *)sender {
 	if (mapView.userLocation.location) {
-		[mapView setCenterCoordinate:mapView.userLocation.location.coordinate animated:YES];
+		float spanMultiplier = 0.5f;
+		
+		MKCoordinateRegion newRegion = mapView.region;
+		newRegion.span.longitudeDelta *= spanMultiplier;
+		newRegion.span.latitudeDelta *= spanMultiplier;
+		newRegion.center = mapView.userLocation.location.coordinate;
+		
+		NSLog(@"Old: %f %f, New: %f %f", mapView.region.span.latitudeDelta, mapView.region.span.longitudeDelta, newRegion.span.latitudeDelta, newRegion.span.longitudeDelta);
+		
+		[mapView setRegion:newRegion animated:YES];
 	}
+}
+
+- (IBAction)changeType:(UISegmentedControl *)sender {
+	NSInteger index = sender.selectedSegmentIndex;
+	mapView.mapType = (MKMapType)index;
 }
 
 #pragma mark -

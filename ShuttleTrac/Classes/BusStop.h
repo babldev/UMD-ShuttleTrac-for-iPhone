@@ -20,6 +20,9 @@
 	//ShuttleTrac tag number
 	NSInteger tagNumber;
 	
+	// Angle bearing to road
+	NSNumber *angle;
+	
 	// Geolocation of the bus stop
 	CLLocationCoordinate2D coordinate;
 	
