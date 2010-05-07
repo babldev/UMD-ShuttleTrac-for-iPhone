@@ -35,6 +35,8 @@
 	BusStop *currBusStop; //used for parsing
 	BusRoute *currBusRoute;//used for parsing
 	NSMutableArray *currRouteBusStops; //used for parsing
+	
+	BOOL updateNeeded;
 }
 
 -(NSMutableDictionary *)allBusStops;
@@ -45,5 +47,6 @@
 
 @property (retain, readonly) BookmarkedStopsDataStore *bookmarkedStopsDataStore;
 @property (retain, readonly) BusMapDataStore *busMapDataStore;
+@property (assign, readwrite) BOOL updateNeeded;
 
 @end

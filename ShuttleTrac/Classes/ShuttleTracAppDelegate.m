@@ -20,11 +20,11 @@
 
 	if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
         NSData *archiveData = [NSData dataWithContentsOfFile:path];
-        dataStore = [NSKeyedUnarchiver unarchiveObjectWithData:archiveData];
+        self.dataStore = [NSKeyedUnarchiver unarchiveObjectWithData:archiveData];
     }
 		
 	if(!dataStore) 
-		dataStore = [[ShuttleTracDataStore alloc] init];
+		self.dataStore = [[ShuttleTracDataStore alloc] init];
 	
 	[window addSubview:tabBarController.view];
 	// [self performSelectorInBackground:@selector(loadDataStore) withObject:nil];

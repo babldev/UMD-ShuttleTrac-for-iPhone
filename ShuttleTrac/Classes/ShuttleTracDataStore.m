@@ -23,7 +23,7 @@
 
 @implementation ShuttleTracDataStore
 
-@synthesize bookmarkedStopsDataStore, busMapDataStore;
+@synthesize bookmarkedStopsDataStore, busMapDataStore, updateNeeded;
 
 -(id)init {
 	if (self = [super init]) {
@@ -36,18 +36,27 @@
 		// Initiate data stores
 		self.bookmarkedStopsDataStore	= [[[BookmarkedStopsDataStore alloc] initWithDataStore:self] autorelease];
 		self.busMapDataStore			= [[[BusMapDataStore alloc] initWithDataStore:self] autorelease];
+		
+		updateNeeded = NO;
 	}
 	return self;
 }
 - (id)initWithCoder:(NSCoder *)coder {
-	busStops = [[coder decodeObjectForKey:@"busStops"] retain];
-	busRoutes = [[coder decodeObjectForKey:@"busRoutes"] retain];
-	sortedRoutes = [[coder decodeObjectForKey:@"sortedRoutes"] retain];
+	updateNeeded = [coder decodeBoolForKey:@"updateNeeded"];
 	
-    bookmarkedStopsDataStore = [[coder decodeObjectForKey:@"bookmarkedStopsDataStore"] retain];
-	busMapDataStore = [[coder decodeObjectForKey:@"busMapDataStore"] retain];
+	if (updateNeeded)
+		return [self init];
 
-	return [self retain]; //Shouldn't have to retain here...
+	if (self = [super init]) {
+		busStops = [[coder decodeObjectForKey:@"busStops"] retain];
+		busRoutes = [[coder decodeObjectForKey:@"busRoutes"] retain];
+		sortedRoutes = [[coder decodeObjectForKey:@"sortedRoutes"] retain];
+		
+		bookmarkedStopsDataStore = [[coder decodeObjectForKey:@"bookmarkedStopsDataStore"] retain];
+		busMapDataStore = [[coder decodeObjectForKey:@"busMapDataStore"] retain];
+	}
+	
+	return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
@@ -57,6 +66,8 @@
 	
 	[coder encodeObject:busRoutes forKey: @"busRoutes"];
 	[coder encodeObject:busStops forKey: @"busStops"];
+	
+	[coder encodeBool:updateNeeded forKey:@"updateNeeded"];
 }
 
 -(void)refreshStopAndRouteData {
