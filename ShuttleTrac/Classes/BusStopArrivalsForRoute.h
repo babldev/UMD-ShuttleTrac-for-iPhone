@@ -15,6 +15,8 @@
 }
 
 -(id)initWithRoute:(BusRoute *)route;
+// Returns true if it is empty
+-(BOOL)cleanArrivals:(NSDate *)requiredDate;
 
 @property (assign, readonly) BusRoute *route;
 @property (assign, readonly) NSMutableArray *upcomingArrivals;

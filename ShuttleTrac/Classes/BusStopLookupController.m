@@ -18,8 +18,6 @@
 
 @interface BusStopLookupController ( )
 @property (retain, readwrite) NSTimer *refreshTimer;
-
--(void)loadSelectedBusArrivals;
 @end
 
 

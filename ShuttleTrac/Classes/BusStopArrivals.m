@@ -18,6 +18,8 @@
 @property (retain, readwrite) NSDate *lastRefresh;
 @property (retain, readwrite) NSMutableArray *upcomingBusRoutes;
 
+-(void)cleanArrivals:(NSDate *)requiredDate;
+
 @end
 
 @implementation BusStopArrivals
@@ -121,18 +123,35 @@
 	NSURL *url = [NSURL URLWithString:request];
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 	NSXMLParser *parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
+	
 	[parser setDelegate:self];
-	[parser parse];
+	if ([parser parse]) {
+		self.lastRefresh = [NSDate dateWithTimeIntervalSinceNow:-60]; // Clean any arrivals older than 60 seconds
+		self.upcomingBusRoutes = newUpcomingBusRoutes;
+		[newUpcomingBusRoutes release];
+	} else {
+		[self cleanArrivals:[NSDate date]];
+		NSLog(@"Arrival Parsing Error: %@", [parser parserError]);
+	}
+
 	[parser release];
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 	
-	self.upcomingBusRoutes = newUpcomingBusRoutes;
-	[newUpcomingBusRoutes release];
 	
-	[self setLastRefresh:[NSDate date]];
 	[self performSelectorOnMainThread:@selector(doneRefreshing) withObject:nil waitUntilDone:NO];
 	
 	[pool release];
+}
+
+-(void)cleanArrivals:(NSDate *)requiredDate {
+	NSMutableArray *toRemove = [NSMutableArray arrayWithCapacity:[upcomingBusRoutes count]];
+	
+	for (BusStopArrivalsForRoute *routeArrivals in upcomingBusRoutes) {
+		if ([routeArrivals cleanArrivals:requiredDate]) // still has values
+			[toRemove addObject:routeArrivals];
+	}
+	
+	[upcomingBusRoutes removeObjectsInArray:toRemove];
 }
 
 -(BOOL)isSameStopAs:(BusStopArrivals *)otherArrivals {

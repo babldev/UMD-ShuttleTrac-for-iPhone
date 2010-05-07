@@ -9,6 +9,12 @@
 #import "BusStopArrivalsForRoute.h"
 
 
+@interface BusStopArrivalsForRoute ()
+@property (assign, readwrite) NSMutableArray *upcomingArrivals;
+
+@end
+
+
 @implementation BusStopArrivalsForRoute
 
 @synthesize route, upcomingArrivals;
@@ -37,6 +43,22 @@
 - (void)encodeWithCoder:(NSCoder *)coder {
 	[coder encodeObject:route forKey:@"route"];
 	[coder encodeObject:upcomingArrivals forKey:@"upcomingArrivals"];	
+}
+
+#pragma mark -
+
+-(BOOL)cleanArrivals:(NSDate *)requiredDate {
+	NSMutableArray *toRemove = [NSMutableArray arrayWithCapacity:[upcomingArrivals count]];
+	
+	for (NSDate *arrival in upcomingArrivals) {
+		// Valid arrival
+		if ([requiredDate compare:arrival] != NSOrderedAscending)
+			[toRemove addObject:arrival];
+	}
+	
+	[upcomingArrivals removeObjectsInArray:toRemove];
+	
+	return [upcomingArrivals count] == 0;
 }
 
 @end
