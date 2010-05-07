@@ -76,8 +76,8 @@
 	}
 }
 
--(NSMutableDictionary *)allRoutes {
-	return [dataStore allBusRoutes];
+-(NSArray *)allRoutes {
+	return [dataStore sortedRoutes];
 }
 
 #pragma mark BusStopArrivalsDelegate

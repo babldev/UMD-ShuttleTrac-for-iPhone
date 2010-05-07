@@ -45,7 +45,7 @@
 // Load all stops for activeRoute
 -(void)loadStopsForActiveRoute;
 
--(NSMutableDictionary *)allRoutes;
+-(NSArray *)allRoutes;
 
 
 @property (retain, readonly) NSArray *mappedStops;

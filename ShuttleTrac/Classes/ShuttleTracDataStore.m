@@ -42,6 +42,7 @@
 - (id)initWithCoder:(NSCoder *)coder {
 	busStops = [[coder decodeObjectForKey:@"busStops"] retain];
 	busRoutes = [[coder decodeObjectForKey:@"busRoutes"] retain];
+	sortedRoutes = [[coder decodeObjectForKey:@"sortedRoutes"] retain];
 	
     bookmarkedStopsDataStore = [[coder decodeObjectForKey:@"bookmarkedStopsDataStore"] retain];
 	busMapDataStore = [[coder decodeObjectForKey:@"busMapDataStore"] retain];
@@ -52,6 +53,7 @@
 - (void)encodeWithCoder:(NSCoder *)coder {
     [coder encodeObject:bookmarkedStopsDataStore forKey: @"bookmarkedStopsDataStore"];
 	[coder encodeObject:busMapDataStore forKey: @"busMapDataStore"];
+	sortedRoutes = [[coder decodeObjectForKey:@"sortedRoutes"] retain];
 	
 	[coder encodeObject:busRoutes forKey: @"busRoutes"];
 	[coder encodeObject:busStops forKey: @"busStops"];
@@ -85,7 +87,15 @@
 	[parser setDelegate:self];
 	[parser parse];
 	[parser release];
+	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+
+-(NSArray *)sortedRoutes {
+	if (sortedRoutes == nil) {
+		sortedRoutes = [[[busRoutes allValues] sortedArrayUsingSelector:@selector(routeNameCompare:)] retain];
+	}
+	return sortedRoutes;
 }
 
 -(NSMutableDictionary *)allBusStops {	

@@ -124,7 +124,7 @@
 	
 	// Select route
 	else 
-		return [[[dataStore allRoutes] allValues] count];
+		return [[dataStore allRoutes] count];
 }
 
 
@@ -173,7 +173,7 @@
 			cell = [[[RouteSelectorTableViewCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
 		}
 		
-		cell.route = [[[dataStore allRoutes] allValues] objectAtIndex:indexPath.row];
+		cell.route = [[dataStore allRoutes] objectAtIndex:indexPath.row];
 		
 		return cell;
 	}
@@ -226,7 +226,7 @@
 			bookmarkCell.selected = NO;
 		}
 	} else  {
-		dataStore.activeRoute = [[[dataStore allRoutes] allValues] objectAtIndex:indexPath.row];
+		dataStore.activeRoute = [[dataStore allRoutes] objectAtIndex:indexPath.row];
 		
 		if (busMapViewController == nil) {
 			busMapViewController = [[BusMapViewController alloc] initWithNibName:@"BusMapViewController" bundle:nil];

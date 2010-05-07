@@ -30,6 +30,8 @@
 	NSMutableDictionary *busRoutes;
 	NSInteger parsingMode;
 	
+	NSArray *sortedRoutes;
+	
 	BusStop *currBusStop; //used for parsing
 	BusRoute *currBusRoute;//used for parsing
 	NSMutableArray *currRouteBusStops; //used for parsing
@@ -37,6 +39,7 @@
 
 -(NSMutableDictionary *)allBusStops;
 -(NSMutableDictionary *)allBusRoutes;
+-(NSArray *)sortedRoutes;
 
 -(void)refreshStopAndRouteData;
 

@@ -47,6 +47,15 @@
 	[coder encodeObject:stops forKey:@"stops"];	
 }
 
+#pragma mark comparators
+-(NSComparisonResult)routeNameCompare:(BusRoute *)otherRoute {
+	return [routeName compare:otherRoute.routeName];
+}
+
+-(NSComparisonResult)routeIdCompare:(BusRoute *)otherRoute {
+	return [[NSNumber numberWithInt:routeID] compare:[NSNumber numberWithInt:otherRoute.routeID]];
+}
+#pragma mark copy
 - (id)copyWithZone:(NSZone *)zone{
 	return [[BusRoute alloc] initRouteWithID:self.routeID name:self.routeName stops:self.stops];
 }
