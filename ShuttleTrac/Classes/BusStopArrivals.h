@@ -56,6 +56,7 @@
 
 -(void)refreshUpcomingBuses;
 -(BOOL)isSameStopAs:(BusStopArrivals *)otherArrivals;
+-(void)cleanArrivals;
 
 @property (assign, readonly) BusRoute *route;
 @property (assign, readonly) BusStop *stop;

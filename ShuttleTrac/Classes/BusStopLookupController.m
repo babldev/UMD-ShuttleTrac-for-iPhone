@@ -41,6 +41,7 @@
 	if (arrivals != nil) {
 		searchBar.text = [NSString stringWithFormat:@"%d", arrivals.stop.stopNumber];
 		navItem.rightBarButtonItem = cancelButton;
+		[arrivals cleanArrivals];
 	}
 	
 	[dataStore loadSelectedBusArrivals];

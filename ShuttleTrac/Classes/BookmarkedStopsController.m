@@ -30,10 +30,14 @@
 - (void)viewDidLoad {
 	dataStore = [GetShuttleTracDataStore() bookmarkedStopsDataStore];
 	bookmarkedStops = [dataStore bookmarkedStops];
-	
 	[self setRefreshTimer:[NSTimer scheduledTimerWithTimeInterval:REFRESH_RATE target:self
-													  selector:@selector(refreshBookmarks)
-													  userInfo:nil repeats:YES]];
+														 selector:@selector(refreshBookmarks)
+														 userInfo:nil repeats:YES]];
+	
+	
+	
+	for (BusStopArrivals *bookmarkStop in bookmarkedStops) 
+		[bookmarkStop cleanArrivals];
 	
 	[self refreshBookmarks];
 	[[NSNotificationCenter defaultCenter] addObserver:self 

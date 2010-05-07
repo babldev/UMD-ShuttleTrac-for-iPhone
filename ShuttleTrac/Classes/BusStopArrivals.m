@@ -18,8 +18,6 @@
 @property (retain, readwrite) NSDate *lastRefresh;
 @property (retain, readwrite) NSMutableArray *upcomingBusRoutes;
 
--(void)cleanArrivals:(NSDate *)requiredDate;
-
 @end
 
 @implementation BusStopArrivals
@@ -126,11 +124,11 @@
 	
 	[parser setDelegate:self];
 	if ([parser parse]) {
-		self.lastRefresh = [NSDate dateWithTimeIntervalSinceNow:-60]; // Clean any arrivals older than 60 seconds
+		self.lastRefresh = [NSDate date]; // Clean any arrivals older than 60 seconds
 		self.upcomingBusRoutes = newUpcomingBusRoutes;
 		[newUpcomingBusRoutes release];
 	} else {
-		[self cleanArrivals:[NSDate date]];
+		[self cleanArrivals];
 		NSLog(@"Arrival Parsing Error: %@", [parser parserError]);
 	}
 
@@ -143,7 +141,8 @@
 	[pool release];
 }
 
--(void)cleanArrivals:(NSDate *)requiredDate {
+-(void)cleanArrivals {
+	NSDate *requiredDate = [NSDate dateWithTimeIntervalSinceNow:-59];
 	NSMutableArray *toRemove = [NSMutableArray arrayWithCapacity:[upcomingBusRoutes count]];
 	
 	for (BusStopArrivalsForRoute *routeArrivals in upcomingBusRoutes) {

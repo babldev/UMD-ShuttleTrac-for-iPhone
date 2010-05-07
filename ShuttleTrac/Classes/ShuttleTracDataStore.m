@@ -53,7 +53,7 @@
 - (void)encodeWithCoder:(NSCoder *)coder {
     [coder encodeObject:bookmarkedStopsDataStore forKey: @"bookmarkedStopsDataStore"];
 	[coder encodeObject:busMapDataStore forKey: @"busMapDataStore"];
-	sortedRoutes = [[coder decodeObjectForKey:@"sortedRoutes"] retain];
+	[coder encodeObject:sortedRoutes forKey:@"sortedRoutes"];
 	
 	[coder encodeObject:busRoutes forKey: @"busRoutes"];
 	[coder encodeObject:busStops forKey: @"busStops"];
