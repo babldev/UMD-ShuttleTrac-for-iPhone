@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface ShuttleTracMore : UIViewController {
+@interface ShuttleTracMore : UIViewController <UIAlertViewDelegate> {
 
 }
 

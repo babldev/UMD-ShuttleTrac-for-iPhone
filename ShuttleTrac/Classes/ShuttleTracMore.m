@@ -40,13 +40,36 @@
 
 -(IBAction)resetApplication:(UIButton *)sender {
 	// Verify with confirm dialog warning bookmarks are lost
-	
-	ShuttleTracDataStore *dataStore = GetShuttleTracDataStore();
-	[dataStore setUpdateNeeded:YES];
+	UIAlertView *verifyReset = [[UIAlertView alloc] initWithTitle:@"Are you sure?" 
+														  message:@"Reseting stored data will cause you to lose your saved bookmarks."
+														 delegate:self
+												cancelButtonTitle:@"Cancel"
+												otherButtonTitles:nil];
+	[verifyReset addButtonWithTitle:@"OK, Reset"];
+	[verifyReset show];
+	[verifyReset autorelease];
 }
 
 -(IBAction)loadTransportationWebsite:(UIButton *)sender {
 	return;
+}
+
+#pragma mark UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if (buttonIndex != 1)
+		return;
+	
+	UIAlertView *verifyReset = [[UIAlertView alloc] initWithTitle:@"Restart Application" 
+														  message:@"Data will be re-downloaded after you reload the application."
+														 delegate:nil
+												cancelButtonTitle:@"OK"
+												otherButtonTitles:nil];
+	[verifyReset show];
+
+	ShuttleTracDataStore *dataStore = GetShuttleTracDataStore();
+	[dataStore setUpdateNeeded:YES];
+
 }
 
 #pragma mark -
