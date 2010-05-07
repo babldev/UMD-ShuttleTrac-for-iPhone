@@ -22,7 +22,13 @@
 
 -(NSString *)minutesTillArrivalWithDate:(NSDate *)date {
 	NSInteger nextBusIn = (int) ([date timeIntervalSinceNow] / 60);
-	return (nextBusIn >= 0 && nextBusIn < 100) ? [NSString stringWithFormat:@"%dm", nextBusIn] : @"?";
+	
+	if (nextBusIn == 0)
+		return @"Now";
+	else if (nextBusIn < 100)
+		return [NSString stringWithFormat:@"%dm", nextBusIn];
+	else
+		return @"?";
 }
 
 - (void)layoutSubviews {
