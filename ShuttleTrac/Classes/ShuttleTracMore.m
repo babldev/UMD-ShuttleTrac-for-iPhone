@@ -51,7 +51,7 @@
 }
 
 -(IBAction)loadTransportationWebsite:(UIButton *)sender {
-	return;
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.transportation.umd.edu/routes/commuter.html"]]; 
 }
 
 #pragma mark UIAlertViewDelegate
