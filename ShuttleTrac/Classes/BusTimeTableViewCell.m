@@ -50,7 +50,8 @@
 		
 		[dateFormatter release];
 	} else {
-		time1.text = (count >= 1) ? [self minutesTillArrivalWithDate:[upcomingTimes objectAtIndex:0]] : nil;
+		NSInteger nextBusIn = (int) ([[upcomingTimes objectAtIndex:0] timeIntervalSinceNow] / 60);
+		time1.text = (count >= 1) ? [NSString stringWithFormat:@"%d", nextBusIn] : nil;
 		time2.text = (count >= 2) ? [self minutesTillArrivalWithDate:[upcomingTimes objectAtIndex:1]] : nil;
 		time3.text = (count >= 3) ? [self minutesTillArrivalWithDate:[upcomingTimes objectAtIndex:2]] : nil;
 		time4.text = (count >= 4) ? [self minutesTillArrivalWithDate:[upcomingTimes objectAtIndex:3]] : nil;
@@ -58,8 +59,8 @@
 	}
 	
 	
-	NSInteger nextBusIn = (int) ([[upcomingTimes objectAtIndex:0] timeIntervalSinceNow] / 60);
-	timeUntilArrivalLabel.text = (nextBusIn >= 0 && nextBusIn < 100) ? [NSString stringWithFormat:@"%d", nextBusIn] : @"?";
+	// NSInteger nextBusIn = (int) ([[upcomingTimes objectAtIndex:0] timeIntervalSinceNow] / 60);
+	// timeUntilArrivalLabel.text = (nextBusIn >= 0 && nextBusIn < 100) ? [NSString stringWithFormat:@"%d", nextBusIn] : @"?";
 	
 	[super layoutSubviews];
 }
