@@ -10,6 +10,8 @@
 #import "DataStoreGrabber.h"
 #import "BusTimeTableViewCell.h"
 #import "RouteSelectorTableViewCell.h"
+#import "NSDateAdditions.h"
+
 
 #define REFRESH_RATE 60
 
@@ -195,18 +197,18 @@
 	}
 }
 
-//- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-//	BusStopArrivals *arrivals = [dataStore activeStopArrivals];
-//	
-//	if ([dataStore activeStopArrivals] != nil)
-//		if (section == STOP_SECTION)
-//			return [NSString stringWithFormat:@"Last Update: %@", [[arrivals lastRefresh] description]];
-//		else
-//			return nil;
-//	else
-//		return nil;
-//
-//}
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+	BusStopArrivals *arrivals = [dataStore activeStopArrivals];
+	
+	if ([dataStore activeStopArrivals] != nil)
+		if (section == STOP_SECTION)
+			return [NSString stringWithFormat:@"Last Update: %@", [[arrivals lastRefresh] timeOfDayLocalizedString]];
+		else
+			return nil;
+	else
+		return nil;
+
+}
 
 #pragma mark UITableViewDelegate
 

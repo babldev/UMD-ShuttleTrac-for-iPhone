@@ -10,6 +10,7 @@
 #import "BookmarkedStopsController.h"
 #import "DataStoreGrabber.h"
 #import "BusStopArrivals.h"
+#import "NSDateAdditions.h"
 
 #define REFRESH_RATE 60
 
@@ -53,11 +54,16 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return [bookmarkedStops count];
+	NSInteger size = [bookmarkedStops count];
+    return size == 0 ? 1 : size;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
+	NSInteger size = [bookmarkedStops count];
+	if(size == 0)
+		return 0;
+	
 	return [[[bookmarkedStops objectAtIndex:section] upcomingBusRoutes] count];
 }
 
@@ -89,13 +95,16 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	if([bookmarkedStops count] == 0)
+		return @"No Bookmarked Stops";
 	return [[bookmarkedStops objectAtIndex:section] getBusStopName];
 }
-//
-//- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-//	return [NSString stringWithFormat:@"Last Update: %@", [[[bookmarkedStops objectAtIndex:section] lastRefresh] description]];
-//}
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+	if(section == ([bookmarkedStops count] -1))
+		return [NSString stringWithFormat:@"Last Update: %@", [[[bookmarkedStops objectAtIndex:section] lastRefresh] timeOfDayLocalizedString] ];
+	return nil;
+}
 -(void)refreshBookmarks {
 	bookmarkedStops = dataStore.bookmarkedStops;
 	

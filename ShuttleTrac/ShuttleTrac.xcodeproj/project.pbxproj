@@ -42,6 +42,7 @@
 		855893CE117BC85F005DF0F5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 855893CD117BC85F005DF0F5 /* CoreLocation.framework */; };
 		85624D8E1181E74C007AE93C /* BookmarksEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85624D8C1181E74C007AE93C /* BookmarksEditorController.m */; };
 		85624D8F1181E74C007AE93C /* BookmarksEditorController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85624D8D1181E74C007AE93C /* BookmarksEditorController.xib */; };
+		862934EC1195DE5100E24C75 /* NSDateAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 862934EB1195DE5100E24C75 /* NSDateAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +101,8 @@
 		85624D8B1181E74C007AE93C /* BookmarksEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarksEditorController.h; sourceTree = "<group>"; };
 		85624D8C1181E74C007AE93C /* BookmarksEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarksEditorController.m; sourceTree = "<group>"; };
 		85624D8D1181E74C007AE93C /* BookmarksEditorController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookmarksEditorController.xib; sourceTree = "<group>"; };
+		862934EA1195DE5100E24C75 /* NSDateAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDateAdditions.h; sourceTree = "<group>"; };
+		862934EB1195DE5100E24C75 /* NSDateAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateAdditions.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ShuttleTrac-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ShuttleTrac-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,6 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				28A0AB4B0D9B1048005BE974 /* ShuttleTrac_Prefix.pch */,
+				862934EA1195DE5100E24C75 /* NSDateAdditions.h */,
+				862934EB1195DE5100E24C75 /* NSDateAdditions.m */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
@@ -376,6 +381,7 @@
 				41CF99F711910E450061BCCC /* BookmarkToggleTableViewCell.m in Sources */,
 				41C7BD2C11933E3100A48A83 /* BusStopArrivalsForRoute.m in Sources */,
 				41A470051194CC23004BB075 /* ShuttleTracMore.m in Sources */,
+				862934EC1195DE5100E24C75 /* NSDateAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
