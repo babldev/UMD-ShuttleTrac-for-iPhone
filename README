@@ -53,3 +53,9 @@ With the details given with this where the ID & ServiceName are taken from above
 http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=Scheduledetail.xml&ID=1&ServiceName=Weekday
 
 Note that the ID may change whenever a new schedule is loaded so the IDs should be looked up not hard coded.
+
+---
+
+Code Not Written By Us 
+
+NSDateAdditions.m/h - written by Chuck Pisulu
