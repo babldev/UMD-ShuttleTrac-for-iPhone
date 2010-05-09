@@ -58,4 +58,4 @@ Note that the ID may change whenever a new schedule is loaded so the IDs should 
 
 Code Not Written By Us 
 
-NSDateAdditions.m/h - written by Chuck Pisulu
+* NSDateAdditions.m/h - written by Chuck Pisulu
