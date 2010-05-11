@@ -32,17 +32,20 @@
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
-	name = [[coder decodeObjectForKey:@"name"]retain];
-	stopNumber =  [[coder decodeObjectForKey:@"stopNumber"] integerValue];
-	tagNumber =  [[coder decodeObjectForKey:@"tagNumber"] integerValue];
-	float lon =  [[coder decodeObjectForKey:@"longitude"] floatValue];
-	float lat =  [[coder decodeObjectForKey:@"latitude"] floatValue];
+	if (self = [super init]) {
+		self.name = [coder decodeObjectForKey:@"name"];
+		self.stopNumber =  [[coder decodeObjectForKey:@"stopNumber"] integerValue];
+		self.tagNumber =  [[coder decodeObjectForKey:@"tagNumber"] integerValue];
+		
+		float lon =  [[coder decodeObjectForKey:@"longitude"] floatValue];
+		float lat =  [[coder decodeObjectForKey:@"latitude"] floatValue];
+		
+		CLLocationCoordinate2D loc;
+		loc.latitude = lat;
+		loc.longitude = lon;
+		self.coordinate = loc;
+	}
 	
-	CLLocationCoordinate2D loc;
-	loc.latitude = lat;
-	loc.longitude = lon;
-	coordinate = loc;
-
 	return self;
 }
 

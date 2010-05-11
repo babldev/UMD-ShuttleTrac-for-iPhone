@@ -60,13 +60,13 @@
 	if (buttonIndex != 1)
 		return;
 	
-	UIAlertView *verifyReset = [[UIAlertView alloc] initWithTitle:@"Restart Application" 
+	UIAlertView *verifyReset = [[[UIAlertView alloc] initWithTitle:@"Restart Application" 
 														  message:@"Data will be re-downloaded after you reload the application."
 														 delegate:nil
 												cancelButtonTitle:@"OK"
-												otherButtonTitles:nil];
+												otherButtonTitles:nil] autorelease];
 	[verifyReset show];
-
+	
 	ShuttleTracDataStore *dataStore = GetShuttleTracDataStore();
 	[dataStore setUpdateNeeded:YES];
 

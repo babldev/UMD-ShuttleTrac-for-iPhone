@@ -10,8 +10,8 @@
 
 
 @interface BusStopArrivalsForRoute ()
+@property (assign, readwrite) BusRoute *route;
 @property (assign, readwrite) NSMutableArray *upcomingArrivals;
-
 @end
 
 
@@ -35,8 +35,11 @@
 #pragma mark NSCoding
 
 - (id)initWithCoder:(NSCoder *)coder {
-	route = [[coder decodeObjectForKey:@"route"] retain];
-	upcomingArrivals = [[coder decodeObjectForKey:@"upcomingArrivals"] retain];
+	if (self = [super init]) {
+		self.route = [[coder decodeObjectForKey:@"route"] retain];
+		self.upcomingArrivals = [[coder decodeObjectForKey:@"upcomingArrivals"] retain];
+	}
+	
 	return self;
 }
 

@@ -31,13 +31,17 @@
 		[self setRouteName:rName];
 		[self setStops:rStops];
 	}
+	
 	return self;
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
-	routeID = [[coder decodeObjectForKey:@"routeID"] integerValue];
-	routeName =  [[coder decodeObjectForKey:@"routeName"]retain];
-	stops =  [[coder decodeObjectForKey:@"stops"]retain];	
+	if (self = [super init]) {
+		self.routeID = [[coder decodeObjectForKey:@"routeID"] integerValue];
+		self.routeName = [coder decodeObjectForKey:@"routeName"];
+		self.stops =  [coder decodeObjectForKey:@"stops"];
+	}
+	
 	return self;
 }
 
