@@ -11,15 +11,7 @@
 
 @implementation BusTimeTableViewCell
 
-@synthesize busArrival;
-
-- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier {
-    if ((self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier])) {
-        // Initialization code
-    }
-    return self;
-}
-
+@synthesize arrivals;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
 
@@ -28,31 +20,60 @@
     // Configure the view for the selected state
 }
 
+-(NSString *)minutesTillArrivalWithDate:(NSDate *)date {
+	NSInteger nextBusIn = (int) ([date timeIntervalSinceNow] / 60);
+	
+	if (nextBusIn == 0)
+		return @"Now";
+	else if (nextBusIn < 100)
+		return [NSString stringWithFormat:@"%dm", nextBusIn];
+	else
+		return @"?";
+}
+
 - (void)layoutSubviews {
-	// Customize cell
-	self.textLabel.text = [[busArrival route] routeName];
 	
-	// Format countodwn
-	NSInteger minutes = (int) ([[busArrival arrivalTime] timeIntervalSinceNow] / 60); 
-	NSString *countdown;
 	
-	if (minutes <= 0) {
-		// Bus left, remove cell
-		countdown = @"Now";
-	} else if (minutes == 1) {
-		countdown = @"1 minute";
+	busLabel.text = arrivals.route.routeName;
+	NSArray *upcomingTimes = arrivals.upcomingArrivals;
+	NSInteger count = [upcomingTimes count];
+	
+	if (false) {
+		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+		[dateFormatter setDateFormat:@"h:mm"];
+		
+		time1.text = (count >= 1) ? [dateFormatter stringFromDate:[upcomingTimes objectAtIndex:0]] : nil;
+		time2.text = (count >= 2) ? [dateFormatter stringFromDate:[upcomingTimes objectAtIndex:1]] : nil;
+		time3.text = (count >= 3) ? [dateFormatter stringFromDate:[upcomingTimes objectAtIndex:2]] : nil;
+		time4.text = (count >= 4) ? [dateFormatter stringFromDate:[upcomingTimes objectAtIndex:3]] : nil;
+		time5.text = (count >= 5) ? [dateFormatter stringFromDate:[upcomingTimes objectAtIndex:4]] : nil;
+		
+		[dateFormatter release];
 	} else {
-		countdown = [NSString stringWithFormat:@"%d minutes", minutes];
+		if (count >= 1) {
+			NSInteger nextBusIn = (int) ([[upcomingTimes objectAtIndex:0] timeIntervalSinceNow] / 60);
+			time1.text = [NSString stringWithFormat:@"%d", nextBusIn];
+		} else {
+			time1.text = nil;
+		}
+
+		
+		time2.text = (count >= 2) ? [self minutesTillArrivalWithDate:[upcomingTimes objectAtIndex:1]] : nil;
+		time3.text = (count >= 3) ? [self minutesTillArrivalWithDate:[upcomingTimes objectAtIndex:2]] : nil;
+		time4.text = (count >= 4) ? [self minutesTillArrivalWithDate:[upcomingTimes objectAtIndex:3]] : nil;
+		time5.text = (count >= 5) ? [self minutesTillArrivalWithDate:[upcomingTimes objectAtIndex:4]] : nil;
 	}
 	
-	self.detailTextLabel.text = countdown;
+	
+	// NSInteger nextBusIn = (int) ([[upcomingTimes objectAtIndex:0] timeIntervalSinceNow] / 60);
+	// timeUntilArrivalLabel.text = (nextBusIn >= 0 && nextBusIn < 100) ? [NSString stringWithFormat:@"%d", nextBusIn] : @"?";
 	
 	[super layoutSubviews];
 }
 
 - (void)dealloc {
-	[busArrival release];
-	busArrival = nil;
+	[arrivals release];
+	arrivals = nil;
 	
     [super dealloc];
 }

@@ -7,14 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BusArrival.h"
+#import "BusStopArrivalsForRoute.h"
 
 @interface BusTimeTableViewCell : UITableViewCell {
-	BusArrival *busArrival;
+	IBOutlet UIView *timeUntilArrivalView;
+	IBOutlet UILabel *timeUntilArrivalLabel;
+	IBOutlet UILabel *busLabel;
+	
+	IBOutlet UILabel *time1;
+	IBOutlet UILabel *time2;
+	IBOutlet UILabel *time3;
+	IBOutlet UILabel *time4;
+	IBOutlet UILabel *time5;
+	
+	BusStopArrivalsForRoute *arrivals;
 }
 
-- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
-
-@property (retain, readwrite) BusArrival *busArrival;
+@property (retain, readwrite) BusStopArrivalsForRoute *arrivals;
 
 @end

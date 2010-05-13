@@ -23,7 +23,7 @@
 
 @implementation ShuttleTracDataStore
 
-@synthesize bookmarkedStopsDataStore, busMapDataStore;
+@synthesize bookmarkedStopsDataStore, busMapDataStore, updateNeeded;
 
 -(id)init {
 	if (self = [super init]) {
@@ -36,23 +36,38 @@
 		// Initiate data stores
 		self.bookmarkedStopsDataStore	= [[[BookmarkedStopsDataStore alloc] initWithDataStore:self] autorelease];
 		self.busMapDataStore			= [[[BusMapDataStore alloc] initWithDataStore:self] autorelease];
+		
+		updateNeeded = NO;
 	}
 	return self;
 }
 - (id)initWithCoder:(NSCoder *)coder {
-    bookmarkedStopsDataStore = [[coder decodeObjectForKey:@"bookmarkedStopsDataStore"] retain];
-	busMapDataStore = [[coder decodeObjectForKey:@"busMapDataStore"] retain];
-	busStops = [[coder decodeObjectForKey:@"busStops"] retain];
-	busRoutes = [[coder decodeObjectForKey:@"busRoutes"] retain];
+	updateNeeded = [coder decodeBoolForKey:@"updateNeeded"];
+	
+	if (updateNeeded)
+		return [self init];
 
-	return [self retain]; //Shouldn't have to retain here...
+	if (self = [super init]) {
+		busStops = [[coder decodeObjectForKey:@"busStops"] retain];
+		busRoutes = [[coder decodeObjectForKey:@"busRoutes"] retain];
+		sortedRoutes = [[coder decodeObjectForKey:@"sortedRoutes"] retain];
+		
+		bookmarkedStopsDataStore = [[coder decodeObjectForKey:@"bookmarkedStopsDataStore"] retain];
+		busMapDataStore = [[coder decodeObjectForKey:@"busMapDataStore"] retain];
+	}
+	
+	return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
     [coder encodeObject:bookmarkedStopsDataStore forKey: @"bookmarkedStopsDataStore"];
 	[coder encodeObject:busMapDataStore forKey: @"busMapDataStore"];
+	[coder encodeObject:sortedRoutes forKey:@"sortedRoutes"];
+	
 	[coder encodeObject:busRoutes forKey: @"busRoutes"];
 	[coder encodeObject:busStops forKey: @"busStops"];
+	
+	[coder encodeBool:updateNeeded forKey:@"updateNeeded"];
 }
 
 -(void)refreshStopAndRouteData {
@@ -83,7 +98,15 @@
 	[parser setDelegate:self];
 	[parser parse];
 	[parser release];
+	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+
+-(NSArray *)sortedRoutes {
+	if (sortedRoutes == nil) {
+		sortedRoutes = [[[busRoutes allValues] sortedArrayUsingSelector:@selector(routeNameCompare:)] retain];
+	}
+	return sortedRoutes;
 }
 
 -(NSMutableDictionary *)allBusStops {	
@@ -101,7 +124,7 @@
 		NSInteger busNumber = [[attributeDict objectForKey:@"PlatformNo"] integerValue];
 		if(parsingMode == PARSING_STOPS){
 			if(!currBusStop){
-				NSString *name = [attributeDict objectForKey:@"Name"];
+				NSString *name = [[attributeDict objectForKey:@"Name"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 				NSInteger tagNumber = [[attributeDict objectForKey:@"PlatformTag"] integerValue];
 
 				currBusStop = [[BusStop alloc] init];
@@ -129,7 +152,7 @@
 	else if([elementName isEqual:@"Route"]){
 		if(!currBusRoute){
 			NSInteger routeNum = [[attributeDict objectForKey:@"RouteNo"] integerValue];
-			NSString *routeName = [attributeDict objectForKey:@"Name"];
+			NSString *routeName = [[attributeDict objectForKey:@"Name"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 			
 			currRouteBusStops = [[NSMutableArray alloc] init]; // create array to store bus stops reached on route
 			

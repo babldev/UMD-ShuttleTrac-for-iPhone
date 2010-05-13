@@ -8,6 +8,8 @@
 
 #import "BookmarkedStopsDataStore.h"
 
+NSString *const BookmarksDidChange = @"BookmarksDidChange";
+
 @interface BookmarkedStopsDataStore ( )
 @property (retain, readwrite) NSMutableArray *bookmarkedStops;
 @end
@@ -19,18 +21,18 @@
 	if (self = [super init]) {
 		dataStore = dStore;
 		self.bookmarkedStops = [[[NSMutableArray alloc] init] autorelease];
-		
-		// FIXME - Debug statement
-		// [self.bookmarkedStops addObject:[[dataStore allBusStops] objectAtIndex:100]];
-		// [self.bookmarkedStops addObject:[[dataStore allBusStops] objectAtIndex:101]];
-		// [self.bookmarkedStops addObject:[[dataStore allBusStops] objectAtIndex:102]];
+		refreshing = NO;
 	}
 	
 	return self;
 }
 - (id)initWithCoder:(NSCoder *)coder {
-    bookmarkedStops = [[coder decodeObjectForKey:@"bookmarkedStops"] retain];
-	dataStore = [[coder decodeObjectForKey:@"dataStore"] retain];
+	if (self = [super init]) {
+		bookmarkedStops = [[coder decodeObjectForKey:@"bookmarkedStops"] retain];
+		dataStore = [[coder decodeObjectForKey:@"dataStore"] retain];
+		refreshing = NO;
+	}
+	
 	return self;
 }
 
@@ -40,8 +42,43 @@
 
 }
 
+-(void)addStopToBookmarks:(BusStopArrivals *)newArrivals {
+	if (![self containsStop:newArrivals]) {
+		[bookmarkedStops insertObject:newArrivals atIndex:0];
+		[[NSNotificationCenter defaultCenter] postNotificationName:BookmarksDidChange object:self userInfo:nil];
+	}
+}
+
+-(void)removeStopFromBookmarks:(BusStopArrivals *)oldArrivals {
+	BusStopArrivals *localArrivals = nil;
+	
+	for (BusStopArrivals *arr in bookmarkedStops) {
+		if ([arr isSameStopAs:oldArrivals]) {
+			localArrivals = arr;
+			break;
+		}
+	}
+	
+	[bookmarkedStops removeObject:localArrivals];
+	[[NSNotificationCenter defaultCenter] postNotificationName:BookmarksDidChange object:self userInfo:nil];
+}
+
+-(void)replaceBookmarks:(NSArray *)newBookmarks {
+	[self setBookmarkedStops:[[newBookmarks mutableCopy] autorelease]];
+	[[NSNotificationCenter defaultCenter] postNotificationName:BookmarksDidChange object:self userInfo:nil];
+}
+
+-(BOOL)containsStop:(BusStopArrivals *)compareArrivals {
+	for (BusStopArrivals *arr in bookmarkedStops) {
+		if ([arr isSameStopAs:compareArrivals])
+			return YES;
+	}
+	
+	return NO;
+}
+
 -(void)refreshBookmarkedStopArrivals {
-	// Do nothing for now
+
 	[delegate refreshBookmarkedStopArrivalsCompleted:self.bookmarkedStops];
 }
 

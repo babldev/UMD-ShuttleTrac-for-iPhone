@@ -35,6 +35,7 @@
 		self.textLabel.text = route.routeName;
 		self.detailTextLabel.text = [NSString stringWithFormat:@"#%d", route.routeID];
 	}
+	self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	
 	[super layoutSubviews];
 }

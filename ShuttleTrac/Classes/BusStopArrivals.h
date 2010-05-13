@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+#import "ShuttleTracDataStore.h"
+#import "BusStopArrivals.h"
+#import "BusStopArrivalsForRoute.h"
 #import "BusStop.h"
 #import "BusRoute.h"
-#import "BusArrival.h"
 
-@class BusStopArrivals;
+@class ShuttleTracDataStore, BusStopArrivals;
 
 @protocol BusStopArrivalsDelegate
 
@@ -20,34 +22,48 @@
 
 @end
 
-@interface BusStopArrivals : BusStop <NSCoding> {
-	// Route for the arriving buses (OPTIONAL)
-	BusRoute *route;
+@interface BusStopArrivals : NSObject <NSCoding> {
+	ShuttleTracDataStore *dataStore;
 	
-	// NSArray of BusArrival
-	NSMutableArray *upcomingBuses;
+	// Route for the arriving buses
+	BusRoute *route;
+	BusStop *stop;
+	
+	// NSArray of BusStopArrivalsForRoute
+	NSMutableArray *upcomingBusRoutes;
 	
 	// Time of last refresh
 	NSDate *lastRefresh;
 	
-	NSInteger currRouteNum;
-	//used for XML parsing
-	BusArrival *currBusArrival;
-	
 	id <BusStopArrivalsDelegate> delegate;
 	
+	// ----
+	
+	BOOL refreshing;
+	
+	BusStopArrivalsForRoute *currentParsingArrivalsRoute;
+	
+	// From ShuttleTracDataStore
 	NSDictionary *routes; 
 	NSDictionary *stops;
+		
+	NSMutableArray *newUpcomingBusRoutes;
 	
-	
+	NSXMLParser *parser;
 }
+
+-(NSString *) getBusStopName;
 
 -(id)initWithBusStop:(BusStop *)bStop forBusRoute:(BusRoute *)bRoute;
 
 -(void)refreshUpcomingBuses;
+-(BOOL)isSameStopAs:(BusStopArrivals *)otherArrivals;
+-(void)cleanArrivals;
 
 @property (assign, readonly) BusRoute *route;
-@property (retain, readwrite) NSMutableArray *upcomingBuses;
+@property (assign, readonly) BusStop *stop;
+
+@property (retain, readonly) NSMutableArray *upcomingBusRoutes;
 @property (retain, readonly) NSDate *lastRefresh;
 @property (assign, readwrite) id <BusStopArrivalsDelegate> delegate;
 

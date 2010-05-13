@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "ShuttleTracDataStore.h"
+#import "BusStopArrivals.h"
 
-@class ShuttleTracDataStore;
+extern NSString *const BookmarksDidChange;
+
+@class BusStopArrivals, ShuttleTracDataStore;
 
 @protocol BookmarkedStopsDataStoreDelegate
 -(void)refreshBookmarkedStopArrivalsCompleted:(NSMutableArray *)bookmarkedStops;
@@ -22,9 +25,16 @@
 	NSMutableArray *bookmarkedStops;
 	
 	id <BookmarkedStopsDataStoreDelegate> delegate;
+	
+	BOOL refreshing;
 }
 
 -(id)initWithDataStore:(ShuttleTracDataStore *)dStore;
+
+-(BOOL)containsStop:(BusStopArrivals *)compareArrivals;
+-(void)addStopToBookmarks:(BusStopArrivals *)newArrivals;
+-(void)removeStopFromBookmarks:(BusStopArrivals *)oldArrivals;
+-(void)replaceBookmarks:(NSArray *)newBookmarks;
 
 -(void)refreshBookmarkedStopArrivals;
 

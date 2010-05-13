@@ -7,45 +7,65 @@
 //
 
 #import "BusMapDataStore.h"
+#import "DataStoreGrabber.h"
 
 @interface BusMapDataStore ( )
 @property (retain, readwrite) NSArray *mappedStops;
+@property (retain, readwrite) BusStopArrivals *activeStopArrivals;
 @end
 
 @implementation BusMapDataStore
 
-@synthesize mappedStops, activeRoute, activeStop, delegate;
+@synthesize mappedStops, activeRoute, activeStopArrivals, delegate;
 
 -(id)initWithDataStore:(ShuttleTracDataStore *)dStore {
 	if (self = [super init]) {
 		dataStore = dStore;
-		
-		// FIXME - This isn't necessary
-		self.activeStop.delegate = self;
 	}
 	
 	return self;
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
-    mappedStops = [[coder decodeObjectForKey:@"mappedStops"] retain];
-    activeStop = [[coder decodeObjectForKey:@"activeStop"] retain];
-    activeRoute = [[coder decodeObjectForKey:@"activeRoute"] retain];
-	dataStore = [[coder decodeObjectForKey:@"dataStore"] retain]; //Extremely inefficient
+	if (self = [super init]) {
+		dataStore = [[coder decodeObjectForKey:@"dataStore"] retain];
+		mappedStops = [[coder decodeObjectForKey:@"mappedStops"] retain];
+		activeStopArrivals = [[coder decodeObjectForKey:@"activeStopArrivals"] retain];
+		activeRoute = [[coder decodeObjectForKey:@"activeRoute"] retain];
+	}
+	
 	return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
+	[coder encodeObject:dataStore forKey:@"dataStore"];
 	[coder encodeObject:mappedStops forKey :@"mappedStops"];
-	[coder encodeObject:activeStop forKey :@"activeStop"];
+	[coder encodeObject:activeStopArrivals forKey :@"activeStopArrivals"];
 	[coder encodeObject:activeRoute forKey :@"activeRoute"];
-	[coder encodeObject:dataStore forKey :@"dataStore"];
+}
 
+-(void)setActiveStop:(BusStop *)bStop {
+	if (bStop != nil) {
+		BusStopArrivals *newArrivals = [[[BusStopArrivals alloc] initWithBusStop:bStop forBusRoute:nil] autorelease];
+		newArrivals.delegate = self;
+		self.activeStopArrivals = newArrivals;
+	} else {
+		[self setActiveStopArrivals:nil];
+	}
+}
+
+-(void)setActiveStopWithStopId:(NSInteger)stopId {
+	BusStop *stop = [[dataStore allBusStops] objectForKey:[NSNumber numberWithInt:stopId]];
+	[self setActiveStop:stop];
 }
 
 // Begin loading of upcoming buses for activeStop
 -(void)loadSelectedBusArrivals {
-	[self.activeStop refreshUpcomingBuses];
+	if (activeStopArrivals != nil) {
+		self.activeStopArrivals.delegate = self;
+		[activeStopArrivals refreshUpcomingBuses];
+	} else
+		[delegate loadSelectedBusArrivalsCompleted:nil];
 }
 
 // Load all stops for activeRoute
@@ -57,19 +77,19 @@
 	}
 }
 
--(NSMutableDictionary *)allRoutes {
-	return [dataStore allBusRoutes];
+-(NSArray *)allRoutes {
+	return [dataStore sortedRoutes];
 }
 
 #pragma mark BusStopArrivalsDelegate
--(void)arrivalsRefreshComplete:(BusStopArrivals *)arrivals {
-	[delegate loadSelectedBusArrivalsCompleted:activeStop];
+-(void)arrivalsRefreshComplete:(BusStopArrivals *)bArrivals {
+	[delegate loadSelectedBusArrivalsCompleted:activeStopArrivals];
 }
 
 #pragma mark dealloc
 -(void)dealloc {
 	[mappedStops release];
-	[activeStop release];
+	[activeStopArrivals release];
 	[activeRoute release];
 	
 	[super dealloc];

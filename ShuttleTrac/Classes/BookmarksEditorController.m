@@ -7,11 +7,11 @@
 //
 
 #import "BookmarksEditorController.h"
-
+#import "BusStopArrivals.h"
 
 @implementation BookmarksEditorController
 
-@synthesize bookmarkedStops, delegate;
+@synthesize bookmarkedStops, delegate, tableView;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -81,7 +81,8 @@
     }
     
     // Configure the cell...
-    [[cell textLabel] setText:[[bookmarkedStops objectAtIndex:[indexPath row]] name]];
+	BusStopArrivals *arrivals = [bookmarkedStops objectAtIndex:indexPath.row];
+	cell.textLabel.text = arrivals.stop.name;
 	
     return cell;
 }

@@ -7,12 +7,11 @@
 //
 
 #import "DataStoreGrabber.h"
-
 #import "BusMapViewController.h"
-
-
 #import "DataStoreGrabber.h"
 #import "BusStop.h"
+
+#define ZOOM_OVERSIZE	1.1
 
 @interface BusMapViewController ( )
 -(void)zoomToFitMapAnnotations;
@@ -49,8 +48,6 @@
 }
 
 - (void)reloadMap {
-	[mapView removeAnnotations:[dataStore mappedStops]];
-	
 	[dataStore loadStopsForActiveRoute];
 	
 	for (BusStop *stop in [dataStore mappedStops])
@@ -77,6 +74,9 @@
 	
     for(id <MKAnnotation> annotation in mapView.annotations)
     {
+		if (annotation == [mapView userLocation])
+			continue; // skip user location
+		
         topLeftCoord.longitude = fmin(topLeftCoord.longitude, annotation.coordinate.longitude);
         topLeftCoord.latitude = fmax(topLeftCoord.latitude, annotation.coordinate.latitude);
 		
@@ -87,11 +87,11 @@
     MKCoordinateRegion region;
     region.center.latitude = topLeftCoord.latitude - (topLeftCoord.latitude - bottomRightCoord.latitude) * 0.5;
     region.center.longitude = topLeftCoord.longitude + (bottomRightCoord.longitude - topLeftCoord.longitude) * 0.5;
-    region.span.latitudeDelta = fabs(topLeftCoord.latitude - bottomRightCoord.latitude) * 1.2;
-    region.span.longitudeDelta = fabs(bottomRightCoord.longitude - topLeftCoord.longitude) * 1.2;
+    region.span.latitudeDelta = fabs(topLeftCoord.latitude - bottomRightCoord.latitude) * ZOOM_OVERSIZE;
+    region.span.longitudeDelta = fabs(bottomRightCoord.longitude - topLeftCoord.longitude) * ZOOM_OVERSIZE;
 	
     region = [mapView regionThatFits:region];
-    [mapView setRegion:region animated:YES];
+    [mapView setRegion:region];
 }
 
 #pragma mark -
@@ -103,8 +103,22 @@
 
 - (IBAction)findMe:(UIBarButtonItem *)sender {
 	if (mapView.userLocation.location) {
-		[mapView setCenterCoordinate:mapView.userLocation.location.coordinate animated:YES];
+		float spanMultiplier = 0.5f;
+		
+		MKCoordinateRegion newRegion = mapView.region;
+		newRegion.span.longitudeDelta *= spanMultiplier;
+		newRegion.span.latitudeDelta *= spanMultiplier;
+		newRegion.center = mapView.userLocation.location.coordinate;
+		
+		NSLog(@"Old: %f %f, New: %f %f", mapView.region.span.latitudeDelta, mapView.region.span.longitudeDelta, newRegion.span.latitudeDelta, newRegion.span.longitudeDelta);
+		
+		[mapView setRegion:newRegion animated:YES];
 	}
+}
+
+- (IBAction)changeType:(UISegmentedControl *)sender {
+	NSInteger index = sender.selectedSegmentIndex;
+	mapView.mapType = (MKMapType)index;
 }
 
 #pragma mark -
@@ -134,7 +148,7 @@
 }
 
 - (void)mapView:(MKMapView *)aMapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-	[delegate busStopSelected:view.annotation];
+	[delegate busStopSelected:(BusStop *) view.annotation];
 }
 
 #pragma mark -

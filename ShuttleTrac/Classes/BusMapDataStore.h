@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ShuttleTracDataStore.h"
 #import "BusStopArrivals.h"
+#import "BusRoute.h"
+#import "BusStop.h"
 
-@class ShuttleTracDataStore;
+@protocol BusStopArrivalsDelegate;
 
 @protocol BusMapDataStoreDelegate
 
@@ -19,6 +20,7 @@
 
 @end
 
+@class BusStop;
 
 @interface BusMapDataStore : NSObject <BusStopArrivalsDelegate, NSCoding>{
 	ShuttleTracDataStore *dataStore;
@@ -27,12 +29,15 @@
 	NSArray *mappedStops;
 
 	BusRoute *activeRoute;
-	BusStopArrivals *activeStop;
+	BusStopArrivals *activeStopArrivals;
 	
 	id <BusMapDataStoreDelegate> delegate;
 }
 
 -(id)initWithDataStore:(ShuttleTracDataStore *)dStore;
+
+-(void)setActiveStop:(BusStop *)bStop;
+-(void)setActiveStopWithStopId:(NSInteger)stopId;
 
 // Begin loading of upcoming buses for activeStop
 -(void)loadSelectedBusArrivals;
@@ -40,12 +45,12 @@
 // Load all stops for activeRoute
 -(void)loadStopsForActiveRoute;
 
--(NSMutableDictionary *)allRoutes;
+-(NSArray *)allRoutes;
 
 
 @property (retain, readonly) NSArray *mappedStops;
 @property (retain, readwrite) BusRoute *activeRoute;
-@property (retain, readwrite) BusStopArrivals *activeStop;
+@property (retain, readonly) BusStopArrivals *activeStopArrivals;
 
 @property (assign, readwrite) id <BusMapDataStoreDelegate> delegate;
 

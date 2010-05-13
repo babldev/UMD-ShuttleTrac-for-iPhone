@@ -24,6 +24,9 @@
 
 -(id)initRouteWithID:(NSInteger)rID name:(NSString *)rName stops:(NSArray *)rStops;
 
+-(NSComparisonResult)routeNameCompare:(BusRoute *)otherRoute;
+-(NSComparisonResult)routeIdCompare:(BusRoute *)otherRoute;
+
 @property (retain, readonly) NSString *routeName;
 @property (assign, readonly) NSInteger routeID;
 @property (retain, readwrite) NSArray *stops;

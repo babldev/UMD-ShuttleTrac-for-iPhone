@@ -10,14 +10,21 @@
 #import "DataStoreGrabber.h"
 #import "BusTimeTableViewCell.h"
 #import "RouteSelectorTableViewCell.h"
+#import "NSDateAdditions.h"
+
+
+#define REFRESH_RATE 60
+
+#define STOP_SECTION		0
+#define BOOKMARK_SECTION	1
 
 @interface BusStopLookupController ( )
--(void)updateBookmarkLock;
+@property (retain, readwrite) NSTimer *refreshTimer;
 @end
 
 
 @implementation BusStopLookupController
-
+@synthesize refreshTimer;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -32,15 +39,22 @@
 	stopSelectorTableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
 	[stopSelectorTableViewController setView:stopSelectorTableView];
 	
-	[dataStore loadSelectedBusArrivals];
-	[self updateBookmarkLock];
-}
-
--(void)updateBookmarkLock {
-	NSMutableArray *bookmarkedStops = bookmarksDataStore.bookmarkedStops;
-	BusStopArrivals *newBookmark = dataStore.activeStop;
+	BusStopArrivals *arrivals = dataStore.activeStopArrivals;
+	if (arrivals != nil) {
+		searchBar.text = [NSString stringWithFormat:@"%d", arrivals.stop.stopNumber];
+		navItem.rightBarButtonItem = cancelButton;
+		[arrivals cleanArrivals];
+	}
 	
-	bookmarkButton.enabled = (![bookmarkedStops containsObject:newBookmark]);
+	[dataStore loadSelectedBusArrivals];
+	[self setRefreshTimer:[NSTimer scheduledTimerWithTimeInterval:REFRESH_RATE target:dataStore
+														 selector:@selector(loadSelectedBusArrivals)
+														 userInfo:nil repeats:YES]];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self 
+											 selector:@selector(bookmarksRefreshNeeded) 
+												 name:BookmarksDidChange 
+											   object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,14 +75,15 @@
 	[dataStore loadSelectedBusArrivals];
 }
 
--(IBAction)bookmarkActiveStop:(UIBarButtonItem *)sender {
-	NSMutableArray *bookmarkedStops = bookmarksDataStore.bookmarkedStops;
-	BusStopArrivals *newBookmark = dataStore.activeStop;
-	
-	if (![bookmarkedStops containsObject:newBookmark])
-		[bookmarkedStops insertObject:newBookmark atIndex:0];
-	
-	[self updateBookmarkLock];
+-(IBAction)cancelEditing:(UIBarButtonItem *)sender {
+	searchBar.text = nil;
+	[dataStore setActiveStop:nil];
+	[dataStore loadSelectedBusArrivals];
+	[navItem setRightBarButtonItem:nil animated:YES];
+}
+
+-(IBAction)doneEditing:(UIBarButtonItem *)sender {
+	[searchBar resignFirstResponder];
 }
 
 #pragma mark -
@@ -81,34 +96,79 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 2;
+	// Stop selected
+    if ([dataStore activeStopArrivals] != nil)
+		/*
+		Section 1 - Upcoming Arrivals
+		Section 2 - Add/Remove Bookmark
+		 */
+		return 2;
+	
+	// Select route
+	else 
+		// Section 1 - All Routes
+		return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-	if (section == 0)
-		return [[[dataStore activeStop] upcomingBuses] count];
+    // Stop selected
+	if ([dataStore activeStopArrivals] != nil) {
+		/*
+		 Section 1 - Upcoming Arrivals
+		 Section 2 - Add/Remove Bookmark
+		 */
+		
+		if (section == STOP_SECTION)
+			return [[[dataStore activeStopArrivals] upcomingBusRoutes] count];
+		else
+			return 1; // Add/remove bookmark button
+	}
+	
+	// Select route
 	else 
-		return [[[dataStore allRoutes] allValues] count]+1;
+		return [[dataStore allRoutes] count];
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([indexPath section] == 0) {
-		static NSString *CellIdentifier = @"BusTimes";
+	// Stop selected
+    if ([dataStore activeStopArrivals] != nil) {
 		
-		BusTimeTableViewCell *cell = (BusTimeTableViewCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-		if (cell == nil) {
-			cell = [[[BusTimeTableViewCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
+		// Section 1 - Upcoming Arrivals
+		if ([indexPath section] == STOP_SECTION) {
+			
+			static NSString *CellIdentifier = @"BusTimeCell";
+			
+			BusTimeTableViewCell *cell = (BusTimeTableViewCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+			if (cell == nil) {
+				NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"BusTimeTableViewCell" 
+																		 owner:self 
+																	   options:nil];
+				
+				for (id currentObject in topLevelObjects) {
+					if ([currentObject isKindOfClass:[UITableViewCell class]]) {
+						cell = (BusTimeTableViewCell *) currentObject;
+						break;
+					}
+				}
+			}
+
+			cell.arrivals = [[[dataStore activeStopArrivals] upcomingBusRoutes] objectAtIndex:[indexPath row]];
+				 
+			return cell;
 		}
 		
-		cell.busArrival = [[[dataStore activeStop] upcomingBuses] objectAtIndex:indexPath.row];
-			 
-		return cell;
-	} else {
+		// Section 2 - Add/Remove Bookmark
+		else {
+			bookmarkCell.bookmarked = [bookmarksDataStore containsStop:dataStore.activeStopArrivals];
+			return bookmarkCell;
+		}
+	}
+	
+	// Select route
+	else {
 		static NSString *CellIdentifier = @"BusRoutes";
 		
 		RouteSelectorTableViewCell *cell = (RouteSelectorTableViewCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -116,32 +176,61 @@
 			cell = [[[RouteSelectorTableViewCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
 		}
 		
-		if (indexPath.row == 0) {
-			cell.route = nil;
-		} else {
-			cell.route = [[[dataStore allRoutes] allValues] objectAtIndex:(indexPath.row - 1)];
-		}
+		cell.route = [[dataStore allRoutes] objectAtIndex:indexPath.row];
 		
 		return cell;
 	}
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	if (section == 0) {
-		return [[dataStore activeStop] name];
-	} else {
-		return @"Select Route";
+	// Stop selected
+	if ([dataStore activeStopArrivals] != nil) {
+		if (section == STOP_SECTION)
+			return [[dataStore activeStopArrivals] getBusStopName];
+		else
+			return nil;
 	}
+	
+	// Route selected
+	else {
+		return @"Or Select Route";
+	}
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+	BusStopArrivals *arrivals = [dataStore activeStopArrivals];
+	
+	if (arrivals != nil) {
+		if (section == STOP_SECTION) {
+			NSDate *lastRefresh = [arrivals lastRefresh];
+			if (lastRefresh != nil)
+				return [NSString stringWithFormat:@"Last Update: %@", [lastRefresh timeOfDayLocalizedString]];
+		}
+	}
+	
+	return nil;
 }
 
 #pragma mark UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 1) {
-		if (indexPath.row == 0)
-			dataStore.activeRoute = nil;
-		else
-			dataStore.activeRoute = [[[dataStore allRoutes] allValues] objectAtIndex:(indexPath.row - 1)];
+	if ([dataStore activeStopArrivals] != nil) {
+		// BOOKMARK_SECTION
+		if (indexPath.section == BOOKMARK_SECTION) {
+			BusStopArrivals *activeStop = dataStore.activeStopArrivals;
+			
+			if (![bookmarksDataStore containsStop:activeStop]) {
+				[bookmarksDataStore addStopToBookmarks:activeStop];
+				bookmarkCell.bookmarked = YES;
+			} else {
+				[bookmarksDataStore removeStopFromBookmarks:activeStop];
+				bookmarkCell.bookmarked = NO;
+			}
+
+			bookmarkCell.selected = NO;
+		}
+	} else  {
+		dataStore.activeRoute = [[dataStore allRoutes] objectAtIndex:indexPath.row];
 		
 		if (busMapViewController == nil) {
 			busMapViewController = [[BusMapViewController alloc] initWithNibName:@"BusMapViewController" bundle:nil];
@@ -149,8 +238,11 @@
 		
 		busMapViewController.delegate = self;
 		busMapViewController.dataStore = dataStore;
-		[self presentModalViewController:busMapViewController animated:YES];
+		// busMapViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+		
+		[busMapViewController loadView];
 		[busMapViewController reloadMap];
+		[self presentModalViewController:busMapViewController animated:YES];
 	}
 }
 
@@ -160,45 +252,54 @@
 	[self dismissModalViewControllerAnimated:YES];
 	
 	if (stop != nil) {
-		dataStore.activeStop = [[BusStopArrivals alloc] initWithBusStop: stop forBusRoute:nil];
-		searchBar.text = [NSString stringWithFormat:@"%d", dataStore.activeStop.stopNumber];
+		[dataStore setActiveStop:stop];
+		searchBar.text = [NSString stringWithFormat:@"%d", dataStore.activeStopArrivals.stop.stopNumber];
+		navItem.rightBarButtonItem = cancelButton;
 	}
 	
 	[dataStore loadSelectedBusArrivals];
 	[stopSelectorTableViewController.tableView reloadData];
-	
-	[self updateBookmarkLock];
 }
 
 #pragma mark UISearchBarDelegate
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)sBar {
-	[sBar setShowsCancelButton:YES animated:YES];
+	[navItem setRightBarButtonItem:doneButton animated:YES];
 }
 
 -(void)searchBarTextDidEndEditing:(UISearchBar *)sBar {
-	[sBar setShowsCancelButton:NO animated:YES];
+	
+	if ([dataStore activeStopArrivals] != nil) {
+		[navItem setRightBarButtonItem:cancelButton animated:YES];
+	} else 
+		[navItem setRightBarButtonItem:nil animated:YES];
 }
 
 - (void)searchBar:(UISearchBar *)sBar textDidChange:(NSString *)searchText {
 	if ([searchText length] == 5) { // Set the active stop
 		[searchBar resignFirstResponder];
 		
-		// FIXME
-		dataStore.activeStop = nil;
-		
+		[dataStore setActiveStopWithStopId:[searchText intValue]];
 		[dataStore loadSelectedBusArrivals];
-		[stopSelectorTableViewController.tableView reloadData];
-	} else if (dataStore.activeStop != nil) { // Clear the active stop
-		dataStore.activeStop = nil;
 		
+		if ([dataStore activeStopArrivals] != nil) {
+			[navItem setRightBarButtonItem:cancelButton animated:YES];
+		}
+	} else if (dataStore.activeStopArrivals != nil) { // Clear the active stop
+		[dataStore setActiveStop:nil];
 		[dataStore loadSelectedBusArrivals];
-		[stopSelectorTableViewController.tableView reloadData];
+		
+		if ([searchText length] == 0) {
+			[sBar resignFirstResponder];
+		}
 	}
 }
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *)sBar {
-	[sBar resignFirstResponder];
+#pragma mark BookmarksDidChange Observer
+
+-(void)bookmarksRefreshNeeded {
+	bookmarkCell.bookmarked = [bookmarksDataStore containsStop:dataStore.activeStopArrivals];
+	[bookmarkCell layoutSubviews];
 }
 
 #pragma mark dealloc
@@ -209,6 +310,9 @@
 	
 	[busMapViewController release];
 	busMapViewController = nil;
+	
+	[refreshTimer release];
+	refreshTimer = nil;
 	
     [super dealloc];
 }
