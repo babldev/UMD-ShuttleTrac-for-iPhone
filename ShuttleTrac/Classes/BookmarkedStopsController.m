@@ -118,6 +118,17 @@
 		[bookmarkStop refreshUpcomingBuses];
 	}
 	
+	NSInteger count = [bookmarkedStops count];
+	UIView *introSuperView = [introView superview];
+	
+	if (count == 0 && introSuperView == nil) {
+		[tableView addSubview:introView];
+		[tableView setUserInteractionEnabled:NO];
+	} else if (count > 0 && introSuperView != nil) {
+		[introView removeFromSuperview];
+		[tableView setUserInteractionEnabled:YES];
+	}
+	
 	[tableView reloadData];
 }
 

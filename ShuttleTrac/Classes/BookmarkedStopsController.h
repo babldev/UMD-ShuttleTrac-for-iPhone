@@ -27,6 +27,7 @@
 	IBOutlet UIBarButtonItem *refreshButton;
 	IBOutlet UIBarButtonItem *editButton;
 	IBOutlet UITableView *tableView;
+	IBOutlet UIView *introView;
 }
 
 -(IBAction)refreshBookmarksPressed:(UIBarButtonItem *)sender;
