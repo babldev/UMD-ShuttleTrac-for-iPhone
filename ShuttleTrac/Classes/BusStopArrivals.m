@@ -10,6 +10,8 @@
 #import "BusStopArrivals.h"
 #import "DataStoreGrabber.h"
 
+#define REFRESH_PARSING_TIMEOUT	0.001f
+
 @interface BusStopArrivals ()
 
 @property (assign, readwrite) BusRoute *route;
@@ -79,12 +81,26 @@
 -(void)refreshUpcomingBuses {
 	if (!refreshing) {
 		refreshing = YES;
+		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+		
+		NSString *request = [NSString stringWithFormat:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=RoutePositionET.xml&PlatformNo=%d", 
+							 stop.stopNumber];
+		NSURL *url = [NSURL URLWithString:request];
+		
+		newUpcomingBusRoutes = [[NSMutableArray alloc] init];
+		
+		parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
+		[parser setDelegate:self];
+		
+		// [self performSelector:@selector(parsingDidTimeout:) withObject:parser afterDelay:REFRESH_PARSING_TIMEOUT];
 		[self performSelectorInBackground:@selector(requestBusArrivalFromWeb) withObject:nil];
 	}
 }
 
 -(void)doneRefreshing {
 	refreshing = NO;
+	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+	
 	[delegate arrivalsRefreshComplete:self];
 }
 
@@ -94,6 +110,7 @@
 -(BusRoute *) getBusRouteForID:(NSInteger)routeNum{
 	return [routes objectForKey:[NSNumber numberWithInteger:routeNum]];
 }
+
 # pragma mark XML parsing
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
@@ -111,18 +128,9 @@
 }
 
 # pragma mark refresh arrival times
--(void)requestBusArrivalFromWeb{
+-(void)requestBusArrivalFromWeb {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
-	NSString *request = [NSString stringWithFormat:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=RoutePositionET.xml&PlatformNo=%d", stop.stopNumber];
-	
-	newUpcomingBusRoutes = [[NSMutableArray alloc] init];
-	
-	NSURL *url = [NSURL URLWithString:request];
-	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-	NSXMLParser *parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
-	
-	[parser setDelegate:self];
 	if ([parser parse]) {
 		self.lastRefresh = [NSDate date]; // Clean any arrivals older than 60 seconds
 		self.upcomingBusRoutes = newUpcomingBusRoutes;
@@ -133,8 +141,7 @@
 	}
 
 	[parser release];
-	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-	
+	parser = nil;
 	
 	[self performSelectorOnMainThread:@selector(doneRefreshing) withObject:nil waitUntilDone:NO];
 	

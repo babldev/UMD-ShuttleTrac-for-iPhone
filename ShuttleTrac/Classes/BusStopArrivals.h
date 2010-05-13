@@ -48,6 +48,8 @@
 	NSDictionary *stops;
 		
 	NSMutableArray *newUpcomingBusRoutes;
+	
+	NSXMLParser *parser;
 }
 
 -(NSString *) getBusStopName;

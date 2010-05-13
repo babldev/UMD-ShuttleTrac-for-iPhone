@@ -198,10 +198,10 @@
 		41127424117C0FE40082FBF7 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				41A470011194CBFF004BB075 /* More */,
 				41C7BCE71193330200A48A83 /* Shared */,
 				8528A31A117F771F000CDEF3 /* Bookmarked Stops */,
 				41127425117C0FEA0082FBF7 /* Bus Stop Lookup */,
+				41A470011194CBFF004BB075 /* More */,
 			);
 			name = Tabs;
 			sourceTree = "<group>";

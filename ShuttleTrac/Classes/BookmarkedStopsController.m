@@ -101,10 +101,15 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-	if(section == ([bookmarkedStops count] -1))
-		return [NSString stringWithFormat:@"Last Update: %@", [[[bookmarkedStops objectAtIndex:section] lastRefresh] timeOfDayLocalizedString] ];
+	if(section == ([bookmarkedStops count] -1)) {
+		NSDate *lastRefresh = [[bookmarkedStops objectAtIndex:section] lastRefresh];
+		if (lastRefresh != nil)
+			return [NSString stringWithFormat:@"Last Update: %@", [lastRefresh timeOfDayLocalizedString]];
+	}
+		
 	return nil;
 }
+
 -(void)refreshBookmarks {
 	bookmarkedStops = dataStore.bookmarkedStops;
 	

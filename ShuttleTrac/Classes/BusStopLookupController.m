@@ -200,14 +200,15 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
 	BusStopArrivals *arrivals = [dataStore activeStopArrivals];
 	
-	if ([dataStore activeStopArrivals] != nil)
-		if (section == STOP_SECTION)
-			return [NSString stringWithFormat:@"Last Update: %@", [[arrivals lastRefresh] timeOfDayLocalizedString]];
-		else
-			return nil;
-	else
-		return nil;
-
+	if (arrivals != nil) {
+		if (section == STOP_SECTION) {
+			NSDate *lastRefresh = [arrivals lastRefresh];
+			if (lastRefresh != nil)
+				return [NSString stringWithFormat:@"Last Update: %@", [lastRefresh timeOfDayLocalizedString]];
+		}
+	}
+	
+	return nil;
 }
 
 #pragma mark UITableViewDelegate
@@ -237,7 +238,7 @@
 		
 		busMapViewController.delegate = self;
 		busMapViewController.dataStore = dataStore;
-		busMapViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+		// busMapViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 		
 		[busMapViewController loadView];
 		[busMapViewController reloadMap];
