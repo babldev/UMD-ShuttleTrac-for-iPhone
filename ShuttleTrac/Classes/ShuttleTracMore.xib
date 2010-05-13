@@ -56,7 +56,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUINavigationItem" id="430866898">
 								<reference key="IBUINavigationBar" ref="99067966"/>
-								<string key="IBUITitle">Terp ShuttleTrac</string>
+								<string key="IBUITitle">Settings</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</object>

@@ -1,5 +1,6 @@
 ShuttleTrac for iPhone
-Project for Spring 10' CMSC498i @ UMD
+Open source project for Spring 10' CMSC498i @ UMD
+http://github.com/babldev/UMD-ShuttleTrac-for-iPhone
 
 Created by:
 Brady and Tarek
@@ -7,22 +8,9 @@ Brady and Tarek
 Tab Bar icons by Joseph Wain / glyphish.com
 NSDateAdditions.m/h - written by Chuck Pisula
 
-This work is licensed under the Creative Commons Attribution-Share Alike 3.0 United States License. To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/us/ or send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
-
----
-
-Data to be stored:
-* Set of all bus stops
-Used for quick loading on map. Can be refreshed using menu and refreshes automatically.
-
-* Set of all bus routes
-Used for looking up bus schedules quickly. Can be refreshed using menu and refreshes automatically.
-
-* Bookmarked bus stops
-
-* BusArrivals for bookmarked stops
-
-* BusArrivals for active stop 
+This work is licensed under the Creative Commons Attribution-Share Alike 3.0 United States License. 
+To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/us/ or send a letter 
+to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 
 ---
 

@@ -30,9 +30,9 @@
 
 - (void)layoutSubviews {
 	if (!bookmarked)
-		newTextLabel.text = @"Add Bookmark";
+		newTextLabel.text = @"Add to Favorites";
 	else
-		newTextLabel.text = @"Remove Bookmark";
+		newTextLabel.text = @"Remove from Favorites";
 	
 	[super layoutSubviews];
 }
