@@ -21,6 +21,8 @@
 #define PARSING_STOPS	0
 #define PARSING_ROUTES	1
 
+#define MAX_LOAD_TIME	10
+
 @implementation ShuttleTracDataStore
 
 @synthesize bookmarkedStopsDataStore, busMapDataStore, updateNeeded;
@@ -83,7 +85,9 @@
 
 	//Get Routes
 	NSURL *urlRoutes = [NSURL URLWithString:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=RoutePattern.xml"];
-    NSURLRequest *requestRoutes = [[NSURLRequest alloc] initWithURL:urlRoutes cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    NSURLRequest *requestRoutes = [[NSURLRequest alloc] initWithURL:urlRoutes 
+														cachePolicy:NSURLRequestUseProtocolCachePolicy 
+													timeoutInterval:MAX_LOAD_TIME];
 
     routeURLConnection = [[NSURLConnection alloc] initWithRequest:requestRoutes delegate:self];
 	CFDictionaryAddValue(
@@ -97,7 +101,9 @@
 	
 	//Get Stops
 	NSURL *urlStops = [NSURL URLWithString:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=Platform.xml"];
-    NSURLRequest *requestStops = [[NSURLRequest alloc] initWithURL:urlStops cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    NSURLRequest *requestStops = [[NSURLRequest alloc] initWithURL:urlStops 
+													   cachePolicy:NSURLRequestUseProtocolCachePolicy 
+												   timeoutInterval:MAX_LOAD_TIME];
 	
 	stopURLConnection = [[NSURLConnection alloc] initWithRequest:requestStops delegate:self];
 	
@@ -121,7 +127,6 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-	//Need to do soemthing
 	UIAlertView *internet = [[[UIAlertView alloc] initWithTitle:@"Check Your Internet Connection " 
 														   message:@"Reload the application once you have internet."
 														  delegate:nil
@@ -129,6 +134,7 @@
 												 otherButtonTitles:nil] autorelease];
 	[internet show];
 	
+	// TODO - Close the app or retry
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
