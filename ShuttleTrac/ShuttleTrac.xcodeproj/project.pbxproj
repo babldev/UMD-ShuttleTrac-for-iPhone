@@ -28,6 +28,9 @@
 		418D7D73117EA1FB0027754F /* BusStopArrivals.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7D72117EA1FB0027754F /* BusStopArrivals.m */; };
 		418D7E3A117EB9490027754F /* DataStoreGrabber.m in Sources */ = {isa = PBXBuildFile; fileRef = 418D7E39117EB9490027754F /* DataStoreGrabber.m */; };
 		418D7F70117F65EC0027754F /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 418D7F6F117F65EC0027754F /* libsqlite3.0.dylib */; };
+		4198553E119C644700A6907C /* 28-star.png in Resources */ = {isa = PBXBuildFile; fileRef = 4198553D119C644700A6907C /* 28-star.png */; };
+		41985540119C647B00A6907C /* 73-radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4198553F119C647B00A6907C /* 73-radar.png */; };
+		41985542119C649F00A6907C /* 106-sliders.png in Resources */ = {isa = PBXBuildFile; fileRef = 41985541119C649F00A6907C /* 106-sliders.png */; };
 		41A470051194CC23004BB075 /* ShuttleTracMore.m in Sources */ = {isa = PBXBuildFile; fileRef = 41A470031194CC23004BB075 /* ShuttleTracMore.m */; };
 		41A470061194CC23004BB075 /* ShuttleTracMore.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41A470041194CC23004BB075 /* ShuttleTracMore.xib */; };
 		41C7BCE91193337300A48A83 /* BusTimeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41C7BCE81193337300A48A83 /* BusTimeTableViewCell.xib */; };
@@ -80,6 +83,9 @@
 		418D7E38117EB9490027754F /* DataStoreGrabber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStoreGrabber.h; sourceTree = "<group>"; };
 		418D7E39117EB9490027754F /* DataStoreGrabber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStoreGrabber.m; sourceTree = "<group>"; };
 		418D7F6F117F65EC0027754F /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		4198553D119C644700A6907C /* 28-star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "28-star.png"; sourceTree = "<group>"; };
+		4198553F119C647B00A6907C /* 73-radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "73-radar.png"; sourceTree = "<group>"; };
+		41985541119C649F00A6907C /* 106-sliders.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "106-sliders.png"; sourceTree = "<group>"; };
 		41A470021194CC23004BB075 /* ShuttleTracMore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShuttleTracMore.h; sourceTree = "<group>"; };
 		41A470031194CC23004BB075 /* ShuttleTracMore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShuttleTracMore.m; sourceTree = "<group>"; };
 		41A470041194CC23004BB075 /* ShuttleTracMore.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShuttleTracMore.xib; sourceTree = "<group>"; };
@@ -172,6 +178,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				41985541119C649F00A6907C /* 106-sliders.png */,
+				4198553F119C647B00A6907C /* 73-radar.png */,
+				4198553D119C644700A6907C /* 28-star.png */,
 				41E0562C1193A7FE001FB3D4 /* arrival-bg.png */,
 				41C97230118FCAEB0088FBF7 /* Default.png */,
 				4132DDC1118D4C1400BAC3AF /* shuttletrac-logo-small.png */,
@@ -353,6 +362,9 @@
 				41C7BCE91193337300A48A83 /* BusTimeTableViewCell.xib in Resources */,
 				41E0562D1193A7FE001FB3D4 /* arrival-bg.png in Resources */,
 				41A470061194CC23004BB075 /* ShuttleTracMore.xib in Resources */,
+				4198553E119C644700A6907C /* 28-star.png in Resources */,
+				41985540119C647B00A6907C /* 73-radar.png in Resources */,
+				41985542119C649F00A6907C /* 106-sliders.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
