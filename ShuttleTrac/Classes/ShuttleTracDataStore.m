@@ -82,11 +82,10 @@
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 
 	//Get Routes
-	NSURL *url = [NSURL URLWithString:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=RoutePattern.xml"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-	
-	//Note defualt timeout is 60 seconds
-    routeURLConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+	NSURL *urlRoutes = [NSURL URLWithString:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=RoutePattern.xml"];
+    NSURLRequest *requestRoutes = [[NSURLRequest alloc] initWithURL:urlRoutes cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+
+    routeURLConnection = [[NSURLConnection alloc] initWithRequest:requestRoutes delegate:self];
 	CFDictionaryAddValue(
 						 connectionToDataMapping,
 						 routeURLConnection,
@@ -97,10 +96,10 @@
 	
 	
 	//Get Stops
-	NSURL *url2 = [NSURL URLWithString:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=Platform.xml"];
-    NSURLRequest *request2 = [NSURLRequest requestWithURL:url2];
+	NSURL *urlStops = [NSURL URLWithString:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=Platform.xml"];
+    NSURLRequest *requestStops = [[NSURLRequest alloc] initWithURL:urlStops cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
 	
-	stopURLConnection = [[NSURLConnection alloc] initWithRequest:request2 delegate:self];
+	stopURLConnection = [[NSURLConnection alloc] initWithRequest:requestStops delegate:self];
 	
 	CFDictionaryAddValue(
 						 connectionToDataMapping,
@@ -123,6 +122,13 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
 	//Need to do soemthing
+	UIAlertView *internet = [[[UIAlertView alloc] initWithTitle:@"Check Your Internet Connection " 
+														   message:@"Reload the application once you have internet."
+														  delegate:nil
+												 cancelButtonTitle:@"OK"
+												 otherButtonTitles:nil] autorelease];
+	[internet show];
+	
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
