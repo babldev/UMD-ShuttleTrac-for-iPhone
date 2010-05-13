@@ -40,6 +40,7 @@
 	// ----
 	
 	BOOL refreshing;
+	NSMutableData *dataForConnection;
 	
 	BusStopArrivalsForRoute *currentParsingArrivalsRoute;
 	
@@ -50,13 +51,14 @@
 	NSMutableArray *newUpcomingBusRoutes;
 	
 	NSXMLParser *parser;
+	bool isManualRefresh; 
 }
 
 -(NSString *) getBusStopName;
 
 -(id)initWithBusStop:(BusStop *)bStop forBusRoute:(BusRoute *)bRoute;
 
--(void)refreshUpcomingBuses;
+-(void)refreshUpcomingBuses:(NSInteger)manualRefresh;
 -(BOOL)isSameStopAs:(BusStopArrivals *)otherArrivals;
 -(void)cleanArrivals;
 

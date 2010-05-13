@@ -109,9 +109,6 @@
 						  forKey:@"receivedData"]);
 }
 
-//- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-//    responseData = [[NSMutableData alloc] init];
-//}
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
 	NSMutableDictionary *connectionInfo =
@@ -122,13 +119,6 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
 	//Need to do soemthing
-	UIAlertView *internet = [[[UIAlertView alloc] initWithTitle:@"Check Your Internet Connection " 
-														   message:@"Reload the application once you have internet."
-														  delegate:nil
-												 cancelButtonTitle:@"OK"
-												 otherButtonTitles:nil] autorelease];
-	[internet show];
-	
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
