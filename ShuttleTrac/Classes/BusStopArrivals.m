@@ -50,9 +50,7 @@
 		
 		stop = [[coder decodeObjectForKey:@"stop"] retain];
 		route = [[coder decodeObjectForKey:@"route"]retain];
-		
-		delegate = [[coder decodeObjectForKey:@"delegate"] retain];
-		
+				
 		upcomingBusRoutes = [[coder decodeObjectForKey:@"upcomingBusRoutes"]retain];
 		lastRefresh = [[coder decodeObjectForKey:@"lastRefresh"] retain];
 	}
@@ -68,8 +66,6 @@
 	
 	[coder encodeObject:upcomingBusRoutes forKey:@"upcomingBusRoutes"];	
 	[coder encodeObject:lastRefresh forKey:@"lastRefresh"];	
-	
-	[coder encodeObject:delegate forKey:@"delegate"];
 }
 
 -(NSString *) getBusStopName{
