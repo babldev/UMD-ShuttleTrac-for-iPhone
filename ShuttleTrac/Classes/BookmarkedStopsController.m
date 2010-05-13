@@ -18,7 +18,7 @@
 
 @property (retain, readwrite) NSTimer *refreshTimer;
 
--(void)refreshBookmarks;
+-(void)refreshBookmarksByUser:(BOOL)manualRefresh;
 
 @end
 
@@ -32,7 +32,7 @@
 	dataStore = [GetShuttleTracDataStore() bookmarkedStopsDataStore];
 	bookmarkedStops = [dataStore bookmarkedStops];
 	[self setRefreshTimer:[NSTimer scheduledTimerWithTimeInterval:REFRESH_RATE target:self
-														 selector:@selector(refreshBookmarks)
+														 selector:@selector(refreshBookmarksByUser:)
 														 userInfo:nil repeats:YES]];
 	
 	
@@ -40,7 +40,7 @@
 	for (BusStopArrivals *bookmarkStop in bookmarkedStops) 
 		[bookmarkStop cleanArrivals];
 	
-	[self refreshBookmarks];
+	[self refreshBookmarksByUser:NO];
 	[[NSNotificationCenter defaultCenter] addObserver:self 
 											 selector:@selector(bookmarksRefreshNeeded) 
 												 name:BookmarksDidChange 
@@ -110,12 +110,12 @@
 	return nil;
 }
 
--(void)refreshBookmarks {
+-(void)refreshBookmarksByUser:(BOOL)manualRefresh {
 	bookmarkedStops = dataStore.bookmarkedStops;
 	
 	for (BusStopArrivals *bookmarkStop in bookmarkedStops) {
 		[bookmarkStop setDelegate:self];
-		[bookmarkStop refreshUpcomingBuses];
+		[bookmarkStop refreshUpcomingBuses:manualRefresh];
 	}
 	
 	NSInteger count = [bookmarkedStops count];
@@ -142,7 +142,7 @@
 #pragma mark Actions
 
 -(IBAction)refreshBookmarksPressed:(UIBarButtonItem *)sender {
-	[self refreshBookmarks];
+	[self refreshBookmarksByUser:YES];
 }
 
 -(IBAction)editBookmarks:(UIBarButtonItem *)sender {
@@ -169,7 +169,7 @@
 -(void)bookmarkEditingCompleted:(NSArray *)bookmarks {
 	[dataStore replaceBookmarks:bookmarks];
 	
-	[self refreshBookmarks];
+	[self refreshBookmarksByUser:NO];
 	[tableView reloadData];
 	
 	[self dismissModalViewControllerAnimated:YES];
@@ -181,7 +181,7 @@
 
 #pragma mark BookmarksDidChange Observer
 -(void)bookmarksRefreshNeeded {
-	[self refreshBookmarks];
+	[self refreshBookmarksByUser:NO];
 }
 
 #pragma mark -

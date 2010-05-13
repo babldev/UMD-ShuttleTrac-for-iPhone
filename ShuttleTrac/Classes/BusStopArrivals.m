@@ -76,24 +76,62 @@
 	return stop.name;	
 }
 
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+	dataForConnection = [[NSMutableData alloc] init];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+	[dataForConnection appendData:data];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+	parser = [[NSXMLParser alloc] initWithData:dataForConnection];
+	[parser setDelegate:self];
+	
+	// [self performSelector:@selector(parsingDidTimeout:) withObject:parser afterDelay:REFRESH_PARSING_TIMEOUT];
+	[self performSelectorInBackground:@selector(requestBusArrivalFromWeb) withObject:nil];
+	
+	[connection release];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+	//Need to do soemthing
+	if(isManualRefresh){
+		UIAlertView *internet = [[[UIAlertView alloc] initWithTitle:@"Check Your Internet Connection " 
+															message:@"Can only refresh when you have an internet connection"
+														   delegate:nil
+												  cancelButtonTitle:@"OK"
+												  otherButtonTitles:nil] autorelease];
+		[internet show];
+		
+		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+		refreshing = NO;
+	}
+		
+}
+
 #pragma mark -
 #pragma mark Refresh routes
--(void)refreshUpcomingBuses {
+-(void)refreshUpcomingBuses:(BOOL)manualRefresh {
+	isManualRefresh = manualRefresh;
+	
 	if (!refreshing) {
 		refreshing = YES;
 		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 		
-		NSString *request = [NSString stringWithFormat:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=RoutePositionET.xml&PlatformNo=%d", 
+		
+			
+		//Get Routes
+		NSString *stringRequest = [NSString stringWithFormat:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=RoutePositionET.xml&PlatformNo=%d", 
 							 stop.stopNumber];
-		NSURL *url = [NSURL URLWithString:request];
+		NSURL *url = [NSURL URLWithString:stringRequest];
+		NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
 		
+		[[NSURLConnection alloc] initWithRequest:request delegate:self];
+		
+				
 		newUpcomingBusRoutes = [[NSMutableArray alloc] init];
-		
-		parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
-		[parser setDelegate:self];
-		
-		// [self performSelector:@selector(parsingDidTimeout:) withObject:parser afterDelay:REFRESH_PARSING_TIMEOUT];
-		[self performSelectorInBackground:@selector(requestBusArrivalFromWeb) withObject:nil];
+
 	}
 }
 

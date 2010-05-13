@@ -63,7 +63,7 @@
 -(void)loadSelectedBusArrivals {
 	if (activeStopArrivals != nil) {
 		self.activeStopArrivals.delegate = self;
-		[activeStopArrivals refreshUpcomingBuses];
+		[activeStopArrivals refreshUpcomingBuses:NO];
 	} else
 		[delegate loadSelectedBusArrivalsCompleted:nil];
 }

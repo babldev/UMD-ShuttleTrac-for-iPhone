@@ -115,9 +115,6 @@
 						  forKey:@"receivedData"]);
 }
 
-//- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-//    responseData = [[NSMutableData alloc] init];
-//}
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
 	NSMutableDictionary *connectionInfo =
