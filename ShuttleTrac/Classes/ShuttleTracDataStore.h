@@ -31,11 +31,13 @@
 	NSInteger parsingMode;
 	
 	NSArray *sortedRoutes;
-	
 	BusStop *currBusStop; //used for parsing
 	BusRoute *currBusRoute;//used for parsing
 	NSMutableArray *currRouteBusStops; //used for parsing
-	
+	CFMutableDictionaryRef connectionToDataMapping;
+	CFMutableDictionaryRef dataToParserMapping;
+	NSURLConnection *stopURLConnection; 
+	NSURLConnection *routeURLConnection;
 	BOOL updateNeeded;
 }
 

@@ -70,36 +70,96 @@
 	[coder encodeBool:updateNeeded forKey:@"updateNeeded"];
 }
 
--(void)refreshStopAndRouteData {
-	[self requestStopsFromWeb];
-	[self requestRoutesFromWeb];
-}
-
--(void)requestStopsFromWeb{
-	parsingMode = PARSING_STOPS;
+- (void)refreshStopAndRouteData {
 	
-	NSURL *url = [NSURL URLWithString:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=Platform.xml"];
-
+	connectionToDataMapping =
+    CFDictionaryCreateMutable(
+							  kCFAllocatorDefault,
+							  0,
+							  &kCFTypeDictionaryKeyCallBacks,
+							  &kCFTypeDictionaryValueCallBacks);
+	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-	NSXMLParser *parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
-	[parser setDelegate:self];
-	[parser parse];
-	[parser release];
-	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-}
 
--(void)requestRoutesFromWeb{
-	parsingMode = PARSING_ROUTES;
-	
+	//Get Routes
 	NSURL *url = [NSURL URLWithString:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=RoutePattern.xml"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
 	
-	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-	NSXMLParser *parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
+	//Note defualt timeout is 60 seconds
+    routeURLConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+	CFDictionaryAddValue(
+						 connectionToDataMapping,
+						 routeURLConnection,
+						 [NSMutableDictionary
+						  dictionaryWithObject:[NSMutableData data]
+						  forKey:@"receivedData"]);
+	
+	
+	
+	//Get Stops
+	NSURL *url2 = [NSURL URLWithString:@"http://shuttle.umd.edu/RTT/Public/Utility/File.aspx?ContentType=SQLXML&Name=Platform.xml"];
+    NSURLRequest *request2 = [NSURLRequest requestWithURL:url2];
+	
+	stopURLConnection = [[NSURLConnection alloc] initWithRequest:request2 delegate:self];
+	
+	CFDictionaryAddValue(
+						 connectionToDataMapping,
+						 stopURLConnection,
+						 [NSMutableDictionary
+						  dictionaryWithObject:[NSMutableData data]
+						  forKey:@"receivedData"]);
+}
+
+//- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+//    responseData = [[NSMutableData alloc] init];
+//}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+	NSMutableDictionary *connectionInfo =
+	CFDictionaryGetValue(connectionToDataMapping, connection);
+	
+    [[connectionInfo objectForKey:@"receivedData"] appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+	//Need to do soemthing
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+	NSMutableDictionary *connectionInfo =
+	CFDictionaryGetValue(connectionToDataMapping, connection);
+	
+    NSData *data = [connectionInfo objectForKey:@"receivedData"];
+	NSString *parseType;
+	if([connection isEqual:routeURLConnection])
+		parseType = @"routes";
+	else
+		parseType = @"stops";
+		
+	dataToParserMapping =
+    CFDictionaryCreateMutable(
+							  kCFAllocatorDefault,
+							  0,
+							  &kCFTypeDictionaryKeyCallBacks,
+							  &kCFTypeDictionaryValueCallBacks);
+
+	
+	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:[data copy]];
+	
+	
+	CFDictionaryAddValue(
+						 dataToParserMapping,
+						 parser,
+						 [NSMutableDictionary
+						  dictionaryWithObject:parseType
+						  forKey:@"parser"]);
+	
 	[parser setDelegate:self];
 	[parser parse];
 	[parser release];
-	
+
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+
 }
 
 -(NSArray *)sortedRoutes {
@@ -120,6 +180,17 @@
 #pragma mark XML Parsing
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
+	NSMutableDictionary *dict =
+	CFDictionaryGetValue(dataToParserMapping, parser);
+	
+	NSString *pMode = [dict objectForKey:@"parser"];
+	if([pMode isEqual:@"routes"])
+		parsingMode = PARSING_ROUTES;
+	else {
+		parsingMode = PARSING_STOPS;
+	}
+
+		
 	if ([elementName isEqual: @"Platform"]) {
 		NSInteger busNumber = [[attributeDict objectForKey:@"PlatformNo"] integerValue];
 		if(parsingMode == PARSING_STOPS){
